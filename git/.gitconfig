@@ -1,0 +1,55 @@
+[include]
+    path = "~/.gitconfig-local"
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[core]
+	editor = code -w -n
+	excludesfile = "~/.gitignore_global"
+
+[color]
+	ui = true
+
+[diff]
+	tool = default-difftool
+
+[difftool "default-difftool"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+
+[alias]
+	lol = log --graph --all --oneline
+    s = status
+
+    c = commit
+    cm = commit -m
+    ca = commit -a
+    cam = commit -am
+
+    pua = push -u origin --all
+
+    rh = reset --hard
+    rhh = reset --hard HEAD
+    rs = reset --soft
+    rsh = reset --soft HEAD
+
+    # Show number of commits for each author
+    authorlist = shortlog -s -n --all --no-merges
+
+    # Deletes a particular branch or tag from local and remote repository (D = force delete)
+    d = "!f() { git branch -d $1 2> /dev/null && git push -d origin $1 || (git tag -d $1 && git push -d origin $1); }; f"
+    D = "!f() { git branch -D $1 2> /dev/null && git push -d origin $1 || (git tag -d $1 && git push -d origin $1); }; f"
+
+    # Switch to a branch, creating it if necessary
+    go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+
+    # Show verbose output about tags, branches or remotes
+	tags = tag -l
+	branches = branch -a
+    remotes = remote -v
+
+[fetch]
+	prune = true
