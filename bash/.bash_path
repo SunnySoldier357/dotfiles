@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Add .NET Core SDK tools
+export PATH="$PATH:/home/sandeepsingh/.dotnet/tools"
