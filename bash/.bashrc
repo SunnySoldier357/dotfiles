@@ -108,9 +108,16 @@ shopt -s histappend
 # better yaourt colors
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 
-# Setting up the prompt
-[[ -f /usr/share/git/git-prompt.sh ]] && . /usr/share/git/git-prompt.sh
-PS1='\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[91m\]\u \[\033[35m\]\h \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[91m\]\n$ \033[31m\]'
+# Load the shell dotfiles, and then some:
+# * ~/.bash_path can be used to extend `$PATH`.
+# * ~/.bash_extra can be used for other settings you don’t want to commit.
+for file in ~/.bash/{prompt,aliases,functions,extra}; do
+	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+		# shellcheck source=/dev/null
+		source "$file"
+	fi
+done
+unset file
 
 # Setting up git completion
 if [ -f ~/.git-completion.bash ]; then

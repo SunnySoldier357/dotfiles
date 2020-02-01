@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Setting up the prompt
+[[ -f /usr/share/git/git-prompt.sh ]] && . /usr/share/git/git-prompt.sh
+PS1='\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[91m\]\u \[\033[35m\]\h \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[91m\]\n$ \033[31m\]'
