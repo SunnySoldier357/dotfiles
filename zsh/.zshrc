@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+# Enable colors and change prompt:
+autoload -U colors && colors
+
+# History in cache directory:
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.cache/zsh/history
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)               # Include hidden files.
+
+# Load the shell dotfiles, and then some:
+# * ~/.zsh/extra can be used for other settings you don’t want to commit.
+for file in ~/.zsh/{prompt,aliases,functions,extra,plugins}; do
+	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+		# shellcheck source=/dev/null
+		source "$file"
+	fi
+done
+unset file

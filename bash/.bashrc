@@ -109,8 +109,7 @@ shopt -s histappend
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 
 # Load the shell dotfiles, and then some:
-# * ~/.bash_path can be used to extend `$PATH`.
-# * ~/.bash_extra can be used for other settings you don’t want to commit.
+# * ~/.bash/extra can be used for other settings you don’t want to commit.
 for file in ~/.bash/{prompt,aliases,functions,extra}; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
 		# shellcheck source=/dev/null

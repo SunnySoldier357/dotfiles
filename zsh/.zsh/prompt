@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+# Allow git branch to update in prompt
+setopt prompt_subst
+
+# Setting up the prompt
+# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
+# %F - Set foreground colour
+# %M - The full machine hostname
+# %n - $USERNAME
+# %~ - Current working directory, shortned with ~ if possible
+[[ -f /usr/share/git/git-prompt.sh ]] && . /usr/share/git/git-prompt.sh
+PS1="
+%F{red}%n %F{magenta}%M %F{yellow}%~%F{cyan}\$(__git_ps1 ' (%s)')
+%f$ "
