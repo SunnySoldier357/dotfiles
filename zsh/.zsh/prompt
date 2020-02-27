@@ -1,7 +1,15 @@
-#!/bin/zsh
+#!/bin/sh
 
 # Allow git branch to update in prompt
 setopt prompt_subst
+
+git_branch() 
+{
+    branch="($(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'}))"
+    if [ $branch != "()" ]; then
+        echo $branch
+    fi
+}
 
 # Setting up the prompt
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
@@ -9,7 +17,6 @@ setopt prompt_subst
 # %M - The full machine hostname
 # %n - $USERNAME
 # %~ - Current working directory, shortned with ~ if possible
-[[ -f /usr/share/git/git-prompt.sh ]] && . /usr/share/git/git-prompt.sh
 PS1="
-%F{red}%n %F{magenta}%M %F{yellow}%~%F{cyan}\$(__git_ps1 ' (%s)')
+%F{red}%n %F{magenta}%M %F{yellow}%~ %F{cyan}\$(git_branch)
 %f$ "
