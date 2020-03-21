@@ -2,3 +2,13 @@
 
 export ANDROID_HOME=/opt/android-sdk
 export EDITOR=nvim
+
+# NVIDIA Offloading for Optimus Manager Hybrid Mode
+re="Current GPU mode : (hybrid)"
+if [[ $(optimus-manager --print-mode) =~ $re ]] then
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __GLX_VENDOR_LIBRARY_NAME="nvidia"
+    export __VK_LAYER_NV_optimus="NVIDIA_only"
+fi
+
+unset re
