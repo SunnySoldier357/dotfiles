@@ -1,5 +1,3 @@
-return
-{
-    global = require("configuration.keybindings.global"),
-    mod = require("configuration.keybindings.mod")
-}
+local globalKeybindings = require("configuration.keybindings.global")
+
+root.keys(globalKeybindings)
