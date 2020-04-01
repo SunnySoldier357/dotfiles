@@ -2,6 +2,7 @@
 
 export ANDROID_HOME=/opt/android-sdk
 export EDITOR=nvim
+export QT_QPA_PLATFORMTHEME=gtk2
 
 # NVIDIA Offloading for Optimus Manager Hybrid Mode
 re="Current GPU mode : (hybrid)"
