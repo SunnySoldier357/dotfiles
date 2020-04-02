@@ -41,6 +41,7 @@ return
         "picom --config " .. configDir .. "/configuration/picom.conf",
         "nm-applet", -- Wifi
         "numlockx on", -- Enable numlock
+        "eval $(gnome-keyring-daemon --start)",
 
         -- Add applications that need to be killed between reloads
         -- to avoid multipled instances, inside the awspawn script

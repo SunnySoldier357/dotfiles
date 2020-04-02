@@ -3,8 +3,8 @@ local hotkeysPopup = require("awful.hotkeys_popup").widget
 local gears = require("gears")
 
 local apps = require("configuration.apps")
-local altkey = require("configuration.keybindings.mod").altKey
-local modkey = require("configuration.keybindings.mod").modKey
+local altKey = require("configuration.keybindings.mod").altKey
+local modKey = require("configuration.keybindings.mod").modKey
 
 -- Settings
 local brightnessStep = 10
@@ -13,7 +13,7 @@ local volumeStep = 2
 local keybindings = gears.table.join(
     --* Awesome Key Bindings
     awful.key(
-        {modkey}, "p",
+        { modKey }, "p",
         function()
             awful.spawn(apps.default.launcher)
         end,
@@ -23,7 +23,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {modkey}, "r",
+        { modKey }, "r",
         function()
             awful.spawn(apps.default.runner)
         end,
@@ -34,7 +34,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {modkey}, "s",
+        { modKey }, "s",
         hotkeysPopup.show_help,
         {
             description="show help",
@@ -43,7 +43,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {modkey, "Control"}, "r",
+        { modKey, "Control" }, "r",
         awesome.restart,
         {
             description = "reload awesome",
@@ -52,7 +52,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {modkey, "Shift"}, "p",
+        { modKey, "Shift" }, "p",
         function()
             awful.spawn(apps.default.activeClients)
         end,
@@ -63,7 +63,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {modkey, "Shift"}, "q",
+        { modKey, "Shift" }, "q",
         awesome.quit,
         {
             description = "quit awesome",
@@ -75,7 +75,7 @@ local keybindings = gears.table.join(
 
     --* Client Key Bindings
     awful.key(
-        {modkey}, "j",
+        { modKey }, "j",
         function ()
             awful.client.focus.byidx(1)
         end,
@@ -85,7 +85,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {modkey}, "k",
+        { modKey }, "k",
         function ()
             awful.client.focus.byidx(-1)
         end,
@@ -96,7 +96,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {modkey}, "u",
+        { modKey }, "u",
         awful.client.urgent.jumpto,
         {
             description = "jump to urgent client",
@@ -105,7 +105,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {modkey, "Control"}, "n",
+        { modKey, "Control" }, "n",
         function ()
             local _client = awful.client.restore()
             -- Focus restored client
@@ -121,7 +121,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {modkey, "Shift"}, "j",
+        { modKey, "Shift" }, "j",
         function()
             awful.client.swap.byidx(1)
         end,
@@ -131,7 +131,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {modkey, "Shift"}, "k",
+        { modKey, "Shift" }, "k",
         function()
             awful.client.swap.byidx(-1)
         end,
@@ -145,7 +145,7 @@ local keybindings = gears.table.join(
 
     --* Hotkeys Key Bindings
     awful.key(
-        {}, "XF86MonBrightnessUp",
+        { }, "XF86MonBrightnessUp",
         function()
             awful.spawn("brightnessctl s +" .. brightnessStep .. "%")
         end,
@@ -155,7 +155,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {}, "XF86MonBrightnessDown",
+        { }, "XF86MonBrightnessDown",
         function()
             awful.spawn("brightnessctl s " .. brightnessStep .. "%-")
         end,
@@ -166,7 +166,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {}, "XF86AudioRaiseVolume",
+        { }, "XF86AudioRaiseVolume",
         function()
             awful.spawn("amixer -D pulse sset Master " .. volumeStep .."%+")
         end,
@@ -176,7 +176,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {}, "XF86AudioLowerVolume",
+        { }, "XF86AudioLowerVolume",
         function()
             awful.spawn("amixer -D pulse sset Master " .. volumeStep .."%-")
         end,
@@ -186,7 +186,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {}, "XF86AudioMute",
+        { }, "XF86AudioMute",
         function()
             awful.spawn("amixer -D pulse set Master 1+ toggle")
         end,
@@ -202,7 +202,7 @@ local keybindings = gears.table.join(
 
     --* Launcher Key Bindings
     awful.key(
-        {modkey}, "b",
+        { modKey }, "b",
         function()
             awful.util.spawn(apps.default.browser)
         end,
@@ -213,7 +213,7 @@ local keybindings = gears.table.join(
     ),
     
     awful.key(
-        {modkey}, "c",
+        { modKey }, "c",
         function()
             awful.util.spawn(apps.default.ide)
         end,
@@ -224,7 +224,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {modkey}, "e",
+        { modKey }, "e",
         function()
             awful.util.spawn(apps.default.filemanager)
         end,
@@ -235,7 +235,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {modkey}, "Return",
+        { modKey }, "Return",
         function()
             awful.spawn(apps.default.terminal)
         end,
@@ -249,7 +249,7 @@ local keybindings = gears.table.join(
 
     --* Layout Key Bindings
     awful.key(
-        {modkey}, "space",
+        { modKey }, "space",
         function()
             awful.layout.inc(1)
         end,
@@ -260,7 +260,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {altkey}, "l",
+        { altKey }, "l",
         function()
             awful.tag.incmwfact(0.05)
         end,
@@ -270,7 +270,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {altkey}, "h",
+        { altKey }, "h",
         function()
             awful.tag.incmwfact(-0.05)
         end,
@@ -281,7 +281,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {altkey}, "k",
+        { altKey }, "k",
         function()
             awful.client.incwfact(0.05)
         end,
@@ -291,7 +291,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {altkey}, "j",
+        { altKey }, "j",
         function()
             awful.client.incwfact(-0.05)
         end,
@@ -302,7 +302,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {modkey, "Shift"}, "space",
+        { modKey, "Shift" }, "space",
         function()
             awful.layout.inc(-1)
         end,
@@ -313,7 +313,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {modkey, "Control"}, "l",
+        { modKey, "Control" }, "l",
         function()
             awful.tag.incncol(1, nil, true)
         end,
@@ -323,7 +323,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {modkey, "Control"}, "h",
+        { modKey, "Control" }, "h",
         function()
             awful.tag.incncol(-1, nil, true)
         end,
@@ -334,7 +334,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        {modkey, "Control"}, "j",
+        { modKey, "Control" }, "j",
         function()
             awful.tag.incnmaster(1, nil, true)
         end,
@@ -344,7 +344,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {modkey, "Control"}, "k",
+        { modKey, "Control" }, "k",
         function()
             awful.tag.incnmaster(-1, nil, true)
         end,
@@ -358,7 +358,7 @@ local keybindings = gears.table.join(
 
     --* Screenshots Key Bindings
     awful.key(
-        {}, "Print",
+        { }, "Print",
         function()
             awful.util.spawn_with_shell(apps.default.screenshotDesktop)
         end,
@@ -368,7 +368,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {modkey}, "Print",
+        { modKey }, "Print",
         function()
             awful.util.spawn_with_shell(apps.default.screenshotWindow)
         end,
@@ -378,7 +378,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {modkey, "Shift"}, "s",
+        { modKey, "Shift" }, "s",
         function()
             awful.util.spawn_with_shell(apps.default.screenshotRegion)
         end,
@@ -392,7 +392,7 @@ local keybindings = gears.table.join(
 
     --* Screen Key Bindings
     awful.key(
-        {modkey}, "l",
+        { modKey }, "l",
         function()
             awful.screen.focus_relative( 1)
         end,
@@ -402,7 +402,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {modkey}, "h",
+        { modKey }, "h",
         function()
             awful.screen.focus_relative(-1)
         end,
@@ -416,7 +416,7 @@ local keybindings = gears.table.join(
 
     --* Tag Key Bindings
     awful.key(
-        {modkey, "Control"}, "Left",
+        { modKey, "Control" }, "Left",
         awful.tag.viewprev,
         {
             description = "view previous",
@@ -424,7 +424,7 @@ local keybindings = gears.table.join(
         }
     ),
     awful.key(
-        {modkey, "Control"}, "Right",
+        { modKey, "Control" }, "Right",
         awful.tag.viewnext,
         {
             description = "view next",
@@ -468,7 +468,7 @@ for i = 1, 9 do
 
         -- View tag only.
         awful.key(
-            {modkey}, "#" .. i + 9,
+            { modKey }, "#" .. i + 9,
             function()
                 local screen = awful.screen.focused()
                 local tag = screen.tags[i]
@@ -481,7 +481,7 @@ for i = 1, 9 do
 
         -- Toggle tag display.
         awful.key(
-            {modkey, "Control"}, "#" .. i + 9,
+            { modKey, "Control" }, "#" .. i + 9,
             function()
                 local screen = awful.screen.focused()
                 local tag = screen.tags[i]
@@ -494,7 +494,7 @@ for i = 1, 9 do
 
         -- Move client to tag.
         awful.key(
-            {modkey, "Shift"}, "#" .. i + 9,
+            { modKey, "Shift" }, "#" .. i + 9,
             function()
                 if _G.client.focus then
                     local tag = _G.client.focus.screen.tags[i]
@@ -508,7 +508,7 @@ for i = 1, 9 do
 
         -- Toggle tag on focused client.
         awful.key(
-            {modkey, "Control", "Shift"}, "#" .. i + 9,
+            { modKey, "Control", "Shift" }, "#" .. i + 9,
             function()
                 if _G.client.focus then
                     local tag = _G.client.focus.screen.tags[i]
