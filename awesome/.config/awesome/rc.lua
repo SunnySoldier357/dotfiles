@@ -43,6 +43,8 @@ do
 end
 -- }}}
 
+require("module")
+require("configuration")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
@@ -229,8 +231,6 @@ root.buttons(gears.table.join(
 -- }}}
 
 -- {{{ Key bindings
-require("configuration.keybindings")
-
 clientkeys = gears.table.join(
     awful.key({ modkey,           }, "f",
         function (c)
