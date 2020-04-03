@@ -30,9 +30,9 @@ return
         runner = rofi_command .. " -show run",
 
         -- Screenshot
-        screenshotDesktop = configDir .. "configuration/utils/screenshot -m",
-        screenshotRegion = configDir .. "configuration/utils/screenshot -r",
-        screenshotWindow = configDir .. "configuration/utils/screenshot -a"
+        screenshotDesktop = configDir .. "scripts/screenshot -m",
+        screenshotRegion = configDir .. "scripts/screenshot -r",
+        screenshotWindow = configDir .. "scripts/screenshot -a"
     },
 
     -- List of apps to start once on start-up

@@ -39,11 +39,6 @@ awful.rules.rules =
             floating = true,
             ontop = true,
             placement = awful.placement.centered,
-            shape = function()
-                return function(cr, w, h)
-                    gears.shape.rounded_rect(cr, w, h, 8)
-                end
-            end,
             skip_decoration = true
         }
     }

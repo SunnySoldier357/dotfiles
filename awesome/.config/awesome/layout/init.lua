@@ -5,6 +5,8 @@ local gears = require("gears")
 local menubar = require("menubar")
 local wibox = require("wibox")
 
+local updateWidget = require("widgets.update")
+
 local apps = require("configuration.apps")
 local modKey = require("configuration.keybindings.mod").modKey
 
@@ -29,8 +31,6 @@ local mainMenu = awful.menu(
 
 local launcher = awful.widget.launcher(
     { image = beautiful.awesome_icon, menu = mainMenu })
-
-local keyboardWidget = awful.widget.keyboardlayout()
 
 local textClockWidget = wibox.widget.textclock()
 
@@ -216,8 +216,8 @@ awful.screen.connect_for_each_screen(
             {
                 -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
-                keyboardWidget,
                 wibox.widget.systray(),
+                updateWidget,
                 textClockWidget,
                 s.mylayoutbox,
             },
