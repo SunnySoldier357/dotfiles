@@ -2,6 +2,10 @@ local awful = require("awful")
 local hotkeysPopup = require("awful.hotkeys_popup").widget
 local gears = require("gears")
 
+-- Enable hotkeys help widget for VIM and other apps
+-- when client with a matching name is opened:
+require("awful.hotkeys_popup.keys")
+
 local apps = require("configuration.apps")
 local altKey = require("configuration.keybindings.mod").altKey
 local modKey = require("configuration.keybindings.mod").modKey

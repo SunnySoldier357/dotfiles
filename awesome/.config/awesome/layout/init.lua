@@ -1,6 +1,5 @@
 local awful = require("awful")
-require("awful.autofocus")
-local hotkeys_popup = require("awful.hotkeys_popup")
+local hotkeysPopup = require("awful.hotkeys_popup")
 local beautiful = require("beautiful")
 local gears = require("gears")
 local menubar = require("menubar")
@@ -13,7 +12,7 @@ local modKey = require("configuration.keybindings.mod").modKey
 menubar.utils.terminal = apps.default.terminal
 
 local awesomeMenu = {
-   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+   { "hotkeys", function() hotkeysPopup.show_help(nil, awful.screen.focused()) end },
    { "edit config", apps.default.editor .. " " .. awesome.conffile },
    { "restart", awesome.restart },
    { "quit", function() awesome.quit() end },
@@ -134,9 +133,6 @@ awful.screen.connect_for_each_screen(
         -- Wallpaper
         set_wallpaper(s)
 
-        -- Each screen has its own tag table.
-        awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
-
         -- Create a promptbox for each screen
         s.mypromptbox = awful.widget.prompt()
 
@@ -178,12 +174,28 @@ awful.screen.connect_for_each_screen(
             buttons = taglistButtons
         }
 
+        -- and apply shape to it
+        if beautiful.taglist_shape_container then
+            local background_shape_wrapper = wibox.container.background(s.mytaglist)
+            background_shape_wrapper._do_taglist_update_now =
+                s.mytaglist._do_taglist_update_now
+            background_shape_wrapper._do_taglist_update = s.mytaglist._do_taglist_update
+            background_shape_wrapper.shape = beautiful.taglist_shape_container
+            background_shape_wrapper.shape_clip = beautiful.taglist_shape_clip_container
+            background_shape_wrapper.shape_border_width =
+                beautiful.taglist_shape_border_width_container
+            background_shape_wrapper.shape_border_color =
+                beautiful.taglist_shape_border_color_container
+            s.mytaglist = background_shape_wrapper
+        end
+
         -- Create a tasklist widget
         s.mytasklist = awful.widget.tasklist
         {
             screen  = s,
             filter  = awful.widget.tasklist.filter.currenttags,
-            buttons = tasklistButtons
+            buttons = tasklistButtons,
+            widget_template = beautiful.tasklist_widget_template
         }
 
         -- Create the wibox
