@@ -84,16 +84,8 @@ awful.layout.layouts = {
 }
 -- }}}
 
--- {{{ Mouse bindings
-root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
-))
--- }}}
-
 -- {{{ Key bindings
-clientkeys = gears.table.join(
+local clientkeys = gears.table.join(
     awful.key({ modKey,           }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
@@ -137,7 +129,7 @@ clientkeys = gears.table.join(
         {description = "(un)maximize horizontally", group = "client"})
 )
 
-clientbuttons = gears.table.join(
+local clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
     end),
@@ -154,61 +146,107 @@ clientbuttons = gears.table.join(
 
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
-awful.rules.rules = {
-    -- All clients will match this rule.
-    { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = awful.client.focus.filter,
-                     raise = true,
-                     keys = clientkeys,
-                     buttons = clientbuttons,
-                     screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
-     }
-    },
+-- awful.rules.rules = {
+--     -- All clients will match this rule.
+--     { rule = { },
+--       properties = { border_width = beautiful.border_width,
+--                      border_color = beautiful.border_normal,
+--                      focus = awful.client.focus.filter,
+--                      raise = true,
+--                      keys = clientkeys,
+--                      buttons = clientbuttons,
+--                      screen = awful.screen.preferred,
+--                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
+--      }
+--     },
 
-    -- Floating clients.
-    { rule_any = {
-        instance = {
-          "DTA",  -- Firefox addon DownThemAll.
-          "copyq",  -- Includes session name in class.
-          "pinentry",
-        },
-        class = {
-          "Arandr",
-          "Blueman-manager",
-          "Gpick",
-          "Kruler",
-          "MessageWin",  -- kalarm.
-          "Sxiv",
-          "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
-          "Wpa_gui",
-          "veromix",
-          "xtightvncviewer"},
+--     -- Floating clients.
+--     { rule_any = {
+--         instance = {
+--           "DTA",  -- Firefox addon DownThemAll.
+--           "copyq",  -- Includes session name in class.
+--           "pinentry",
+--         },
+--         class = {
+--           "Arandr",
+--           "Blueman-manager",
+--           "Gpick",
+--           "Kruler",
+--           "MessageWin",  -- kalarm.
+--           "Sxiv",
+--           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+--           "Wpa_gui",
+--           "veromix",
+--           "xtightvncviewclientkeyser"},
 
-        -- Note that the name property shown in xprop might be set slightly after creation of the client
-        -- and the name shown there might not match defined rules here.
-        name = {
-          "Event Tester",  -- xev.
-        },
-        role = {
-          "AlarmWindow",  -- Thunderbird's calendar.
-          "ConfigManager",  -- Thunderbird's about:config.
-          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
-        }
-      }, properties = { floating = true }},
+--         -- Note that the name property shown in xprop might be set slightly after creation of the client
+--         -- and the name shown there might not match defined rules here.
+--         name = {
+--           "Event Tester",  -- xev.
+--         },
+--         role = {
+--           "AlarmWindow",  -- Thunderbird's calendar.
+--           "ConfigManager",  -- Thunderbird's about:config.
+--           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+--         }
+--       }, properties = { floating = true }},
 
-    -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
-    },
+--     -- Add titlebars to normal clients and dialogs
+--     { rule_any = {type = { "normal", "dialog" }
+--       }, properties = { titlebars_enabled = true }
+--     },
 
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
-}
+--     -- Set Firefox to always map on the tag named "2" on screen 1.
+--     -- { rule = { class = "Firefox" },
+--     --   properties = { screen = 1, tag = "2" } },
+-- }
 -- }}}
+
+awful.rules.rules =
+{
+    -- All clients will match this rule.
+    {
+        rule = {},
+        properties =
+        {
+            above = false,
+            below = false,
+            buttons = clientbuttons,
+            floating = false,
+            focus = awful.client.focus.filter,
+            keys = clientkeys,
+            maximized = false,
+            maximized_horizontal = false,
+            maximized_vertical = false,
+            ontop = false,
+            placement = awful.placement.no_offscreen,
+            raise = true,
+            screen = awful.screen.preferred,
+            sticky = false
+        }
+    },
+    -- Titlebars
+    {
+        rule_any =
+        {
+            type = { "dialog" },
+            class = { "Wicd-client.py", "calendar.google.com" }
+        },
+        properties =
+        {
+            drawBackdrop = true,
+            floating = true,
+            ontop = true,
+            placement = awful.placement.centered,
+            shape = function()
+                return function(cr, w, h)
+                    gears.shape.rounded_rect(cr, w, h, 8)
+                end
+            end,
+            skip_decoration = true
+        }
+    }
+}
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
