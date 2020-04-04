@@ -23,7 +23,7 @@ local widget = wibox.widget
 
 local widgetButton = clickableContainer(
     wibox.container.margin(
-        widget, dpi(14), dpi(14), dpi(4), dpi(4)))
+        widget, dpi(4), dpi(4), dpi(2), dpi(2)))
 
 widgetButton:buttons(gears.table.join(
     awful.button(
@@ -50,7 +50,7 @@ awful.tooltip(
                 if updateAvailable then
                     local plural = numOfUpdatesAvailable == 1 and " update is " or " updates are "
 
-                    return numOfUpdatesAvailable .. plural .. "updates are available"
+                    return numOfUpdatesAvailable .. plural .. "available"
                 else
                     return "We are up-to-date!"
                 end

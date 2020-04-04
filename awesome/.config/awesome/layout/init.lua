@@ -5,6 +5,7 @@ local gears = require("gears")
 local menubar = require("menubar")
 local wibox = require("wibox")
 
+local batteryWidget = require("widgets.battery")
 local updateWidget = require("widgets.update")
 
 local apps = require("configuration.apps")
@@ -20,11 +21,17 @@ local awesomeMenu = {
    { "quit", function() awesome.quit() end },
 }
 
+local exitMenu = {
+    { "shutdown", function() awful.util.spawn("poweroff") end },
+    { "reboot", function() awful.util.spawn("reboot") end }
+}
+
 local mainMenu = awful.menu(
     {
         items =
         {
             { "awesome", awesomeMenu, beautiful.awesome_icon },
+            { "exit", exitMenu },
             { "open terminal", apps.default.terminal }
         }
     })
@@ -113,7 +120,7 @@ local tasklistButtons = gears.table.join(
     )
 )
 
-local function set_wallpaper(s)
+local function setWallpaper(s)
     -- Wallpaper
     if beautiful.wallpaper then
         local wallpaper = beautiful.wallpaper
@@ -125,21 +132,36 @@ local function set_wallpaper(s)
     end
 end
 
+local function setUpRightWidgets(_screen)
+    local returnWidget = wibox.layout.fixed.horizontal()
+    returnWidget:add(wibox.widget.systray())
+
+    if (screen.primary == _screen) then
+        returnWidget:add(batteryWidget)
+        returnWidget:add(updateWidget)
+    end
+
+    returnWidget:add(textClockWidget)
+    returnWidget:add(_screen.mylayoutbox)
+
+    return returnWidget
+end
+
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", set_wallpaper)
+screen.connect_signal("property::geometry", setWallpaper)
 
 awful.screen.connect_for_each_screen(
-    function(s)
+    function(_screen)
         -- Wallpaper
-        set_wallpaper(s)
+        setWallpaper(_screen)
 
         -- Create a promptbox for each screen
-        s.mypromptbox = awful.widget.prompt()
+        _screen.mypromptbox = awful.widget.prompt()
 
         -- Create an imagebox widget which will contain an icon indicating which layout we're using.
         -- We need one layoutbox per screen.
-        s.mylayoutbox = awful.widget.layoutbox(s)
-        s.mylayoutbox:buttons(gears.table.join(
+        _screen.mylayoutbox = awful.widget.layoutbox(_screen)
+        _screen.mylayoutbox:buttons(gears.table.join(
             awful.button(
                 { }, 1,
                 function()
@@ -167,60 +189,52 @@ awful.screen.connect_for_each_screen(
         ))
 
         -- Create a taglist widget
-        s.mytaglist = awful.widget.taglist
+        _screen.mytaglist = awful.widget.taglist
         {
-            screen  = s,
+            screen  = _screen,
             filter  = awful.widget.taglist.filter.all,
             buttons = taglistButtons
         }
 
         -- and apply shape to it
         if beautiful.taglist_shape_container then
-            local background_shape_wrapper = wibox.container.background(s.mytaglist)
-            background_shape_wrapper._do_taglist_update_now =
-                s.mytaglist._do_taglist_update_now
-            background_shape_wrapper._do_taglist_update = s.mytaglist._do_taglist_update
+            local background_shape_wrapper = wibox.container.background(_screen.mytaglist)
+            background_shape_wrapper._do_taglist_update_now =update
+            background_shape_wrapper._do_taglist_update = _screen.mytaglist._do_taglist_update
             background_shape_wrapper.shape = beautiful.taglist_shape_container
             background_shape_wrapper.shape_clip = beautiful.taglist_shape_clip_container
             background_shape_wrapper.shape_border_width =
                 beautiful.taglist_shape_border_width_container
             background_shape_wrapper.shape_border_color =
                 beautiful.taglist_shape_border_color_container
-            s.mytaglist = background_shape_wrapper
+            _screen.mytaglist = background_shape_wrapper
         end
 
         -- Create a tasklist widget
-        s.mytasklist = awful.widget.tasklist
+        _screen.mytasklist = awful.widget.tasklist
         {
-            screen  = s,
+            screen  = _screen,
             filter  = awful.widget.tasklist.filter.currenttags,
             buttons = tasklistButtons,
             widget_template = beautiful.tasklist_widget_template
         }
 
         -- Create the wibox
-        s.mywibox = awful.wibar({ position = "bottom", screen = s })
+        _screen.mywibox = awful.wibar({ position = "bottom", screen = _screen })
 
         -- Add widgets to the wibox
-        s.mywibox:setup
+        _screen.mywibox:setup
         {
             layout = wibox.layout.align.horizontal,
             {
                 -- Left widgets
                 layout = wibox.layout.fixed.horizontal,
                 launcher,
-                s.mytaglist,
-                s.mypromptbox,
+                _screen.mytaglist,
+                _screen.mypromptbox,
             },
-            s.mytasklist, -- Middle widget
-            {
-                -- Right widgets
-                layout = wibox.layout.fixed.horizontal,
-                wibox.widget.systray(),
-                updateWidget,
-                textClockWidget,
-                s.mylayoutbox,
-            },
+            _screen.mytasklist, -- Middle widget
+            setUpRightWidgets(_screen) -- Right widgets
         }
     end
 )
