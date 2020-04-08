@@ -7,7 +7,7 @@ local get_dpi = beautiful.xresources.get_dpi
 local rofi_command =
     "env /usr/bin/rofi -dpi " .. get_dpi() ..
     " -width " .. with_dpi(800) ..
-    " -theme " .. configDir .. '/configuration/rofi.rasi'
+    " -theme " .. configDir .. "configuration/rofi.rasi"
 
 return
 {
@@ -38,13 +38,14 @@ return
     -- List of apps to start once on start-up
     autostart =
     {
-        "picom --config " .. configDir .. "/configuration/picom.conf",
+        "picom --config " .. configDir .. "configuration/picom.conf",
         "nm-applet", -- Wifi
+        "blueman-applet", -- BLuetooth
         "numlockx on", -- Enable numlock
-        "eval $(gnome-keyring-daemon --start)",
+        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh)", -- credential manager
 
         -- Add applications that need to be killed between reloads
         -- to avoid multipled instances, inside the awspawn script
-        configDir .. "/configuration/awspawn" -- Spawn "dirty" apps that can linger between sessions
+        configDir .. "configuration/awspawn" -- Spawn "dirty" apps that can linger between sessions
     }
 }

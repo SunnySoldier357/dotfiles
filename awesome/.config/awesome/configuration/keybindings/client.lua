@@ -41,6 +41,16 @@ local keybindings = gears.table.join(
             group = "client"
         }
     ),
+
+    awful.key(
+        { modKey }, "o",
+        function (client)
+            client:move_to_screen()
+        end,
+        {
+            description = "move to next screen",
+            group = "client"
+        }),
     
     awful.key(
         { modKey }, "q",

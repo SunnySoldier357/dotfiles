@@ -10,6 +10,7 @@
 APPS=
 (
     kdeconnect-indicator
+    keepassxc
 )
 
 # Some applications start child applications that need to be killed on reload

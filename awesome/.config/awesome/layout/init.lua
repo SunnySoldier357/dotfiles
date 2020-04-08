@@ -6,6 +6,7 @@ local menubar = require("menubar")
 local wibox = require("wibox")
 
 local batteryWidget = require("widgets.battery")
+local optimusWidget = require("widgets.optimus")
 local updateWidget = require("widgets.update")
 
 local apps = require("configuration.apps")
@@ -139,6 +140,7 @@ local function setUpRightWidgets(_screen)
     if (screen.primary == _screen) then
         returnWidget:add(batteryWidget)
         returnWidget:add(updateWidget)
+        returnWidget:add(optimusWidget)
     end
 
     returnWidget:add(textClockWidget)

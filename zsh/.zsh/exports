@@ -4,12 +4,8 @@ export ANDROID_HOME=/opt/android-sdk
 export EDITOR=nvim
 export QT_QPA_PLATFORMTHEME=gtk2
 
-# NVIDIA Offloading for Optimus Manager Hybrid Mode
-re="Current GPU mode : (hybrid)"
-if [[ $(optimus-manager --print-mode) =~ $re ]] then
-    export __NV_PRIME_RENDER_OFFLOAD=1
-    export __GLX_VENDOR_LIBRARY_NAME="nvidia"
-    export __VK_LAYER_NV_optimus="NVIDIA_only"
+# For gnome-keyring ssh access
+if [ -n "$DESKTOP_SESSION" ];then
+    eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+    export SSH_AUTH_SOCK
 fi
-
-unset re

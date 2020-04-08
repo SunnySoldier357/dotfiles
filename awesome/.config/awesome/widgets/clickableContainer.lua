@@ -1,13 +1,16 @@
+local dpi = require("beautiful").xresources.apply_dpi
 local wibox = require("wibox")
 
 local normalBg = "#FFFFFF00"
 local mouseHoverBg = "#FFFFFF11"
 local mouseClickBg = "#FFFFFF22"
 
-function build(widget)
+local function build(widget)
     local container = wibox.widget
     {
-        widget,
+        -- Set default margins for this widget
+        wibox.container.margin(
+            widget, dpi(4), dpi(4), dpi(1), dpi(1)),
         widget = wibox.container.background
     }
 
