@@ -6,6 +6,6 @@ export QT_QPA_PLATFORMTHEME=gtk2
 
 # For gnome-keyring ssh access
 if [ -n "$DESKTOP_SESSION" ];then
-    eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+    eval $(gnome-keyring-daemon --start)
     export SSH_AUTH_SOCK
 fi

@@ -38,11 +38,11 @@ return
     -- List of apps to start once on start-up
     autostart =
     {
-        "picom --config " .. configDir .. "configuration/picom.conf",
+        "picom --experimental-backends --config " .. configDir .. "configuration/picom.conf",
         "nm-applet", -- Wifi
         "blueman-applet", -- BLuetooth
         "numlockx on", -- Enable numlock
-        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh)", -- credential manager
+        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", -- GUI authentication agent
 
         -- Add applications that need to be killed between reloads
         -- to avoid multipled instances, inside the awspawn script
