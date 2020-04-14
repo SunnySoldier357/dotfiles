@@ -16,7 +16,7 @@ return
         -- List of defaults applications
         browser = "brave",
         editor = "kate",
-        filemanager = "nemo",
+        filemanager = "index",
         game = "steam",
         ide = "code",
         lock = "light-locker",

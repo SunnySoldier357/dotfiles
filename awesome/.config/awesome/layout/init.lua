@@ -23,8 +23,8 @@ local awesomeMenu = {
 }
 
 local exitMenu = {
-    { "shutdown", function() awful.spawn("poweroff") end },
-    { "reboot", function() awful.spawn("reboot") end }
+    { "shutdown", function() awful.spawn.with_shell("poweroff") end },
+    { "reboot", function() awful.spawn.with_shell("reboot") end }
 }
 
 local mainMenu = awful.menu(

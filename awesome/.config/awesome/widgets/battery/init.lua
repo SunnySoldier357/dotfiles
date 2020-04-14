@@ -36,7 +36,7 @@ widgetButton:buttons(gears.table.join(
     awful.button(
         { }, 1, nil,
         function()
-            awful.spawn("powerkit --config")
+            awful.spawn.with_shell("powerkit --config")
         end
     )
 ))

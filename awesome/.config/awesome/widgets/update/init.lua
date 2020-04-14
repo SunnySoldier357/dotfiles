@@ -28,10 +28,10 @@ widgetButton:buttons(gears.table.join(
         { }, 1, nil,
         function()
             if updateAvailable then
-                awful.spawn(apps.default.terminal ..
+                awful.spawn.with_shell(apps.default.terminal ..
                     " sh -c 'yay -Syyuu; echo; echo Press Enter to exit.; read'")
             else
-                awful.spawn("pamac-manager")
+                awful.spawn.with_shell("pamac-manager")
             end
         end
     )

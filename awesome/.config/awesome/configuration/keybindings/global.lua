@@ -58,7 +58,7 @@ local keybindings = gears.table.join(
     awful.key(
         { modKey, "Shift" }, "p",
         function()
-            awful.spawn(apps.default.activeClients)
+            awful.spawn.with_shell(apps.default.activeClients)
         end,
         {
             description = "show active clients",
@@ -151,7 +151,7 @@ local keybindings = gears.table.join(
     awful.key(
         { }, "XF86MonBrightnessUp",
         function()
-            awful.spawn("brightnessctl s +" .. brightnessStep .. "%")
+            awful.spawn.with_shell("brightnessctl s +" .. brightnessStep .. "%")
         end,
         {
             description = "increase brightness",
@@ -161,7 +161,7 @@ local keybindings = gears.table.join(
     awful.key(
         { }, "XF86MonBrightnessDown",
         function()
-            awful.spawn("brightnessctl s " .. brightnessStep .. "%-")
+            awful.spawn.with_shell("brightnessctl s " .. brightnessStep .. "%-")
         end,
         {
             description = "decrease brightness",
@@ -172,7 +172,7 @@ local keybindings = gears.table.join(
     awful.key(
         { }, "XF86AudioRaiseVolume",
         function()
-            awful.spawn("amixer -D pulse sset Master " .. volumeStep .."%+")
+            awful.spawn.with_shell("amixer -D pulse sset Master " .. volumeStep .."%+")
         end,
         {
             description = "volume up",
@@ -182,7 +182,7 @@ local keybindings = gears.table.join(
     awful.key(
         { }, "XF86AudioLowerVolume",
         function()
-            awful.spawn("amixer -D pulse sset Master " .. volumeStep .."%-")
+            awful.spawn.with_shell("amixer -D pulse sset Master " .. volumeStep .."%-")
         end,
         {
             description = "volume down",
@@ -192,7 +192,7 @@ local keybindings = gears.table.join(
     awful.key(
         { }, "XF86AudioMute",
         function()
-            awful.spawn("amixer -D pulse set Master 1+ toggle")
+            awful.spawn.with_shell("amixer -D pulse set Master 1+ toggle")
         end,
         {
             description = "volume mute",
@@ -208,7 +208,7 @@ local keybindings = gears.table.join(
     awful.key(
         { modKey }, "b",
         function()
-            awful.spawn(apps.default.browser)
+            awful.spawn.with_shell(apps.default.browser)
         end,
         {
             description = "open a browser",
@@ -219,7 +219,7 @@ local keybindings = gears.table.join(
     awful.key(
         { modKey }, "c",
         function()
-            awful.spawn(apps.default.ide)
+            awful.spawn.with_shell(apps.default.ide)
         end,
         {
             description = "open a code editor",
@@ -230,7 +230,7 @@ local keybindings = gears.table.join(
     awful.key(
         { modKey }, "e",
         function()
-            awful.spawn(apps.default.filemanager)
+            awful.spawn.with_shell(apps.default.filemanager)
         end,
         {
             description = "open a file manager",
@@ -241,7 +241,7 @@ local keybindings = gears.table.join(
     awful.key(
         { modKey }, "Return",
         function()
-            awful.spawn(apps.default.terminal)
+            awful.spawn.with_shell(apps.default.terminal)
         end,
         {
             description = "open a terminal",
