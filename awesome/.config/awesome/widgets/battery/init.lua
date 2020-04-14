@@ -11,6 +11,7 @@
 local awful = require("awful")
 local watch = require("awful.widget.watch")
 local dpi = require("beautiful").xresources.apply_dpi
+local gears = require("gears")
 local naughty = require("naughty")
 local wibox = require("wibox")
 
@@ -30,6 +31,15 @@ local widget = wibox.widget
 }
 
 local widgetButton = clickableContainer(widget)
+
+widgetButton:buttons(gears.table.join(
+    awful.button(
+        { }, 1, nil,
+        function()
+            awful.spawn("powerkit --config")
+        end
+    )
+))
 
 local batteryTooltip = awful.tooltip(
     {

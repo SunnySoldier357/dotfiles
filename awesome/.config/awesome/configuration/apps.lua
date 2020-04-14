@@ -5,7 +5,7 @@ local configDir = require("gears.filesystem").get_configuration_dir()
 local with_dpi = beautiful.xresources.apply_dpi
 local get_dpi = beautiful.xresources.get_dpi
 local rofi_command =
-    "env /usr/bin/rofi -dpi " .. get_dpi() ..
+    "rofi -dpi " .. get_dpi() ..
     " -width " .. with_dpi(800) ..
     " -theme " .. configDir .. "configuration/rofi.rasi"
 
@@ -38,9 +38,15 @@ return
     -- List of apps to start once on start-up
     autostart =
     {
-        "picom --experimental-backends --config " .. configDir .. "configuration/picom.conf",
+        "light-locker",
+
+        "picom --experimental-backends --config " .. configDir ..
+            "configuration/picom.conf",
+
         "nm-applet", -- Wifi
         "blueman-applet", -- BLuetooth
+        "powerkit", -- Power Manager
+
         "numlockx on", -- Enable numlock
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", -- GUI authentication agent
 

@@ -19,7 +19,7 @@ local keybindings = gears.table.join(
     awful.key(
         { modKey }, "p",
         function()
-            awful.spawn(apps.default.launcher)
+            awful.spawn.with_shell(apps.default.launcher)
         end,
         {
             description = "show launcher",
@@ -29,7 +29,7 @@ local keybindings = gears.table.join(
     awful.key(
         { modKey }, "r",
         function()
-            awful.spawn(apps.default.runner)
+            awful.spawn.with_shell(apps.default.runner)
         end,
         {
             description = "show runner",
@@ -208,7 +208,7 @@ local keybindings = gears.table.join(
     awful.key(
         { modKey }, "b",
         function()
-            awful.util.spawn(apps.default.browser)
+            awful.spawn(apps.default.browser)
         end,
         {
             description = "open a browser",
@@ -219,7 +219,7 @@ local keybindings = gears.table.join(
     awful.key(
         { modKey }, "c",
         function()
-            awful.util.spawn(apps.default.ide)
+            awful.spawn(apps.default.ide)
         end,
         {
             description = "open a code editor",
@@ -230,7 +230,7 @@ local keybindings = gears.table.join(
     awful.key(
         { modKey }, "e",
         function()
-            awful.util.spawn(apps.default.filemanager)
+            awful.spawn(apps.default.filemanager)
         end,
         {
             description = "open a file manager",
@@ -364,7 +364,7 @@ local keybindings = gears.table.join(
     awful.key(
         { }, "Print",
         function()
-            awful.util.spawn_with_shell(apps.default.screenshotDesktop)
+            awful.spawn.with_shell(apps.default.screenshotDesktop)
         end,
         {
             description = "take a screenshot of the active monitor",
@@ -374,7 +374,7 @@ local keybindings = gears.table.join(
     awful.key(
         { modKey }, "Print",
         function()
-            awful.util.spawn_with_shell(apps.default.screenshotWindow)
+            awful.spawn.with_shell(apps.default.screenshotWindow)
         end,
         {
             description = "take a screenshot of the active window",
@@ -384,7 +384,7 @@ local keybindings = gears.table.join(
     awful.key(
         { modKey, "Shift" }, "s",
         function()
-            awful.util.spawn_with_shell(apps.default.screenshotRegion)
+            awful.spawn.with_shell(apps.default.screenshotRegion)
         end,
         {
             description = "mark an area and screenshot it",
