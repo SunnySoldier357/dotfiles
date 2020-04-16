@@ -461,35 +461,34 @@ function getNumPadKeyCode(number)
 end
 
 for i = 1, numOfTags do
-
-    -- Hack to only show tags 1 and 9 in the shortcut window
-    local descrView, descrToggle, descrMove, descrToggleFocus
-    if i == 1 or i == numOfTags then
-        descrView =
-        {
-            description = "view tag #",
-            group = "tag"
-        }
-        descrToggle =
-        {
-            description = "toggle tag #",
-            group = "tag"
-        }
-        descrMove =
-        {
-            description = "move focused client to tag #",
-            group = "tag"
-        }
-        descrToggleFocus =
-        {
-            description = "toggle focused client on tag #",
-            group = "tag"
-        }
-    end
-
     local keys = { getTopRowKeyCode(i), getNumPadKeyCode(i) }
 
     for _, key in pairs(keys) do
+        -- Hack to only show the first & last tags in the shortcut window
+        local descrView, descrToggle, descrMove, descrToggleFocus
+        if (i == 1 or i == numOfTags) and key == keys[1] then
+            descrView =
+            {
+                description = "view tag #",
+                group = "tag"
+            }
+            descrToggle =
+            {
+                description = "toggle tag #",
+                group = "tag"
+            }
+            descrMove =
+            {
+                description = "move focused client to tag #",
+                group = "tag"
+            }
+            descrToggleFocus =
+            {
+                description = "toggle focused client on tag #",
+                group = "tag"
+            }
+        end
+
         keybindings = gears.table.join(keybindings,
 
             -- View tag only.
