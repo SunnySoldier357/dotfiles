@@ -51,6 +51,8 @@ local count = 0;
 awful.screen.connect_for_each_screen(
     function(s)
         -- Each screen has its own tag table.
+        count = 0;
+        
         for i, tag in pairs(tags) do
             count = count + 1;
 
