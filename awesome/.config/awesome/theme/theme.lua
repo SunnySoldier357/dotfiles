@@ -1,5 +1,7 @@
 local themeAssets = require("beautiful.theme_assets")
-local dpi = require("beautiful.xresources").apply_dpi
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
+local xrdb = xresources.get_current_theme()
 
 local icons = require("theme.icons")
 local layoutIcons = require("theme.icons.layouts")
@@ -9,35 +11,29 @@ local theme = {}
 
 theme.font = "sans 8"
 
-theme.bg_focus = "#535D6C"
-theme.bg_minimize = "#444444"
-theme.bg_normal = "#222222"
+theme.bg_focus = xrdb.color12
+theme.bg_minimize = xrdb.color8
+theme.bg_normal = xrdb.background
 theme.bg_systray = theme.bg_normal
-theme.bg_urgent = "#FF0000"
+theme.bg_urgent = xrdb.color9
 
-theme.fg_focus      = "#FFFFFF"
-theme.fg_minimize   = "#FFFFFF"
-theme.fg_normal     = "#AAAAAA"
-theme.fg_urgent     = "#FFFFFF"
+theme.fg_focus = theme.bg_normal
+theme.fg_minimize = theme.bg_normal
+theme.fg_normal = xrdb.foreground
+theme.fg_urgent = theme.bg_normal
 
-theme.border_focus  = "#535D6C"
-theme.border_marked = "#91231C"
-theme.border_normal = "#000000"
-theme.border_width  = dpi(1)
-theme.useless_gap   = dpi(0)
+theme.border_focus  = theme.bg_focus
+theme.border_marked = xrdb.color10
+theme.border_normal = xrdb.color0
+theme.border_width  = dpi(2)
+theme.useless_gap   = dpi(3)
 
--- Generate taglist squares:
-local taglistSquareSize = dpi(4)
-theme.taglist_squares_sel = themeAssets.taglist_squares_sel(
-    taglistSquareSize, theme.fg_normal
-)
-theme.taglist_squares_unsel = themeAssets.taglist_squares_unsel(
-    taglistSquareSize, theme.fg_normal
-)
+theme.tooltip_fg = theme.fg_normal
+theme.tooltip_bg = theme.bg_normal
 
 -- Variables set for theming the menu:
 theme.menu_submenu_icon = icons.submenu
-theme.menu_height = dpi(15)
+theme.menu_height = dpi(16)
 theme.menu_width  = dpi(100)
 
 theme.wallpaper = wallpapers.default
@@ -60,9 +56,21 @@ theme.layout_cornerne = layoutIcons.cornernew
 theme.layout_cornersw = layoutIcons.cornersww
 theme.layout_cornerse = layoutIcons.cornersew
 
+-- Recolor Layout icons:
+theme = themeAssets.recolor_layout(theme, theme.fg_normal)
+
 -- Generate Awesome icon:
 theme.awesome_icon = themeAssets.awesome_icon(
     theme.menu_height, theme.bg_focus, theme.fg_focus
+)
+
+-- Generate taglist squares:
+local taglistSquareSize = dpi(4)
+theme.taglist_squares_sel = themeAssets.taglist_squares_sel(
+    taglistSquareSize, theme.fg_normal
+)
+theme.taglist_squares_unsel = themeAssets.taglist_squares_unsel(
+    taglistSquareSize, theme.fg_normal
 )
 
 -- Define the icon theme for application icons. If not set then the icons
