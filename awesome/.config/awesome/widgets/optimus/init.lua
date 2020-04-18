@@ -23,9 +23,33 @@ local widget = wibox.widget
 local widgetButton = clickableContainer(widget)
 
 -- Create the menu to switch to a different mode
--- local menuWibox = wibox.widget(
-    
--- );
+local function switchMode(mode)
+    local mode = function()
+        awful.spawn.with_shell("optimus-manager --switch " .. mode .. " --no-confirm")
+    end
+
+    return mode
+end
+
+local menu = awful.menu(
+    {
+        items =
+        {
+            { "Nvidia",switchMode("nvidia"),iconDir .. "nvidia.svg" },
+            { "Hybrid", switchMode("hybrid"), iconDir .. "hybrid.svg" },
+            { "Intel", switchMode("intel"), iconDir .. "intel.svg" }
+        }
+    }
+)
+
+widgetButton:buttons(gears.table.join(
+    awful.button(
+        { }, 1, nil,
+        function()
+            menu:toggle()
+        end
+    )
+))
 
 -- optimus-manager --status sample outputs
 --
@@ -37,7 +61,6 @@ local widgetButton = clickableContainer(widget)
 -- Temporary config path: no
 
 -- Run optimus-manager --status & get its output
-local naughty = require("naughty")
 awful.spawn.easy_async("optimus-manager --status",
     function(stdout)
         for line in stdout:gmatch("[^\r\n]+") do
