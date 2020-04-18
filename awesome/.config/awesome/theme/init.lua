@@ -1,9 +1,8 @@
 local beautiful = require("beautiful")
-local gears = require("gears")
 
-local configDir = require("gears.filesystem").get_configuration_dir()
+local theme = require("theme.configuration")
 
-beautiful.init(configDir .. "theme/theme.lua")
+beautiful.init(theme)
 
 client.connect_signal("focus",
     function(client)
