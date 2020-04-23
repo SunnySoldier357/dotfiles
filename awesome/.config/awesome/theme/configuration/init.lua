@@ -5,6 +5,8 @@ local initTaglist = require("theme.configuration.taglist")
 local initTasklist = require("theme.configuration.tasklist")
 local wallpapers = require("theme.wallpapers")
 
+require("theme.configuration.extras")
+
 local theme = createThemeWithGtk()
 
 theme.wallpaper = wallpapers.default

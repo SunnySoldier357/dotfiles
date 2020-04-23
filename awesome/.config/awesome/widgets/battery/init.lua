@@ -32,15 +32,6 @@ local widget = wibox.widget
 
 local widgetButton = clickableContainer(widget)
 
-widgetButton:buttons(gears.table.join(
-    awful.button(
-        { }, 1, nil,
-        function()
-            awful.spawn.with_shell("powerkit --config")
-        end
-    )
-))
-
 local batteryTooltip = awful.tooltip(
     {
         objects = { widgetButton },

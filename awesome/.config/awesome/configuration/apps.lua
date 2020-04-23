@@ -16,7 +16,7 @@ return
         -- List of defaults applications
         browser = "brave",
         editor = "kate",
-        filemanager = "index",
+        filemanager = "nautilus",
         game = "steam",
         ide = "code",
         lock = "light-locker",
@@ -45,7 +45,6 @@ return
 
         "nm-applet", -- Wifi
         "blueman-applet", -- BLuetooth
-        "powerkit", -- Power Manager
 
         "numlockx on", -- Enable numlock
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", -- GUI authentication agent

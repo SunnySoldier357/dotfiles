@@ -18,7 +18,7 @@ fi
 
 xrandr --output $eDP --off \
     --output $HDMI --primary --mode 1680x1050 --pos 0x0 --rotate normal \
-    --output $DVI --mode 1680x1050 --pos 1680x0 --rotate normal ||\
+    --output $DVI --mode 1680x1050 --pos 1680x152 --rotate normal ||\
 
     xrandr --output $eDP --primary --mode 1920x1080 --pos 0x0 --rotate normal \
         --output $HDMI --off \

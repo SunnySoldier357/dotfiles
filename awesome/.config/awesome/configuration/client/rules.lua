@@ -35,8 +35,10 @@ awful.rules.rules =
         {
             class =
             {
+                "Android Emulator - *",
                 "Blueman-adapters",
                 "Blueman-manager",
+                "Emulator"
             },
             role =
             {
