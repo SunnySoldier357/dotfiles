@@ -1,6 +1,6 @@
 [include]
     path = "~/.gitconfig-local"
-    path = "~/.gitconfig_aliases"
+    path = "~/.gitconfig-aliases"
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -10,7 +10,7 @@
 
 [core]
 	editor = code -w -n
-	excludesfile = "~/.gitignore_global"
+	excludesfile = "~/.gitignore-global"
 
 [color]
 	ui = true
@@ -23,5 +23,6 @@
 
 [fetch]
 	prune = true
+
 [credential]
 	helper = /usr/lib/git-core/git-credential-libsecret
