@@ -2,11 +2,11 @@ local beautiful = require("beautiful")
 local configDir = require("gears.filesystem").get_configuration_dir()
 
 -- Make rofi dpi aware (github:jo148)
-local with_dpi = beautiful.xresources.apply_dpi
-local get_dpi = beautiful.xresources.get_dpi
+local getDpi = beautiful.xresources.get_dpi
+local withDpi = beautiful.xresources.apply_dpi
 local rofi_command =
-    "rofi -dpi " .. get_dpi() ..
-    " -width " .. with_dpi(800) ..
+    "rofi -dpi " .. getDpi() ..
+    " -width " .. withDpi(800) ..
     " -theme " .. configDir .. "configuration/rofi.rasi"
 
 return
@@ -16,10 +16,10 @@ return
         -- List of defaults applications
         browser = "brave",
         editor = "kate",
-        filemanager = "nautilus",
+        filemanager = "nautilus -w",
         game = "steam",
         ide = "code",
-        lock = "light-locker",
+        lock = "i3lock-fancy",
         music = "cantata",
         social = "caprine",
         terminal = "kitty",
