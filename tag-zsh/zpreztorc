@@ -1,0 +1,2 @@
+zstyle ':prezto:module:prompt' pwd-length 'long'
+zstyle ':prezto:module:prompt' theme 'garrett'
