@@ -43,6 +43,7 @@ return
         "picom --experimental-backends --config " .. configDir ..
             "configuration/picom.conf",
 
+        "redshift-gtk", -- Night Light
         "nm-applet", -- Wifi
         "blueman-applet", -- BLuetooth
 
