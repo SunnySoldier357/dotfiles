@@ -42,3 +42,6 @@ alias sortnr="sort -n -r"
 alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
+
+alias vim="nvim"
+alias svim="sudo vim"
