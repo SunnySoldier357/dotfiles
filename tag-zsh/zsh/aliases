@@ -5,16 +5,12 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-alias pacman-update="sudo reflector -p http -p https --sort rate --save /etc/pacman.d/mirrorlist"
-
 alias ls="ls --color=auto"
 alias ll="ls -l"
 alias l="ls -lFh"     # size, show type, human readable
 alias la="ls -lAFh"   # long list, show almost all, show type, human readable
 alias ll="ls -l"      # long list
 alias ldot="ls -ld .*"
-
-alias zshrc="${=EDITOR} ~/.zshrc" # Quick access to the ~/.zshrc file
 
 alias grep="grep --color"
 
@@ -45,3 +41,8 @@ alias mv="mv -i"
 
 alias vim="nvim"
 alias svim="sudo vim"
+
+alias pacman-update="sudo reflector -p https --sort rate --save /etc/pacman.d/mirrorlist"
+
+alias android-permissions="sudo chown -R :android /opt/android-sdk && sudo chmod -R g+w /opt/android-sdk"
+alias flutter-permissions="sudo chown -R :flutter /opt/flutter && sudo chmod -R g+w /opt/flutter"
