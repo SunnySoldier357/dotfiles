@@ -1,0 +1,20 @@
+configuration {
+    modi:                           "window";
+    icon-theme: 					"Papirus";
+    show-icons:                     true;
+    display-window: 		        "";
+}
+@import "rofi.rasi"
+
+entry {
+    placeholder:                    "Search Active Windows";
+}
+
+listview {
+    columns:                        5;
+}
+
+element-icon {
+    size:                           65px;
+    border:                         0px;
+}

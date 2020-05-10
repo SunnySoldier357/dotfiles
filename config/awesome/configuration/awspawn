@@ -7,8 +7,7 @@
 #  (if you want to apply parameters then use a script file!)
 
 # List of applications to run
-APPS=
-(
+APPS=(
     kdeconnect-indicator
     keepassxc
 )

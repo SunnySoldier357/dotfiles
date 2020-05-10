@@ -8,12 +8,7 @@
  */
 
 configuration {
-    modi:                           "window,run,ssh,drun";
     font:                           "Noto Sans 10";
-    show-icons:                     true;
-	icon-theme: 					"Papirus";
-    display-drun: 					"";
-    drun-display-format:            "{name}";
     threads:                        0;
     scroll-method:                  0;
     disable-history:                false;
@@ -64,14 +59,12 @@ inputbar {
     position:                       center;
 }
 
-
 entry {
     background-color:               @background;
     text-color:                     @foreground;
     placeholder-color:              @foreground;
     expand:                         true;
     horizontal-align:               0;
-    placeholder:                    "Search";
     blink:                          true;
 }
 
@@ -81,10 +74,8 @@ case-indicator {
     spacing:                        0;
 }
 
-
 listview {
     background-color:               @background;
-    columns:                        5;
     spacing:                        4px;
     cycle:                          false;
     dynamic:                        true;
@@ -104,11 +95,6 @@ element {
     orientation:                    vertical;
     border-radius:                  6px;
     padding:                        10px 0px 10px 0px;
-}
-
-element-icon {
-    size:                           65px;
-    border:                         0px;
 }
 
 element-text {
