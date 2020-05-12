@@ -27,6 +27,19 @@ ex ()
 }
 
 #
+# # pacman-update - Updates pacman mirrorlist
+# # usage: pacman-update <country>
+pacman-update ()
+{
+    sudo reflector \
+        -p https -p http \
+        --sort rate \
+        -c $1 \
+        --save /etc/pacman.d/mirrorlist && \
+            cat /etc/pacman.d/mirrorlist
+}
+
+#
 # # new-code - create and open a new file in Visual Studio code
 # # usage: new-code <file>
 new-code ()
