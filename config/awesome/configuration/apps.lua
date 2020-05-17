@@ -4,9 +4,11 @@ local configDir = require("gears.filesystem").get_configuration_dir()
 -- Make rofi dpi aware (github:jo148)
 local getDpi = beautiful.xresources.get_dpi
 local withDpi = beautiful.xresources.apply_dpi
-local rofi_command =
+local rofiCommand =
     "rofi -dpi " .. getDpi() ..
     " -width " .. withDpi(800)
+
+local lockCommand = "i3lock-fancy -f Open-Sans-SemiBold"
 
 return
 {
@@ -18,17 +20,17 @@ return
         filemanager = "nautilus -w",
         game = "steam",
         ide = "code",
-        lock = "i3lock-fancy",
+        lock = lockCommand,
         music = "cantata",
         social = "caprine",
         terminal = "kitty",
 
         -- Rofi
-        activeClients = rofi_command .. " -show window" ..
+        activeClients = rofiCommand .. " -show window" ..
             " -theme " .. configDir .. "configuration/rofi/windows.rasi",
-        launcher = rofi_command .. " -show drun" ..
+        launcher = rofiCommand .. " -show drun" ..
             " -theme " .. configDir .. "configuration/rofi/launcher.rasi",
-        runner = rofi_command .. " -show run" ..
+        runner = rofiCommand .. " -show run" ..
             " -theme " .. configDir .. "configuration/rofi/runner.rasi",
 
         -- Screenshot
@@ -44,7 +46,8 @@ return
         -- to avoid multipled instances, inside the awspawn script
         configDir .. "configuration/awspawn", -- Spawn "dirty" apps that can linger between sessions
 
-        "light-locker",
+        "libinput-gestures-setup start",
+        "xss-lock -- " .. lockCommand,
 
         "picom --experimental-backends --config " .. configDir ..
             "configuration/picom.conf",

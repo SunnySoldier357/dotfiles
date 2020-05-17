@@ -48,7 +48,7 @@ local keybindings = gears.table.join(
     ),
 
     awful.key(
-        { modKey }, "Esc",
+        { modKey }, "Escape",
         function()
             awful.spawn.with_shell(apps.default.lock)
         end,
