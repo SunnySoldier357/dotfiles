@@ -24,32 +24,32 @@ local function init(theme)
 
     theme.tasklist_widget_template =
     {
+        widget = wibox.container.background,
+        id = "background_role",
+        create_callback =
+            function(self, _client)
+                self:get_children_by_id("clienticon")[1].client = _client
+            end,
         {
+            widget = wibox.container.margin,
+            left = dpi(2),
+            right = dpi(4),
             {
+                layout = wibox.layout.fixed.horizontal,
                 {
+                    widget = wibox.container.margin,
+                    margins = dpi(4),
                     {
                         id = "clienticon",
                         widget = clientIcon,
                     },
-                    margins = dpi(4),
-                    widget = wibox.container.margin,
                 },
                 {
                     id = "text_role",
                     widget = wibox.widget.textbox,
                 },
-                layout = wibox.layout.fixed.horizontal,
             },
-            left = dpi(2),
-            right = dpi(4),
-            widget = wibox.container.margin
         },
-        id = "background_role",
-        widget = wibox.container.background,
-        create_callback =
-            function(self, c)
-                self:get_children_by_id("clienticon")[1].client = c
-            end,
     }
 end
 
