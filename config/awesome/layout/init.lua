@@ -18,7 +18,7 @@ local tasklistWidget = require("layout.tasklist")
 -- Set the terminal for applications that require it
 menubar.utils.terminal = apps.default.terminal
 
-local textClockWidget = wibox.widget.textclock("%H:%M - %d/%m/%Y ")
+local textClockWidget = wibox.widget.textclock("%d/%m/%Y - %H:%M ")
 
 -- Create a wibox for each screen and add it
 local function setWallpaper(s)

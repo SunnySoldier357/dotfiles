@@ -16,6 +16,7 @@ return
     {
         -- List of defaults applications
         browser = "brave",
+        browserPrivate = "brave --incognito",
         editor = "kate",
         filemanager = "nautilus -w",
         game = "steam",

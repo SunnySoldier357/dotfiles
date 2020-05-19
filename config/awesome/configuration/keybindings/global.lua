@@ -227,6 +227,16 @@ local keybindings = gears.table.join(
             group = "launcher"
         }
     ),
+    awful.key(
+        { modKey, "Shift" }, "b",
+        function()
+            awful.spawn.with_shell(apps.default.browserPrivate)
+        end,
+        {
+            description = "open a private browser",
+            group = "launcher"
+        }
+    ),
     
     awful.key(
         { modKey }, "c",
