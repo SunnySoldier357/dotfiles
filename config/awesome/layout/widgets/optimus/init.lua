@@ -2,11 +2,11 @@ local awful = require("awful")
 local watch = require("awful.widget.watch")
 local dpi = require("beautiful").xresources.apply_dpi
 local gears = require("gears")
-local iconDir = require("gears.filesystem").get_configuration_dir() .. "widgets/optimus/icons/"
+local iconDir = require("gears.filesystem").get_configuration_dir() .. "layout/widgets/optimus/icons/"
 local wibox = require("wibox")
 
 local apps = require("configuration.apps")
-local clickableContainer = require("widgets.clickableContainer")
+local clickableContainer = require("layout.widgets.material.clickableContainer")
 
 local optimusMode = nil
 

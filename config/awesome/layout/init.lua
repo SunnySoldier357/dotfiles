@@ -5,20 +5,19 @@ local gears = require("gears")
 local menubar = require("menubar")
 local wibox = require("wibox")
 
-local batteryWidget = require("widgets.battery")
-local optimusWidget = require("widgets.optimus")
-local updateWidget = require("widgets.update")
+local batteryWidget = require("layout.widgets.battery")
+local optimusWidget = require("layout.widgets.optimus")
+local updateWidget = require("layout.widgets.update")
 
 local apps = require("configuration.apps")
 
-local launcherWidget = require("layout.launcher")
-local taglistWidget = require("layout.taglist")
-local tasklistWidget = require("layout.tasklist")
+local launcherWidget = require("layout.widgets.launcher")
+local taglistWidget = require("layout.widgets.taglist")
+local tasklistWidget = require("layout.widgets.tasklist")
+local textClockWidget = require("layout.widgets.textClock")
 
 -- Set the terminal for applications that require it
 menubar.utils.terminal = apps.default.terminal
-
-local textClockWidget = wibox.widget.textclock("%d/%m/%Y - %H:%M ")
 
 -- Create a wibox for each screen and add it
 local function setWallpaper(s)
@@ -43,7 +42,7 @@ local function setUpRightWidgets(_screen)
         returnWidget:add(optimusWidget)
     end
 
-    returnWidget:add(textClockWidget)
+    returnWidget:add(textClockWidget(_screen))
     returnWidget:add(_screen.mylayoutbox)
 
     return returnWidget

@@ -15,8 +15,8 @@ local gears = require("gears")
 local naughty = require("naughty")
 local wibox = require("wibox")
 
-local clickableContainer = require("widgets.clickableContainer")
-local iconDir = require("gears.filesystem").get_configuration_dir() .. "widgets/battery/icons/"
+local clickableContainer = require("layout.widgets.material.clickableContainer")
+local iconDir = require("gears.filesystem").get_configuration_dir() .. "layout/widgets/battery/icons/"
 
 local lastBatteryCheck = os.time()
 
