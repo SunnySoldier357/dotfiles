@@ -5,3 +5,6 @@ export PATH="$PATH:/home/sandeepsingh/.local/bin"
 
 # Add Android SDK cmd-line tools to PATH
 export PATH="$PATH:/opt/android-sdk/tools/bin"
+
+# Add .NET Core SDK tools
+export PATH="$PATH:/home/sandeepsingh/.dotnet/tools"
