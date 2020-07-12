@@ -184,7 +184,7 @@ local keybindings = gears.table.join(
     awful.key(
         { }, "XF86AudioRaiseVolume",
         function()
-            awful.spawn.with_shell("amixer -D pulse sset Master " .. volumeStep .."%+")
+            awful.spawn.with_shell("amixer -q -D pulse sset Master " .. volumeStep .."%+")
         end,
         {
             description = "volume up",
@@ -194,7 +194,7 @@ local keybindings = gears.table.join(
     awful.key(
         { }, "XF86AudioLowerVolume",
         function()
-            awful.spawn.with_shell("amixer -D pulse sset Master " .. volumeStep .."%-")
+            awful.spawn.with_shell("amixer -q -D pulse sset Master " .. volumeStep .."%-")
         end,
         {
             description = "volume down",
@@ -212,7 +212,36 @@ local keybindings = gears.table.join(
         }
     ),
 
-    -- TODO: Add Playback Media Controls
+    awful.key(
+        { }, "XF86AudioPlay",
+        function()
+            awful.spawn.with_shell("playerctl play-pause")
+        end,
+        {
+            description = "play / pause",
+            group = "hotkeys"
+        }
+    ),
+    awful.key(
+        { }, "XF86AudioNext",
+        function()
+            awful.spawn.with_shell("playerctl next")
+        end,
+        {
+            description = "next song",
+            group = "hotkeys"
+        }
+    ),
+    awful.key(
+        { }, "XF86AudioPrev",
+        function()
+            awful.spawn.with_shell("playerctl previous")
+        end,
+        {
+            description = "previous song",
+            group = "hotkeys"
+        }
+    ),
     
 
 
