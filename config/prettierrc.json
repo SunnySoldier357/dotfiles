@@ -1,6 +1,5 @@
 {
     "arrowParens": "avoid",
-    // "bracketSpacing": false,
     "printWidth": 80,
     "tabWidth": 4
 }
