@@ -5,7 +5,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-alias ls="ls --color=auto"
+alias ls="lsd --group-dirs first"
 alias ll="ls -l"
 alias l="ls -lFh"     # size, show type, human readable
 alias la="ls -lAFh"   # long list, show almost all, show type, human readable
