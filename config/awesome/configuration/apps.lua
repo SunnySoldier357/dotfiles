@@ -58,6 +58,8 @@ return
         "blueman-applet", -- BLuetooth
         "copyq", -- Clipboard Manager
 
+        "xbindkeys", -- Disable middle click pasting
+
         "numlockx on", -- Enable numlock
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- GUI authentication agent
     }
