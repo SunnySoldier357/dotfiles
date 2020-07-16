@@ -20,17 +20,21 @@ local textClockWidget = require("layout.widgets.textClock")
 menubar.utils.terminal = apps.default.terminal
 
 -- Create a wibox for each screen and add it
-local function setWallpaper(s)
-    -- Wallpaper
-    if beautiful.wallpaper then
-        local wallpaper = beautiful.wallpaper
-        -- If wallpaper is a function, call it with the screen
-        if type(wallpaper) == "function" then
-            wallpaper = wallpaper(s)
+screen.connect_signal("request::wallpaper",
+    function(_screen)
+        -- Wallpaper
+        if beautiful.wallpaper then
+            local wallpaper = beautiful.wallpaper
+
+            -- If wallpaper is a function, call it with the screen
+            if type(wallpaper) == "function" then
+                wallpaper = wallpaper(_screen)
+            end
+
+            gears.wallpaper.maximized(wallpaper, _screen, true)
         end
-        gears.wallpaper.maximized(wallpaper, s, true)
     end
-end
+)
 
 local function setUpRightWidgets(_screen)
     local returnWidget = wibox.layout.fixed.horizontal()
@@ -48,14 +52,8 @@ local function setUpRightWidgets(_screen)
     return returnWidget
 end
 
--- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
-screen.connect_signal("property::geometry", setWallpaper)
-
-awful.screen.connect_for_each_screen(
+screen.connect_signal("request::desktop_decoration",
     function(_screen)
-        -- Wallpaper
-        setWallpaper(_screen)
-
         taglistWidget(_screen)
         tasklistWidget(_screen)
 
@@ -93,7 +91,7 @@ awful.screen.connect_for_each_screen(
         _screen.mywibox = awful.wibar({ position = "bottom", screen = _screen })
 
         -- Add widgets to the wibox
-        _screen.mywibox:setup
+        _screen.mywibox.widget =
         {
             layout = wibox.layout.align.horizontal,
             {

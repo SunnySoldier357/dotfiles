@@ -19,12 +19,12 @@ local function taglist(_screen)
         backgroundShapeWrapper._do_taglist_update_now = update
         backgroundShapeWrapper._do_taglist_update = taglist._do_taglist_update
 
-        backgroundShapeWrapper.shape = beautiful.taglist_shape_container
-        backgroundShapeWrapper.shape_clip = beautiful.taglist_shape_clip_container
-        backgroundShapeWrapper.shape_border_width =
-            beautiful.taglist_shape_border_width_container
-        backgroundShapeWrapper.shape_border_color =
-            beautiful.taglist_shape_border_color_container
+        -- backgroundShapeWrapper.shape = beautiful.taglist_shape_container
+        -- backgroundShapeWrapper.shape_clip = beautiful.taglist_shape_clip_container
+        -- backgroundShapeWrapper.shape_border_width =
+        --     beautiful.taglist_shape_border_width_container
+        -- backgroundShapeWrapper.shape_border_color =
+        --     beautiful.taglist_shape_border_color_container
 
         _screen.mytaglist = backgroundShapeWrapper
     end

@@ -1,82 +1,92 @@
 local awful = require("awful")
-local gears = require("gears")
 
 local modKey = require("configuration.keybindings.mod").modKey
 local altKey = require("configuration.keybindings.mod").altKey
 
-local buttons = gears.table.join(
-    awful.button(
-        { }, 1,
-        function (client)
-            client:emit_signal("request::activate", "mouse_click", { raise = true })
-        end
-    ),
+-- Client Mouse Keybindings
+client.connect_signal("request::default_mousebindings",
+    function()
+        awful.mouse.append_client_mousebindings({
+            awful.button(
+                { }, awful.button.names.LEFT,
+                function (client)
+                    client:activate { context = "mouse_click" }
+                end
+            ),
 
-    awful.button(
-        { altKey }, 1,
-        function (client)
-            client:emit_signal("request::activate", "mouse_click", { raise = true })
-            awful.mouse.client.move(client)
-        end
-    ),
+            awful.button(
+                { altKey }, awful.button.names.LEFT,
+                function (client)
+                    client:activate { context = "mouse_click", action = "mouse_move"  }
+                end
+            ),
 
-    awful.button(
-        { modKey }, 3,
-        function (client)
-            client:emit_signal("request::activate", "mouse_click", { raise = true })
-            awful.mouse.client.resize(client)
-        end
-    )
+            awful.button(
+                { altKey }, awful.button.names.RIGHT,
+                function (client)
+                    client:activate { context = "mouse_click", action = "mouse_resize"}
+                end
+            )
+        })
+    end
 )
 
-local keybindings = gears.table.join(
-    awful.key(
-        { modKey }, "f",
-        function(client)
-            client.fullscreen = not client.fullscreen
-            client:raise()
-        end,
-        {
-            description = "toggle fullscreen",
-            group = "client"
-        }
-    ),
+-- Client Keybindings
+client.connect_signal("request::default_keybindings",
+    function()
+        awful.keyboard.append_client_keybindings({
+            awful.key(
+                { modKey }, "f",
+                function(client)
+                    client.fullscreen = not client.fullscreen
+                    client:raise()
+                end,
+                {
+                    description = "toggle fullscreen",
+                    group = "client"
+                }
+            ),
 
-    awful.key(
-        { modKey }, "o",
-        function (client)
-            client:move_to_screen()
-        end,
-        {
-            description = "move to next screen",
-            group = "client"
-        }),
-    
-    awful.key(
-        { modKey }, "q",
-        function(client)
-            client:kill()
-        end,
-        {
-            description = "close",
-            group = "client"
-        }
-    ),
+            awful.key(
+                { modKey }, "o",
+                function (client)
+                    client:move_to_screen()
+                end,
+                {
+                    description = "move to next screen",
+                    group = "client"
+                }),
+            
+            awful.key(
+                { modKey }, "q",
+                function(client)
+                    client:kill()
+                end,
+                {
+                    description = "close",
+                    group = "client"
+                }
+            ),
 
-    awful.key(
-        { modKey, "Control" }, "Return",
-        function (client)
-            client:swap(awful.client.getmaster())
-        end,
-        {
-            description = "move to master",
-            group = "client"
-        }
-    )
+            awful.key(
+                { modKey, "Control" }, "Return",
+                function (client)
+                    client:swap(awful.client.getmaster())
+                end,
+                {
+                    description = "move to master",
+                    group = "client"
+                }
+            ),
+
+            awful.key(
+                { modKey, "Control" }, "space",
+                awful.client.floating.toggle,
+                {
+                    description = "toggle floating",
+                    group = "client"
+                }
+            ),
+        })
+    end
 )
-
-return
-{
-    buttons = buttons,
-    keybindings = keybindings
-}

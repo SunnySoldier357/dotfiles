@@ -1,6 +1,5 @@
 local awful = require("awful")
 local hotkeysPopup = require("awful.hotkeys_popup").widget
-local gears = require("gears")
 
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
@@ -15,8 +14,8 @@ local numOfTags = require("configuration.tags").numOfTags
 local brightnessStep = 10
 local volumeStep = 2
 
-local keybindings = gears.table.join(
-    --* Awesome Key Bindings
+--* Awesome Key Bindings
+awful.keyboard.append_global_keybindings({
     awful.key(
         { modKey }, "p",
         function()
@@ -86,10 +85,10 @@ local keybindings = gears.table.join(
             group = "awesome"
         }
     ),
+})
 
-
-
-    --* Client Key Bindings
+--* Client Key Bindings
+awful.keyboard.append_global_keybindings({
     awful.key(
         { modKey }, "j",
         function ()
@@ -126,8 +125,7 @@ local keybindings = gears.table.join(
             local _client = awful.client.restore()
             -- Focus restored client
             if _client then
-                _client:emit_signal("request::activate", "key.unminimize",
-                    {raise = true})
+                _client:activate { raise = true, context = "key.unminimize" }
             end
         end,
         {
@@ -156,10 +154,10 @@ local keybindings = gears.table.join(
             group = "client"
         }
     ),
+})
 
-
-
-    --* Hotkeys Key Bindings
+--* Hotkeys Key Bindings
+awful.keyboard.append_global_keybindings({
     awful.key(
         { }, "XF86MonBrightnessUp",
         function()
@@ -242,10 +240,10 @@ local keybindings = gears.table.join(
             group = "hotkeys"
         }
     ),
-    
+})
 
-
-    --* Launcher Key Bindings
+--* Launcher Key Bindings
+awful.keyboard.append_global_keybindings({
     awful.key(
         { modKey }, "b",
         function()
@@ -299,10 +297,10 @@ local keybindings = gears.table.join(
             group = "launcher"
         }
     ),
+})
 
-
-
-    --* Layout Key Bindings
+--* Layout Key Bindings
+awful.keyboard.append_global_keybindings({
     awful.key(
         { modKey }, "space",
         function()
@@ -409,9 +407,10 @@ local keybindings = gears.table.join(
         }
     ),
 
+})
 
-
-    --* Screenshots Key Bindings
+--* Screenshots Key Bindings
+awful.keyboard.append_global_keybindings({
     awful.key(
         { }, "Print",
         function()
@@ -442,14 +441,14 @@ local keybindings = gears.table.join(
             group = "screenshots"
         }
     ),
+})
 
-
-
-    --* Screen Key Bindings
+--* Screen Key Bindings
+awful.keyboard.append_global_keybindings({
     awful.key(
         { modKey }, "l",
         function()
-            awful.screen.focus_relative( 1)
+            awful.screen.focus_relative(1)
         end,
         {
             description = "focus the next screen",
@@ -466,10 +465,70 @@ local keybindings = gears.table.join(
             group = "screen"
         }
     ),
+})
 
+--* Tag Key Bindings
+local function view_tag(index)
+    local screen = awful.screen.focused()
+    local tag = screen.tags[index]
+    if tag then
+        tag:view_only()
+    end
+end
 
+local function toggle_tag(index)
+    local screen = awful.screen.focused()
+    local tag = screen.tags[index]
+    if tag then
+        awful.tag.viewtoggle(tag)
+    end
+end
 
-    --* Tag Key Bindings
+local function move_client_to_tag(index)
+    if client.focus then
+        local tag = client.focus.screen.tags[index]
+        if tag then
+            client.focus:move_to_tag(tag)
+        end
+    end
+end
+
+local function toggle_client_on_tag(index)
+    if client.focus then
+        local tag = client.focus.screen.tags[index]
+        if tag then
+            client.focus:toggle_tag(tag)
+        end
+    end
+end
+
+awful.keyboard.append_global_keybindings({
+    awful.key {
+        modifiers = { modKey },
+        keygroup = "numrow",
+        description = "only view tag",
+        group = "tag",
+        on_press = view_tag,
+    },
+    awful.key {
+        modifiers = { modKey },
+        keygroup = "numpad",
+        on_press = view_tag,
+    },
+
+    awful.key {
+        modifiers = { modKey, "Control" },
+        keygroup = "numrow",
+        description = "toggle tag",
+        group = "tag",
+        on_press = toggle_tag,
+    },
+    awful.key {
+        modifiers = { modKey, "Control" },
+        keygroup = "numpad",
+        on_press = toggle_tag,
+    },
+
     awful.key(
         { modKey, "Control" }, "Left",
         awful.tag.viewprev,
@@ -485,117 +544,31 @@ local keybindings = gears.table.join(
             description = "view next",
             group = "tag"
         }
-    )
-)
+    ),
 
--- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it works on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
-function getTopRowKeyCode(number)
-    return "#" .. number + 9;
-end
+    awful.key {
+        modifiers = { modKey, "Shift" },
+        keygroup = "numrow",
+        description = "move focused client to tag",
+        group = "tag",
+        on_press = move_client_to_tag,
+    },
+    awful.key {
+        modifiers = { modKey, "Shift" },
+        keygroup = "numpad",
+        on_press = move_client_to_tag,
+    },
 
-function getNumPadKeyCode(number)
-    if number == 1 then return "#87"
-    elseif number == 2 then return "#88"
-    elseif number == 3 then return "#89"
-
-    elseif number == 4 then return "#83"
-    elseif number == 5 then return "#84"
-    elseif number == 6 then return "#85"
-
-    elseif number == 7 then return "#79"
-    elseif number == 8 then return "#80"
-    elseif number == 9 then return "#81"
-    end
-end
-
-for i = 1, numOfTags do
-    local keys = { getTopRowKeyCode(i), getNumPadKeyCode(i) }
-
-    for _, key in pairs(keys) do
-        -- Hack to only show the first & last tags in the shortcut window
-        local descrView, descrToggle, descrMove, descrToggleFocus
-        if (i == 1 or i == numOfTags) and key == keys[1] then
-            descrView =
-            {
-                description = "view tag #",
-                group = "tag"
-            }
-            descrToggle =
-            {
-                description = "toggle tag #",
-                group = "tag"
-            }
-            descrMove =
-            {
-                description = "move focused client to tag #",
-                group = "tag"
-            }
-            descrToggleFocus =
-            {
-                description = "toggle focused client on tag #",
-                group = "tag"
-            }
-        end
-
-        keybindings = gears.table.join(keybindings,
-
-            -- View tag only.
-            awful.key(
-                { modKey }, key,
-                function()
-                    local screen = awful.screen.focused()
-                    local tag = screen.tags[i]
-                    if tag then
-                        tag:view_only()
-                    end
-                end,
-                descrView
-            ),
-
-            -- Toggle tag display.
-            awful.key(
-                { modKey, "Control" }, key,
-                function()
-                    local screen = awful.screen.focused()
-                    local tag = screen.tags[i]
-                    if tag then
-                        awful.tag.viewtoggle(tag)
-                    end
-                end,
-                descrToggle
-            ),
-
-            -- Move client to tag.
-            awful.key(
-                { modKey, "Shift" }, key,
-                function()
-                    if client.focus then
-                        local tag = client.focus.screen.tags[i]
-                        if tag then
-                            client.focus:move_to_tag(tag)
-                        end
-                    end
-                end,
-                descrMove
-            ),
-
-            -- Toggle tag on focused client.
-            awful.key(
-                { modKey, "Control", "Shift" }, key,
-                function()
-                    if client.focus then
-                        local tag = client.focus.screen.tags[i]
-                        if tag then
-                            client.focus:toggle_tag(tag)
-                        end
-                    end
-                end,
-                descrToggleFocus
-            )
-        )
-    end
-end
-
-return keybindings
+    awful.key {
+        modifiers = { modKey, "Control", "Shift" },
+        keygroup = "numrow",
+        description = "toggle focused client on tag",
+        group = "tag",
+        on_press = toggle_client_on_tag,
+    },
+    awful.key {
+        modifiers = { modKey, "Control", "Shift" },
+        keygroup = "numpad",
+        on_press = toggle_client_on_tag,
+    },
+})

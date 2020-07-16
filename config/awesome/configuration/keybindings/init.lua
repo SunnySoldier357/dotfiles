@@ -1,3 +1,2 @@
-local globalKeybindings = require("configuration.keybindings.global")
-
-root.keys(globalKeybindings)
+require("configuration.keybindings.client")
+require("configuration.keybindings.global")

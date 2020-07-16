@@ -2,14 +2,17 @@ local awful = require("awful")
 
 local icons = require("theme.icons.tags")
 
-awful.layout.layouts =
-{
-    -- First layout is the default layout for all tags
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.max,
-    awful.layout.suit.floating
-}
+tag.connect_signal("request::default_layouts",
+    function()
+        awful.layout.append_default_layouts({
+            -- First layout is the default layout for all tags
+            awful.layout.suit.tile,
+            awful.layout.suit.tile.bottom,
+            awful.layout.suit.max,
+            awful.layout.suit.floating
+        })
+    end
+)
 
 local tags =
 {
@@ -62,8 +65,8 @@ local tags =
 
 local count = 0;
 
-awful.screen.connect_for_each_screen(
-    function(s)
+screen.connect_signal("request::desktop_decoration",
+    function(_screen)
         -- Each screen has its own tag table.
         count = 0;
         
@@ -75,7 +78,7 @@ awful.screen.connect_for_each_screen(
                 -- icon = tag.icon,
                 -- icon_only = true,
                 layout = tag.layout,
-                screen = s,
+                screen = _screen,
                 selected = i == 1
             })
         end

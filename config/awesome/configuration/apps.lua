@@ -56,6 +56,7 @@ return
         "redshift-gtk", -- Night Light
         "nm-applet", -- Wifi
         "blueman-applet", -- BLuetooth
+        "copyq", -- Clipboard Manager
 
         "numlockx on", -- Enable numlock
         "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- GUI authentication agent
