@@ -6,7 +6,7 @@ local iconDir = require("gears.filesystem").get_configuration_dir() .. "layout/w
 local wibox = require("wibox")
 
 local apps = require("configuration.apps")
-local clickableContainer = require("layout.widgets.material.clickableContainer")
+local clickable_container = require("layout.widgets.material.clickable_container")
 
 local optimusMode = nil
 
@@ -20,7 +20,7 @@ local widget = wibox.widget
     layout = wibox.layout.align.horizontal
 }
 
-local widgetButton = clickableContainer(widget)
+local widgetButton = clickable_container(widget)
 
 -- Create the menu to switch to a different mode
 local function switchMode(mode)
@@ -44,7 +44,7 @@ local menu = awful.menu(
 
 widgetButton:buttons(gears.table.join(
     awful.button(
-        { }, 1, nil,
+        { }, awful.button.names.LEFT, nil,
         function()
             menu:toggle()
         end

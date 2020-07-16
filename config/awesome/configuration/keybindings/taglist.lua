@@ -1,6 +1,6 @@
 local awful = require("awful")
 
-local modKey = require("configuration.keybindings.mod").modKey
+local keys = require("configuration.keybindings.keys")
 
 local buttons = {
     awful.button(
@@ -16,7 +16,7 @@ local buttons = {
     ),
 
     awful.button(
-        { modKey }, awful.button.names.LEFT,
+        { keys.super }, awful.button.names.LEFT,
         function(_tag)
             if client.focus then
                 client.focus:move_to_tag(_tag)
@@ -25,7 +25,7 @@ local buttons = {
     ),
 
     awful.button(
-        { modKey }, awful.button.names.RIGHT,
+        { keys.super }, awful.button.names.RIGHT,
         function(_tag)
             if client.focus then
                 client.focus:toggle_tag(_tag)

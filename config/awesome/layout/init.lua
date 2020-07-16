@@ -62,25 +62,13 @@ screen.connect_signal("request::desktop_decoration",
         _screen.mylayoutbox = awful.widget.layoutbox(_screen)
         _screen.mylayoutbox:buttons(gears.table.join(
             awful.button(
-                { }, 1,
+                { }, awful.button.names.LEFT,
                 function()
                     awful.layout.inc(1)
                 end
             ),
             awful.button(
-                { }, 3,
-                function()
-                    awful.layout.inc(-1)
-                end
-            ),
-            awful.button(
-                { }, 4,
-                function()
-                    awful.layout.inc(1)
-                end
-            ),
-            awful.button(
-                { }, 5,
+                { }, awful.button.names.RIGHT,
                 function()
                     awful.layout.inc(-1)
                 end

@@ -15,7 +15,7 @@ local gears = require("gears")
 local naughty = require("naughty")
 local wibox = require("wibox")
 
-local clickableContainer = require("layout.widgets.material.clickableContainer")
+local clickable_container = require("layout.widgets.material.clickable_container")
 local iconDir = require("gears.filesystem").get_configuration_dir() .. "layout/widgets/battery/icons/"
 
 local lastBatteryCheck = os.time()
@@ -30,7 +30,7 @@ local widget = wibox.widget
     layout = wibox.layout.fixed.horizontal
 }
 
-local widgetButton = clickableContainer(widget)
+local widgetButton = clickable_container(widget)
 
 local batteryTooltip = awful.tooltip(
     {

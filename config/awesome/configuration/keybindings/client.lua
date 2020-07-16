@@ -1,7 +1,6 @@
 local awful = require("awful")
 
-local modKey = require("configuration.keybindings.mod").modKey
-local altKey = require("configuration.keybindings.mod").altKey
+local keys = require("configuration.keybindings.keys")
 
 -- Client Mouse Keybindings
 client.connect_signal("request::default_mousebindings",
@@ -15,14 +14,14 @@ client.connect_signal("request::default_mousebindings",
             ),
 
             awful.button(
-                { altKey }, awful.button.names.LEFT,
+                { keys.alt }, awful.button.names.LEFT,
                 function (client)
                     client:activate { context = "mouse_click", action = "mouse_move"  }
                 end
             ),
 
             awful.button(
-                { altKey }, awful.button.names.RIGHT,
+                { keys.alt }, awful.button.names.RIGHT,
                 function (client)
                     client:activate { context = "mouse_click", action = "mouse_resize"}
                 end
@@ -36,7 +35,7 @@ client.connect_signal("request::default_keybindings",
     function()
         awful.keyboard.append_client_keybindings({
             awful.key(
-                { modKey }, "f",
+                { keys.super }, "f",
                 function(client)
                     client.fullscreen = not client.fullscreen
                     client:raise()
@@ -48,7 +47,7 @@ client.connect_signal("request::default_keybindings",
             ),
 
             awful.key(
-                { modKey }, "o",
+                { keys.super }, "o",
                 function (client)
                     client:move_to_screen()
                 end,
@@ -58,7 +57,7 @@ client.connect_signal("request::default_keybindings",
                 }),
             
             awful.key(
-                { modKey }, "q",
+                { keys.super }, "q",
                 function(client)
                     client:kill()
                 end,
@@ -69,7 +68,7 @@ client.connect_signal("request::default_keybindings",
             ),
 
             awful.key(
-                { modKey, "Control" }, "Return",
+                { keys.super, keys.control }, keys.enter,
                 function (client)
                     client:swap(awful.client.getmaster())
                 end,
@@ -80,7 +79,7 @@ client.connect_signal("request::default_keybindings",
             ),
 
             awful.key(
-                { modKey, "Control" }, "space",
+                { keys.super, keys.control }, keys.space,
                 awful.client.floating.toggle,
                 {
                     description = "toggle floating",

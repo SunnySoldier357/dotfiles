@@ -6,8 +6,7 @@ local hotkeysPopup = require("awful.hotkeys_popup").widget
 require("awful.hotkeys_popup.keys")
 
 local apps = require("configuration.apps")
-local altKey = require("configuration.keybindings.mod").altKey
-local modKey = require("configuration.keybindings.mod").modKey
+local keys = require("configuration.keybindings.keys")
 local numOfTags = require("configuration.tags").numOfTags
 
 -- Settings
@@ -17,7 +16,7 @@ local volumeStep = 2
 --* Awesome Key Bindings
 awful.keyboard.append_global_keybindings({
     awful.key(
-        { modKey }, "p",
+        { keys.super }, "p",
         function()
             awful.spawn.with_shell(apps.default.launcher)
         end,
@@ -27,7 +26,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { modKey }, "r",
+        { keys.super }, "r",
         function()
             awful.spawn.with_shell(apps.default.runner)
         end,
@@ -38,7 +37,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey }, "s",
+        { keys.super }, "s",
         hotkeysPopup.show_help,
         {
             description="show help",
@@ -47,7 +46,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey }, "Escape",
+        { keys.super }, "Escape",
         function()
             awful.spawn.with_shell(apps.default.lock)
         end,
@@ -58,7 +57,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey, "Control" }, "r",
+        { keys.super, keys.control }, "r",
         awesome.restart,
         {
             description = "reload awesome",
@@ -67,7 +66,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey, "Shift" }, "p",
+        { keys.super, keys.shift }, "p",
         function()
             awful.spawn.with_shell(apps.default.activeClients)
         end,
@@ -78,7 +77,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey, "Shift" }, "q",
+        { keys.super, keys.shift }, "q",
         awesome.quit,
         {
             description = "quit awesome",
@@ -90,7 +89,7 @@ awful.keyboard.append_global_keybindings({
 --* Client Key Bindings
 awful.keyboard.append_global_keybindings({
     awful.key(
-        { modKey }, "j",
+        { keys.super }, "j",
         function ()
             awful.client.focus.byidx(1)
         end,
@@ -100,7 +99,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { modKey }, "k",
+        { keys.super }, "k",
         function ()
             awful.client.focus.byidx(-1)
         end,
@@ -111,7 +110,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey }, "u",
+        { keys.super }, "u",
         awful.client.urgent.jumpto,
         {
             description = "jump to urgent client",
@@ -120,7 +119,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey, "Control" }, "n",
+        { keys.super, keys.control }, "n",
         function ()
             local _client = awful.client.restore()
             -- Focus restored client
@@ -135,7 +134,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey, "Shift" }, "j",
+        { keys.super, keys.shift }, "j",
         function()
             awful.client.swap.byidx(1)
         end,
@@ -145,7 +144,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { modKey, "Shift" }, "k",
+        { keys.super, keys.shift }, "k",
         function()
             awful.client.swap.byidx(-1)
         end,
@@ -159,7 +158,7 @@ awful.keyboard.append_global_keybindings({
 --* Hotkeys Key Bindings
 awful.keyboard.append_global_keybindings({
     awful.key(
-        { }, "XF86MonBrightnessUp",
+        { }, keys.brightness.inc,
         function()
             awful.spawn.with_shell("brightnessctl s +" .. brightnessStep .. "%")
         end,
@@ -169,7 +168,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { }, "XF86MonBrightnessDown",
+        { }, keys.brightness.dec,
         function()
             awful.spawn.with_shell("brightnessctl s " .. brightnessStep .. "%-")
         end,
@@ -180,7 +179,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { }, "XF86AudioRaiseVolume",
+        { }, keys.volume.inc,
         function()
             awful.spawn.with_shell("amixer -q -D pulse sset Master " .. volumeStep .."%+")
         end,
@@ -190,7 +189,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { }, "XF86AudioLowerVolume",
+        { }, keys.volume.dec,
         function()
             awful.spawn.with_shell("amixer -q -D pulse sset Master " .. volumeStep .."%-")
         end,
@@ -200,7 +199,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { }, "XF86AudioMute",
+        { }, keys.volume.mute,
         function()
             awful.spawn.with_shell("amixer -D pulse set Master 1+ toggle")
         end,
@@ -211,7 +210,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { }, "XF86AudioPlay",
+        { }, keys.audio.toggle,
         function()
             awful.spawn.with_shell("playerctl play-pause || mpc toggle")
         end,
@@ -221,7 +220,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { }, "XF86AudioNext",
+        { }, keys.audio.next,
         function()
             awful.spawn.with_shell("playerctl next || mpc next")
         end,
@@ -231,7 +230,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { }, "XF86AudioPrev",
+        { }, keys.audio.prev,
         function()
             awful.spawn.with_shell("playerctl previous || mpx prev")
         end,
@@ -245,7 +244,7 @@ awful.keyboard.append_global_keybindings({
 --* Launcher Key Bindings
 awful.keyboard.append_global_keybindings({
     awful.key(
-        { modKey }, "b",
+        { keys.super }, "b",
         function()
             awful.spawn.with_shell(apps.default.browser)
         end,
@@ -255,7 +254,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { modKey, "Shift" }, "b",
+        { keys.super, keys.shift }, "b",
         function()
             awful.spawn.with_shell(apps.default.browserPrivate)
         end,
@@ -266,7 +265,7 @@ awful.keyboard.append_global_keybindings({
     ),
     
     awful.key(
-        { modKey }, "c",
+        { keys.super }, "c",
         function()
             awful.spawn.with_shell(apps.default.ide)
         end,
@@ -277,7 +276,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey }, "e",
+        { keys.super }, "e",
         function()
             awful.spawn.with_shell(apps.default.filemanager)
         end,
@@ -288,7 +287,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey }, "Return",
+        { keys.super }, keys.enter,
         function()
             awful.spawn.with_shell(apps.default.terminal)
         end,
@@ -302,7 +301,7 @@ awful.keyboard.append_global_keybindings({
 --* Layout Key Bindings
 awful.keyboard.append_global_keybindings({
     awful.key(
-        { modKey }, "space",
+        { keys.super }, keys.space,
         function()
             awful.layout.inc(1)
         end,
@@ -313,7 +312,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { altKey }, "l",
+        { keys.alt }, "l",
         function()
             awful.tag.incmwfact(0.05)
         end,
@@ -323,7 +322,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { altKey }, "h",
+        { keys.alt }, "h",
         function()
             awful.tag.incmwfact(-0.05)
         end,
@@ -334,7 +333,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { altKey }, "k",
+        { keys.alt }, "k",
         function()
             awful.client.incwfact(0.05)
         end,
@@ -344,7 +343,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { altKey }, "j",
+        { keys.alt }, "j",
         function()
             awful.client.incwfact(-0.05)
         end,
@@ -355,7 +354,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey, "Shift" }, "space",
+        { keys.super, keys.shift }, keys.space,
         function()
             awful.layout.inc(-1)
         end,
@@ -366,7 +365,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey, "Control" }, "l",
+        { keys.super, keys.control }, "l",
         function()
             awful.tag.incncol(1, nil, true)
         end,
@@ -376,7 +375,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { modKey, "Control" }, "h",
+        { keys.super, keys.control }, "h",
         function()
             awful.tag.incncol(-1, nil, true)
         end,
@@ -387,7 +386,7 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key(
-        { modKey, "Control" }, "j",
+        { keys.super, keys.control }, "j",
         function()
             awful.tag.incnmaster(1, nil, true)
         end,
@@ -397,7 +396,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { modKey, "Control" }, "k",
+        { keys.super, keys.control }, "k",
         function()
             awful.tag.incnmaster(-1, nil, true)
         end,
@@ -412,7 +411,7 @@ awful.keyboard.append_global_keybindings({
 --* Screenshots Key Bindings
 awful.keyboard.append_global_keybindings({
     awful.key(
-        { }, "Print",
+        { }, keys.printScr,
         function()
             awful.spawn.with_shell(apps.default.screenshotDesktop)
         end,
@@ -422,7 +421,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { modKey }, "Print",
+        { keys.super }, keys.printScr,
         function()
             awful.spawn.with_shell(apps.default.screenshotWindow)
         end,
@@ -432,7 +431,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { modKey, "Shift" }, "s",
+        { keys.super, keys.shift }, "s",
         function()
             awful.spawn.with_shell(apps.default.screenshotRegion)
         end,
@@ -446,7 +445,7 @@ awful.keyboard.append_global_keybindings({
 --* Screen Key Bindings
 awful.keyboard.append_global_keybindings({
     awful.key(
-        { modKey }, "l",
+        { keys.super }, "l",
         function()
             awful.screen.focus_relative(1)
         end,
@@ -456,7 +455,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { modKey }, "h",
+        { keys.super }, "h",
         function()
             awful.screen.focus_relative(-1)
         end,
@@ -504,33 +503,33 @@ end
 
 awful.keyboard.append_global_keybindings({
     awful.key {
-        modifiers = { modKey },
+        modifiers = { keys.super },
         keygroup = "numrow",
         description = "only view tag",
         group = "tag",
         on_press = view_tag,
     },
     awful.key {
-        modifiers = { modKey },
+        modifiers = { keys.super },
         keygroup = "numpad",
         on_press = view_tag,
     },
 
     awful.key {
-        modifiers = { modKey, "Control" },
+        modifiers = { keys.super, keys.control },
         keygroup = "numrow",
         description = "toggle tag",
         group = "tag",
         on_press = toggle_tag,
     },
     awful.key {
-        modifiers = { modKey, "Control" },
+        modifiers = { keys.super, keys.control },
         keygroup = "numpad",
         on_press = toggle_tag,
     },
 
     awful.key(
-        { modKey, "Control" }, "Left",
+        { keys.super, keys.control }, "Left",
         awful.tag.viewprev,
         {
             description = "view previous",
@@ -538,7 +537,7 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
-        { modKey, "Control" }, "Right",
+        { keys.super, keys.control }, "Right",
         awful.tag.viewnext,
         {
             description = "view next",
@@ -547,27 +546,27 @@ awful.keyboard.append_global_keybindings({
     ),
 
     awful.key {
-        modifiers = { modKey, "Shift" },
+        modifiers = { keys.super, keys.shift },
         keygroup = "numrow",
         description = "move focused client to tag",
         group = "tag",
         on_press = move_client_to_tag,
     },
     awful.key {
-        modifiers = { modKey, "Shift" },
+        modifiers = { keys.super, keys.shift },
         keygroup = "numpad",
         on_press = move_client_to_tag,
     },
 
     awful.key {
-        modifiers = { modKey, "Control", "Shift" },
+        modifiers = { keys.super, keys.control, keys.shift },
         keygroup = "numrow",
         description = "toggle focused client on tag",
         group = "tag",
         on_press = toggle_client_on_tag,
     },
     awful.key {
-        modifiers = { modKey, "Control", "Shift" },
+        modifiers = { keys.super, keys.control, keys.shift },
         keygroup = "numpad",
         on_press = toggle_client_on_tag,
     },

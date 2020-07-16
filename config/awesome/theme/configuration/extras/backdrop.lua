@@ -50,7 +50,7 @@ local function backdrop(client)
         client.backdrop:buttons(
             gears.table.join(
                 awful.button(
-                    { }, 1,
+                    { }, awful.button.names.LEFT,
                     function()
                         client:kill()
                     end
