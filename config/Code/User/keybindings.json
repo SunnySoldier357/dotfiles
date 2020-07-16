@@ -1,0 +1,27 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+alt+s",
+        "command": "sortLines.sortLines",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "f9",
+        "command": "-sortLines.sortLines",
+        "when": "editorTextFocus"
+    },
+    
+    {
+        "key": "ctrl+shift+n",
+        "command": "explorer.newFile"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "explorer.newFolder"
+    },
+
+    {
+        "key": "ctrl+alt+up",
+        "command": "workbench.action.toggleMaximizedPanel"
+    }
+]

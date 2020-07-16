@@ -1,0 +1,23 @@
+{
+    "Basic HTML Document": {
+        "prefix": "html",
+        "body": [
+            "<!doctype html>",
+            "<html>",
+            "",
+            "\t<head>",
+            "\t\t<meta charset=\"utf-8\" />",
+            "\t\t<title>${1:Page Title}</title>",
+            "\t\t<link rel=\"stylesheet\"",
+            "\t\t\t\t\thref=\"${2:styles}.css\" />",
+            "\t\t<script src=\"${3:main}.js\"></script>",
+            "\t</head>",
+            "",
+            "\t<body>",
+            "\t\t$0",
+            "\t</body>",
+            "",
+            "</html>"
+        ]
+    }
+}
