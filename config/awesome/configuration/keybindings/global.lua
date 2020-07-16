@@ -213,7 +213,7 @@ awful.keyboard.append_global_keybindings({
     awful.key(
         { }, "XF86AudioPlay",
         function()
-            awful.spawn.with_shell("playerctl play-pause")
+            awful.spawn.with_shell("playerctl play-pause || mpc toggle")
         end,
         {
             description = "play / pause",
@@ -223,7 +223,7 @@ awful.keyboard.append_global_keybindings({
     awful.key(
         { }, "XF86AudioNext",
         function()
-            awful.spawn.with_shell("playerctl next")
+            awful.spawn.with_shell("playerctl next || mpc next")
         end,
         {
             description = "next song",
@@ -233,7 +233,7 @@ awful.keyboard.append_global_keybindings({
     awful.key(
         { }, "XF86AudioPrev",
         function()
-            awful.spawn.with_shell("playerctl previous")
+            awful.spawn.with_shell("playerctl previous || mpx prev")
         end,
         {
             description = "previous song",

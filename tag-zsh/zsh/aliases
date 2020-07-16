@@ -44,5 +44,7 @@ alias svim="sudo vim"
 
 alias kssh="kitty +kitten ssh"
 
+alias userctl="systemctl --user"
+
 alias android-permissions="sudo chown -R :android /opt/android-sdk && sudo chmod -R g+w /opt/android-sdk"
 alias flutter-permissions="sudo chown -R :flutter /opt/flutter && sudo chmod -R g+w /opt/flutter"
