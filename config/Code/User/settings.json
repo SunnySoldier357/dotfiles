@@ -214,8 +214,12 @@
     "html.format.wrapAttributes": "force-aligned",
     
     //* JavaScript
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+    "[javascript]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        },
+
+        "editor.defaultFormatter": "vscode.typescript-language-features",
     },
 
     "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
