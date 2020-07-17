@@ -1,36 +1,41 @@
 local dpi = require("beautiful.xresources").apply_dpi
+local gears = require("gears")
 
-local Helper = require("theme.configuration.helper")
+local x = require("theme.colors")
 
 local function init(theme)
     --* Font
-    theme.font = theme.gtk.font_family .. " " .. theme.gtk.font_size
+    theme.font = "monospace 11"
 
     --* Colors
-    theme.bg_normal = theme.gtk.bg_color
-    theme.fg_normal = theme.gtk.fg_color
+    theme.bg_dark = x.background
+    theme.bg_normal = x.color0
+    theme.bg_focus = x.color8
+    theme.bg_urgent = x.color8
+    theme.bg_minimize = x.color8
+    theme.bg_systray = x.background
 
-    theme.bg_focus = theme.gtk.selected_bg_color
-    theme.fg_focus = theme.gtk.selected_fg_color
+    theme.fg_normal = x.color8
+    theme.fg_focus = x.color4
+    theme.fg_urgent = x.color9
+    theme.fg_minimize = x.color8
 
-    theme.bg_urgent = theme.gtk.error_bg_color
-    theme.fg_urgent = theme.gtk.error_fg_color
+    --* Borders & Gaps
+    theme.border_width = dpi(0)
+    theme.border_normal = x.background
+    theme.border_focus = x.background
+    -- Rounded corners
+    theme.border_radius = dpi(6)
 
-    theme.wibar_bg = theme.gtk.menubar_bg_color
-    theme.wibar_fg = theme.gtk.menubar_fg_color
+    theme.useless_gap = dpi(5)
+    -- This could be used to manually determine how far away from the
+    -- screen edge the bars / notifications should be.
+    theme.screen_margin = dpi(5)
 
-    theme.bg_minimize = Helper:mix(theme.wibar_fg, theme.wibar_bg, 0.3)
-    theme.fg_minimize = Helper:mix(theme.wibar_fg, theme.wibar_bg, 0.9)
-
-    --* Borders
-    theme.border_focus = theme.gtk.wm_border_focused_color
-    theme.border_marked = theme.gtk.success_color
-    theme.border_normal = theme.gtk.wm_border_unfocused_color
-
-    theme.border_radius = theme.gtk.button_border_radius
-    theme.border_width = dpi(theme.gtk.button_border_width or 1)
-
-    theme.useless_gap = dpi(3)
+    -- Edge snap
+    theme.snap_shape = gears.shape.rectangle
+    theme.snap_bg = x.foreground
+    theme.snap_border_width = dpi(3)
 end
 
 return init
