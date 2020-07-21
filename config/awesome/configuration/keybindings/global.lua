@@ -5,6 +5,7 @@ local hotkeysPopup = require("awful.hotkeys_popup").widget
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+local helpers = require("helpers")
 local apps = require("configuration.apps")
 local keys = require("configuration.keybindings.keys")
 local numOfTags = require("configuration.tags").numOfTags
@@ -181,7 +182,7 @@ awful.keyboard.append_global_keybindings({
     awful.key(
         { }, keys.volume.inc,
         function()
-            awful.spawn.with_shell("amixer -q -D pulse sset Master " .. volumeStep .."%+")
+            helpers.volume_control(volumeStep)
         end,
         {
             description = "volume up",
@@ -191,7 +192,7 @@ awful.keyboard.append_global_keybindings({
     awful.key(
         { }, keys.volume.dec,
         function()
-            awful.spawn.with_shell("amixer -q -D pulse sset Master " .. volumeStep .."%-")
+            helpers.volume_control(-1 * volumeStep)
         end,
         {
             description = "volume down",
