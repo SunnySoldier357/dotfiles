@@ -3,8 +3,32 @@
 --     once when awesome start
 
 local awful = require("awful")
+local configDir = require("gears.filesystem").get_configuration_dir()
 
 local apps = require("configuration.apps")
+
+local autostart =
+{
+    -- Add applications that need to be killed between reloads
+    -- to avoid multipled instances, inside the awspawn script
+    configDir .. "configuration/awspawn", -- Spawn "dirty" apps that can linger between sessions
+
+    "libinput-gestures-setup start",
+    "xss-lock -- " .. apps.default.lock,
+
+    "picom --experimental-backends --config " .. configDir ..
+        "configuration/picom.conf",
+
+    "redshift-gtk", -- Night Light
+    "nm-applet", -- Wifi
+    "blueman-applet", -- BLuetooth
+    "copyq", -- Clipboard Manager
+
+    "xbindkeys", -- Disable middle click pasting
+
+    "numlockx on", -- Enable numlock
+    "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- GUI authentication agent
+}
 
 local function runOnce(cmd)
     local findme = cmd
@@ -16,6 +40,6 @@ local function runOnce(cmd)
         string.format("pgrep -u $USER -x %s > /dev/null || (%s)", findme, cmd))
 end
 
-for _, app in ipairs(apps.autostart) do
+for _, app in ipairs(autostart) do
     runOnce(app)
 end

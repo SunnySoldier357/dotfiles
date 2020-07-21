@@ -8,8 +8,6 @@ local rofiCommand =
     "rofi -dpi " .. getDpi() ..
     " -width " .. withDpi(800)
 
-local lockCommand = "i3lock-fancy -f Open-Sans-SemiBold"
-
 return
 {
     default =
@@ -21,7 +19,7 @@ return
         filemanager = "nautilus -w",
         game = "steam",
         ide = "code",
-        lock = lockCommand,
+        lock = "i3lock-fancy -f Open-Sans-SemiBold",
         music = "cantata",
         social = "caprine",
         terminal = "kitty",
@@ -38,29 +36,5 @@ return
         screenshotDesktop = configDir .. "scripts/screenshot -m",
         screenshotRegion = configDir .. "scripts/screenshot -r",
         screenshotWindow = configDir .. "scripts/screenshot -a"
-    },
-
-    -- List of apps to start once on start-up
-    autostart =
-    {
-        -- Add applications that need to be killed between reloads
-        -- to avoid multipled instances, inside the awspawn script
-        configDir .. "configuration/awspawn", -- Spawn "dirty" apps that can linger between sessions
-
-        "libinput-gestures-setup start",
-        "xss-lock -- " .. lockCommand,
-
-        "picom --experimental-backends --config " .. configDir ..
-            "configuration/picom.conf",
-
-        "redshift-gtk", -- Night Light
-        "nm-applet", -- Wifi
-        "blueman-applet", -- BLuetooth
-        "copyq", -- Clipboard Manager
-
-        "xbindkeys", -- Disable middle click pasting
-
-        "numlockx on", -- Enable numlock
-        "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- GUI authentication agent
     }
 }
