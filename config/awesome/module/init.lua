@@ -1,2 +1,4 @@
 require("module.autostart")
-require("module.notifications")
+
+local notifications = require("module.notifications")
+notifications.init("amarena")

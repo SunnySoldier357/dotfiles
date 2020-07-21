@@ -5,7 +5,7 @@ local x = require("theme.colors")
 local function init(theme)
     -- Position: bottom_left, bottom_right, bottom_middle,
     --         top_left, top_right, top_middle
-    theme.notification_position = "top_right"
+    theme.notification_position = "bottom_right"
 
     theme.notification_border_width = dpi(0)
     theme.notification_border_radius = theme.border_radius
