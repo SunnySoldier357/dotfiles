@@ -36,6 +36,7 @@
         "*.kwinrule": "properties",
         "*.rmd": "markdown",
         "*.sln": "properties",
+        "config**": "properties",
         "grub": "properties"
     },
     "files.exclude": {
@@ -52,6 +53,11 @@
         "**/CVS": true,
         "**/dist": true,
         "**/obj": true,
+
+        // Flutter specific folders
+        "**/.dart_tool": true,
+        "**/.idea": true,
+        "**/build": true,
     },
     "files.trimFinalNewlines": true,
 
@@ -213,6 +219,11 @@
     },
     "html.format.indentInnerHtml": true,
     "html.format.wrapAttributes": "force-aligned",
+
+    //* Firebase
+    "[firerules]": {
+        "editor.tabSize": 2,
+    },
     
     //* JavaScript & TypeScript
     "[javascript]": {

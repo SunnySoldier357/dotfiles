@@ -1,6 +1,6 @@
 [include]
-    path = "~/.gitconfig-local"
-    path = "~/.gitconfig-aliases"
+    path = "~/.config/git/config-local"
+    path = "~/.config/git/config-aliases"
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -10,7 +10,7 @@
 
 [core]
 	editor = code -w -n
-	excludesfile = "~/.gitignore-global"
+	excludesfile = "~/.config/git/gitignore-global"
 
 [color]
 	ui = true
