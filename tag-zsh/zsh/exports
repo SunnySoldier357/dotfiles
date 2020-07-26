@@ -1,8 +1,13 @@
 #!/bin/zsh
 
+export XDG_CACHE_HOME=~/.cache
+
 export ANDROID_HOME=/opt/android-sdk
 export EDITOR=nvim
 export QT_QPA_PLATFORMTHEME=gtk2
+
+# Set NVIDIA Cache Path
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 
 # For gnome-keyring ssh access
 if [ -n "$DESKTOP_SESSION" ];then
