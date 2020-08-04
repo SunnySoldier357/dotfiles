@@ -24,7 +24,7 @@ local autostart =
     "blueman-applet", -- BLuetooth
     "copyq", -- Clipboard Manager
 
-    "xbindkeys -f '$XDG_CONFIG_HOME'/xbindkeysrc", -- Disable middle click pasting
+    "xbindkeys -f ~/.config/xbindkeysrc", -- Disable middle click pasting
 
     "numlockx on", -- Enable numlock
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- GUI authentication agent
