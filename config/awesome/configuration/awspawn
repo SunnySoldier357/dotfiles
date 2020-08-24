@@ -8,7 +8,6 @@
 
 # List of applications to run
 APPS=(
-    kdeconnect-indicator
     keepassxc
 )
 

@@ -19,10 +19,11 @@ local autostart =
     "picom --experimental-backends --config " .. configDir ..
         "configuration/picom.conf",
 
-    "redshift-gtk", -- Night Light
     "nm-applet", -- Wifi
     "blueman-applet", -- BLuetooth
+    "indicator-kdeconnect", --KDEConnect
     "copyq", -- Clipboard Manager
+    "redshift-gtk", -- Night Light
 
     "xbindkeys -f ~/.config/xbindkeysrc", -- Disable middle click pasting
 
