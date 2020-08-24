@@ -10,7 +10,7 @@ alias ll="ls -l"
 alias l="ls -lFh"     # size, show type, human readable
 alias la="ls -lAFh"   # long list, show almost all, show type, human readable
 alias ll="ls -l"      # long list
-alias ldot="ls -ld .*"
+alias l.="ls -ld .*"
 
 alias grep="grep --color"
 
