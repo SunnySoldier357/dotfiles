@@ -3,7 +3,7 @@
 # Allow git branch to update in prompt
 setopt prompt_subst
 
-git_branch() 
+git_branch()
 {
     branch="($(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'}))"
     if [ $branch != "()" ]; then
