@@ -16,19 +16,20 @@ local autostart =
     "libinput-gestures-setup start",
     "xss-lock -- " .. apps.default.lock,
 
-    "picom --experimental-backends --config " .. configDir ..
+    "picom -b --experimental-backends --config " .. configDir ..
         "configuration/picom.conf",
 
-    "nm-applet", -- Wifi
+    "nm-applet --indicator", -- Wifi
     "blueman-applet", -- BLuetooth
     "indicator-kdeconnect", --KDEConnect
-    "copyq", -- Clipboard Manager
     "redshift-gtk", -- Night Light
 
     "xbindkeys -f ~/.config/xbindkeysrc", -- Disable middle click pasting
 
     "numlockx on", -- Enable numlock
-    "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- GUI authentication agent
+    "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", -- GUI authentication agent
+
+    "pcmanfm -d" -- Start PCManFM as a daemon to automatically mount removable media
 }
 
 local function runOnce(cmd)

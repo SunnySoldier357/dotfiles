@@ -16,7 +16,7 @@ return
         browser = "brave",
         browserPrivate = "brave --incognito",
         editor = "kate",
-        filemanager = "nautilus -w",
+        filemanager = "pcmanfm -n",
         game = "steam",
         ide = "code",
         lock = "i3lock-fancy -f Open-Sans-SemiBold",
