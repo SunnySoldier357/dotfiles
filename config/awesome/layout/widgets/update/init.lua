@@ -8,8 +8,9 @@ local wibox = require("wibox")
 local apps = require("configuration.apps")
 local clickable_container = require("layout.widgets.material.clickable_container")
 
+local checkUpdateCmd = "zsh -c 'checkupdates | wc -l'"
 local updateAvailable = false
-local numOfUpdatesAvailable
+local numOfUpdatesAvailable = 0
 
 local widget = wibox.widget
 {
@@ -21,6 +22,8 @@ local widget = wibox.widget
     layout = wibox.layout.align.horizontal
 }
 
+widget.icon:set_image(iconDir .. "package.svg")
+
 local widgetButton = clickable_container(widget)
 
 widgetButton:buttons(gears.table.join(
@@ -30,8 +33,6 @@ widgetButton:buttons(gears.table.join(
             if updateAvailable then
                 awful.spawn.with_shell(apps.default.terminal ..
                     " sh -c 'yay -Syyuu; echo; echo Press Enter to exit.; read'")
-            else
-                awful.spawn.with_shell("pamac-manager")
             end
         end
     )
@@ -57,17 +58,17 @@ awful.tooltip(
     }
 )
 
-watch("pamac checkupdates", 60,
+watch(checkUpdateCmd, 60,
     function(_, stdout)
         numOfUpdatesAvailable = tonumber(stdout:match(".-\n"):match("%d*"))
 
         local widgetIconName
-        if (numOfUpdatesAvailable ~= nil) then
-            updateAvailable = true
-            widgetIconName = "package-up"
-        else
+        if (numOfUpdatesAvailable == 0) then
             updateAvailable = false
             widgetIconName = "package"
+        else
+            updateAvailable = true
+            widgetIconName = "package-up"
         end
 
         widget.icon:set_image(iconDir .. widgetIconName .. ".svg")
