@@ -37,7 +37,8 @@
         "*.rmd": "markdown",
         "*.sln": "properties",
         "config**": "properties",
-        "grub": "properties"
+        "grub": "properties",
+        "*rc": "properties",
     },
     "files.exclude": {
         "**/.classpath": true,
