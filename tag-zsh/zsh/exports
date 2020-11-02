@@ -31,6 +31,10 @@ export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
 
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
+# For Hardware Video Accelaration
+export LIBVA_DRIVER_NAME=iHD
+export VDPAU_DRIVER=nvidia
+
 # For gnome-keyring ssh access
 if [ -n "$DESKTOP_SESSION" ];then
     eval $(gnome-keyring-daemon --start)

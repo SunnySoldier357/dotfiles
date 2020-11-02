@@ -15,12 +15,14 @@ local autostart =
 
     "libinput-gestures-setup start",
     "xss-lock -- " .. apps.default.lock,
+    "nitrogen --restore",
 
     "picom -b --experimental-backends --config " .. configDir ..
         "configuration/picom.conf",
 
-    "nm-applet --indicator", -- Wifi
+    "nm-applet", -- Wifi
     "blueman-applet", -- BLuetooth
+    "phonesim -p 12345 /usr/share/phonesim/default.xml", -- Bluetooth Headset for HSP/HFP
     "indicator-kdeconnect", --KDEConnect
     "redshift-gtk", -- Night Light
 

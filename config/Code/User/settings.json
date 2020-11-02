@@ -258,4 +258,5 @@
     "[jsonc]": {
         "editor.defaultFormatter": "vscode.json-language-features"
     },
+    "python.pythonPath": "/usr/bin/python",
 }
