@@ -22,7 +22,6 @@ local autostart =
 
     "nm-applet", -- Wifi
     "blueman-applet", -- BLuetooth
-    "phonesim -p 12345 /usr/share/phonesim/default.xml", -- Bluetooth Headset for HSP/HFP
     "indicator-kdeconnect", --KDEConnect
     "redshift-gtk", -- Night Light
 

@@ -39,6 +39,7 @@
         "config**": "properties",
         "grub": "properties",
         "*rc": "properties",
+        "mimeapps.list": "properties",
     },
     "files.exclude": {
         "**/.classpath": true,
@@ -54,6 +55,8 @@
         "**/CVS": true,
         "**/dist": true,
         "**/obj": true,
+
+        "**/*.gz": true,
 
         // Flutter specific folders
         "**/.dart_tool": true,
@@ -259,4 +262,5 @@
         "editor.defaultFormatter": "vscode.json-language-features"
     },
     "python.pythonPath": "/usr/bin/python",
+    "latex-workshop.view.pdf.viewer": "tab",
 }
