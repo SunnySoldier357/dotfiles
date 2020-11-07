@@ -55,17 +55,25 @@ ruled.client.connect_signal("request::rules",
                     "ConfigManager",  -- Thunderbird's about:config.
                     "pop-up",         -- e.g. Google Chrome's (detached) Developer Tools.
                 },
-                type = { "dialog" },
+                type =
+                {
+                    "dialog",
+                    "splash",
+                },
             },
             properties = { floating = true }
         }
 
         -- Dialogs
         ruled.client.append_rule {
-            id = "dialog",
+            id = "centered",
             rule_any =
             {
-                type = { "dialog" },
+                type =
+                {
+                    "dialog",
+                    "splash",
+                },
             },
             properties = {
                 drawBackdrop = true,
