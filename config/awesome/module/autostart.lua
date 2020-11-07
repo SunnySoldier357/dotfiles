@@ -15,7 +15,7 @@ local autostart =
 
     "libinput-gestures-setup start",
     "xss-lock -- " .. apps.default.lock,
-    "nitrogen --restore",
+    "wallpapers",
 
     "picom -b --experimental-backends --config " .. configDir ..
         "configuration/picom.conf",
