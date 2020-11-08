@@ -49,12 +49,12 @@ local tags =
     {
         title = "social",
         icon = icons.social,
-        layout = awful.layout.layouts[1]
+        layout = awful.layout.suit.max
     },
     {
         title = "music",
         icon = icons.music,
-        layout = awful.layout.suit.max,
+        layout = awful.layout.suit.max
     },
     {
         title = "lab",
