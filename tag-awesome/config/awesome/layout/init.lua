@@ -5,7 +5,6 @@ local gears = require("gears")
 local menubar = require("menubar")
 local wibox = require("wibox")
 
-local batteryWidget = require("layout.widgets.battery")
 local optimusWidget = require("layout.widgets.optimus")
 local updateWidget = require("layout.widgets.update")
 
@@ -41,7 +40,6 @@ local function setUpRightWidgets(_screen)
     returnWidget:add(wibox.widget.systray())
 
     if (screen.primary == _screen) then
-        returnWidget:add(batteryWidget)
         returnWidget:add(updateWidget)
         returnWidget:add(optimusWidget)
     end

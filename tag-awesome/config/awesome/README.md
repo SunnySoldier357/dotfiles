@@ -1,6 +1,5 @@
 # Awesome Config Dependencies (`awesome-git`)
 
-- `acpi` (For battery widget)
 - `alsa-utils` (For audio hotkeys)
 - `betterlockscreen` ([For screen-locking](https://github.com/betterlockscreen/betterlockscreen))
 - `brightnessctl` (For brightness hotkeys)
@@ -17,7 +16,7 @@
 - `xcursor-breeze`
 
 ```
-paru -Sy --needed acpi alsa-utils brightnessctl mpc playerctl \
+paru -Sy --needed alsa-utils brightnessctl mpc playerctl \
 lightdm lightdm-webkit2-greeter lightdm-webkit-theme-litarvan \
 orchis-theme-git papirus-icon-theme papirus-folders picom \
 rofi xcursor-breeze

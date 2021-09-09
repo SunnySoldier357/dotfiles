@@ -1,7 +1,7 @@
 # youtube-dl --no-playlist "https://www.youtube.com/watch?v=VNs_cCtdbPc&list=PLmqDusKytARjwwVmrdTS9rsMEmRNrNKp7&index=1" -f 'bestaudio[ext=m4a]' -o "Brown Munde - AP Dhillon, Gurinder Gill & Shinda Kahlon.m4a"
 # ffmpeg -i Brown\ Munde\ -\ AP\ Dhillon,\ Gurinder\ Gill\ \&\ Shinda\ Kahlon.m4a -ss 9 -to 4:21 out.m4a -y
 
-# /bin/bash
+# /bin/zsh
 
 help()
 {

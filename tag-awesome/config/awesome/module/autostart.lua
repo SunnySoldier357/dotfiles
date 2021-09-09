@@ -14,11 +14,13 @@ local autostart =
     configDir .. "configuration/awspawn", -- Spawn "dirty" apps that can linger between sessions
 
     "libinput-gestures-setup start",
+    "autorandr --change",
     "nitrogen --restore",
 
     "picom -b --experimental-backends --config " .. configDir ..
         "configuration/picom.conf",
 
+    "cbatticon --update-interval 20 --command-critical-level 'systemctl hibernate' --low-level 15",
     "nm-applet", -- Wifi
     "blueman-applet", -- BLuetooth
     -- "indicator-kdeconnect", --KDEConnect
