@@ -78,7 +78,9 @@ awful.keyboard.append_global_keybindings({
 
     awful.key(
         { keys.super, keys.shift }, "q",
-        awesome.quit,
+        function()
+            awesome.quit(0)
+        end,
         {
             description = "quit awesome",
             group = "awesome"

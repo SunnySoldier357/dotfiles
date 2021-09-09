@@ -22,7 +22,9 @@ local awesomeMenu =
     },
     {
         "quit",
-        awesome.quit
+        function()
+            awesome.quit(0)
+        end
     },
 }
 
