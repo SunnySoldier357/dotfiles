@@ -181,7 +181,7 @@ awful.keyboard.append_global_keybindings({
     awful.key(
         { }, keys.volume.inc,
         function()
-            awful.spawn.with_shell("amixer -q -D pulse sset Master " .. volumeStep .."%+")
+            awful.spawn.with_shell("amixer set Master " .. volumeStep .. "%+")
         end,
         {
             description = "volume up",
@@ -191,7 +191,7 @@ awful.keyboard.append_global_keybindings({
     awful.key(
         { }, keys.volume.dec,
         function()
-            awful.spawn.with_shell("amixer -q -D pulse sset Master " .. volumeStep .."%-")
+            awful.spawn.with_shell("amixer set Master " .. volumeStep .. "%-")
         end,
         {
             description = "volume down",
@@ -201,7 +201,7 @@ awful.keyboard.append_global_keybindings({
     awful.key(
         { }, keys.volume.mute,
         function()
-            awful.spawn.with_shell("amixer -D pulse set Master 1+ toggle")
+            awful.spawn.with_shell("amixer set Master toggle")
         end,
         {
             description = "volume mute",

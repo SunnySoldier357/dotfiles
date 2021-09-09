@@ -14,16 +14,16 @@ local autostart =
     configDir .. "configuration/awspawn", -- Spawn "dirty" apps that can linger between sessions
 
     "libinput-gestures-setup start",
-    "xss-lock -- " .. apps.default.lock,
-    "wallpapers",
+    -- "xss-lock -- " .. apps.default.lock,
+    "nitrogen --restore",
 
     "picom -b --experimental-backends --config " .. configDir ..
         "configuration/picom.conf",
 
     "nm-applet", -- Wifi
     "blueman-applet", -- BLuetooth
-    "indicator-kdeconnect", --KDEConnect
-    "redshift-gtk", -- Night Light
+    -- "indicator-kdeconnect", --KDEConnect
+    "/usr/lib/geoclue-2.0/demos/agent", -- Geolocation for redshift
 
     "xbindkeys -f ~/.config/xbindkeysrc", -- Disable middle click pasting
 

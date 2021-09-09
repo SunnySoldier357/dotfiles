@@ -1,0 +1,37 @@
+# youtube-dl --no-playlist "https://www.youtube.com/watch?v=VNs_cCtdbPc&list=PLmqDusKytARjwwVmrdTS9rsMEmRNrNKp7&index=1" -f 'bestaudio[ext=m4a]' -o "Brown Munde - AP Dhillon, Gurinder Gill & Shinda Kahlon.m4a"
+# ffmpeg -i Brown\ Munde\ -\ AP\ Dhillon,\ Gurinder\ Gill\ \&\ Shinda\ Kahlon.m4a -ss 9 -to 4:21 out.m4a -y
+
+# /bin/bash
+
+help()
+{
+    echo "music-dl - Downloads .m4a audio files given a Youtube URL"
+    echo "Usage: music-dl URL"
+}
+
+if [ $# -eq 0 ] ; then
+    echo "music-dl: A URL is required"
+    echo
+
+    help
+elif [ $1 = "-h" ] || [ $1 = "--help" ] ; then
+    help
+else
+    file=$(youtube-dl --no-playlist $1 -f "bestaudio[ext=m4a]" -o "%(title)s - %(uploader)s.%(ext)s")
+    filename=$(echo $file | tail -1 | awk -F "\"" '{print $2}')
+    outputfile=$(echo "$filename" | awk -F "." '{last=$NF; $(NF)=""; print $0 "SS." last}')
+
+    echo "Successfully downloaded file '$filename'"
+
+    if [ $# -eq 2 ] ; then
+        ffmpeg -i "$filename" -ss $2 "$outputfile" -y
+        mv -f "$outputfile" "$filename"
+
+        echo "Successfully trimmed file '$filename'"
+    elif [ $# -eq 3 ] ; then
+        ffmpeg -i "$filename" -ss $2 -to $3 "$outputfile" -y
+        mv -f "$outputfile" "$filename"
+
+        echo "Successfully trimmed file '$filename'"
+    fi
+fi

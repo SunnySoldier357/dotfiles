@@ -32,20 +32,21 @@ ex ()
 pacman-update ()
 {
     sudo reflector \
-        -p https -p http \
+        --country $1 \
+        --age 12 \
+        --protocol https \
         --sort rate \
-        -c $1 \
         --save /etc/pacman.d/mirrorlist && \
             cat /etc/pacman.d/mirrorlist
 }
 
 #
-# # new-code - create and open a new file in Visual Studio code
-# # usage: new-code <file>
-new-code ()
+# # scode - create and open a new file in Visual Studio code
+# # usage: scode <file>
+scode ()
 {
     if [ $# -eq 0 ] ; then
-        echo "new-code requires a file name"
+        echo "scode requires a file name"
     else
         sudo touch $1 && code $1
     fi

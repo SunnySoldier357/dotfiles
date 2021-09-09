@@ -37,7 +37,7 @@ local menu = awful.menu(
         {
             { "Nvidia",switchMode("nvidia"),iconDir .. "nvidia.svg" },
             { "Hybrid", switchMode("hybrid"), iconDir .. "hybrid.svg" },
-            { "Intel", switchMode("intel"), iconDir .. "intel.svg" }
+            { "Integrated", switchMode("integrated"), iconDir .. "integrated.svg" }
         }
     }
 )
@@ -55,7 +55,7 @@ widgetButton:buttons(gears.table.join(
 --
 -- Optimus Manager (Client) version 1.2.2
 --
--- Current GPU mode : intel
+-- Current GPU mode : integrated
 -- GPU mode requested for next login : nvidia
 -- GPU mode for next startup : nvidia
 -- Temporary config path: no
