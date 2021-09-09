@@ -14,7 +14,7 @@ return
         filemanager = "pcmanfm -n",
         game = "steam",
         ide = "code",
-        lock = "i3lock-fancy -f Open-Sans-SemiBold",
+        lock = "betterlockscreen -l dimblur --display 1",
         music = "cantata",
         social = "caprine",
         terminal = "kitty",

@@ -14,7 +14,6 @@ local autostart =
     configDir .. "configuration/awspawn", -- Spawn "dirty" apps that can linger between sessions
 
     "libinput-gestures-setup start",
-    -- "xss-lock -- " .. apps.default.lock,
     "nitrogen --restore",
 
     "picom -b --experimental-backends --config " .. configDir ..

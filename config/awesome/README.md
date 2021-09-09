@@ -2,6 +2,7 @@
 
 - `acpi` (For battery widget)
 - `alsa-utils` (For audio hotkeys)
+- `betterlockscreen` ([For screen-locking](https://github.com/betterlockscreen/betterlockscreen))
 - `brightnessctl` (For brightness hotkeys)
 - `mpc`, `playerctl` (For media hotkeys)
 
