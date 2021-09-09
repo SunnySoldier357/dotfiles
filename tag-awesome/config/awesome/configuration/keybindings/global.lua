@@ -222,6 +222,12 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
+        { keys.super }, keys.volume.mute,
+        function()
+            awful.spawn.with_shell("playerctl play-pause || mpc toggle")
+        end
+    ),
+    awful.key(
         { }, keys.audio.next,
         function()
             awful.spawn.with_shell("playerctl next || mpc next")
@@ -232,6 +238,12 @@ awful.keyboard.append_global_keybindings({
         }
     ),
     awful.key(
+        { keys.super }, keys.volume.inc,
+        function()
+            awful.spawn.with_shell("playerctl next || mpc next")
+        end
+    ),
+    awful.key(
         { }, keys.audio.prev,
         function()
             awful.spawn.with_shell("playerctl previous || mpx prev")
@@ -240,6 +252,12 @@ awful.keyboard.append_global_keybindings({
             description = "previous song",
             group = "hotkeys"
         }
+    ),
+    awful.key(
+        { keys.super }, keys.volume.dec,
+        function()
+            awful.spawn.with_shell("playerctl previous || mpx prev")
+        end
     ),
 })
 
