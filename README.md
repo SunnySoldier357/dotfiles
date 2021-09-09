@@ -12,7 +12,7 @@ current machine, create the `.rcrc` file in your `$HOME` directory.
 
 ``` properties
 EXCLUDES="*.md"
-TAGS="git zsh"
+TAGS="awesome zsh"
 ```
 
 ## Dependecies
