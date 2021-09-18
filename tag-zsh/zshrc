@@ -15,6 +15,8 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)               # Include hidden files.
 
+bindkey "\e[3~" delete-char
+
 # Load the shell dotfiles, and then some:
 # * ~/.zsh/extra can be used for other settings you don’t want to commit.
 for file in ~/.zsh/{prompt,aliases,functions,extra,plugins}; do
