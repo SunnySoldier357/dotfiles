@@ -13,12 +13,11 @@ local autostart =
     -- to avoid multipled instances, inside the awspawn script
     configDir .. "configuration/awspawn", -- Spawn "dirty" apps that can linger between sessions
 
-    "libinput-gestures-setup start",
+    "picom --experimental-backends -b",
+
+    -- "libinput-gestures-setup start",
     "autorandr --change",
     "nitrogen --restore",
-
-    "picom -b --experimental-backends --config " .. configDir ..
-        "configuration/picom.conf",
 
     "cbatticon --update-interval 20 --command-critical-level 'systemctl hibernate' --low-level 15",
     "nm-applet", -- Wifi

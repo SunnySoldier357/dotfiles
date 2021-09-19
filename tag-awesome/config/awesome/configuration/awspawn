@@ -8,7 +8,7 @@
 
 # List of applications to run
 APPS=(
-    keepassxc
+    # keepassxc
 )
 
 # Some applications start child applications that need to be killed on reload

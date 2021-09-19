@@ -39,10 +39,8 @@ local function setUpRightWidgets(_screen)
     local returnWidget = wibox.layout.fixed.horizontal()
     returnWidget:add(wibox.widget.systray())
 
-    if (screen.primary == _screen) then
-        returnWidget:add(updateWidget)
-        returnWidget:add(optimusWidget)
-    end
+    returnWidget:add(awful.widget.only_on_screen(updateWidget, "primary"))
+    returnWidget:add(awful.widget.only_on_screen(optimusWidget, "primary"))
 
     returnWidget:add(textClockWidget(_screen))
     returnWidget:add(_screen.mylayoutbox)
@@ -74,7 +72,7 @@ screen.connect_signal("request::desktop_decoration",
         ))
 
         -- Create the wibox
-        _screen.mywibox = awful.wibar({ position = "bottom", screen = _screen })
+        _screen.mywibox = awful.wibar({ position = "top", screen = _screen })
 
         -- Add widgets to the wibox
         _screen.mywibox.widget =

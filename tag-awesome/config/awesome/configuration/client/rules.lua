@@ -42,6 +42,8 @@ ruled.client.connect_signal("request::rules",
                     "Eog",
                     "Galculator",
                     "Gcolor3",
+                    "Redshift-gtk",
+                    "Xviewer",
                 },
                 -- Note that the name property shown in xprop might be set slightly after creation of the client
                 -- and the name shown there might not match defined rules here.
@@ -61,7 +63,11 @@ ruled.client.connect_signal("request::rules",
                     "splash",
                 },
             },
-            properties = { floating = true }
+            properties =
+            {
+                floating = true,
+                placement = awful.placement.centered,
+            }
         }
 
         -- Dialogs
@@ -78,7 +84,6 @@ ruled.client.connect_signal("request::rules",
             properties = {
                 drawBackdrop = true,
                 ontop = true,
-                placement = awful.placement.centered,
                 skip_decoration = true
             }
         }
