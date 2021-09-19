@@ -17,6 +17,12 @@ git_branch()
 # %M - The full machine hostname
 # %n - $USERNAME
 # %~ - Current working directory, shortned with ~ if possible
+if [ -n "$DESKTOP_SESSION" ];then
 PS1="
 %F{red}%n %F{magenta}%M %F{yellow}%~ %F{cyan}\$(git_branch)
 %f$ "
+else
+PS1="
+%F{green}%n %F{magenta}%M %F{yellow}%~ %F{cyan}\$(git_branch)
+%f$ "
+fi
