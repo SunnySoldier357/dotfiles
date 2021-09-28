@@ -1,0 +1,23 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Enable history appending instead of overwriting.
+shopt -s histappend
+
+# Load the shell dotfiles, and then some:
+for file in ~/.sh/{aliases,functions}; do
+	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+		# shellcheck source=/dev/null
+		source "$file"
+	fi
+done
+unset file
+
+# * ~/.bash/extra can be used for other settings you don’t want to commit.
+for file in ~/.bash/{prompt,extra}; do
+	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+		# shellcheck source=/dev/null
+		source "$file"
+	fi
+done
+unset file

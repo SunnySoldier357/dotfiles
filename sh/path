@@ -1,10 +1,8 @@
-#!/bin/zsh
-
 # Add .local/bin to PATH
-export PATH="$PATH:/home/sandeepsingh/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # Add Android SDK cmd-line tools to PATH
 # export PATH="$PATH:/opt/android-sdk/tools/bin"
 
 # Add .NET Core SDK tools
-export PATH="$PATH:/home/sandeepsingh/.dotnet/tools"
+export PATH="$PATH:$HOME/.dotnet/tools"

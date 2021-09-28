@@ -1,11 +1,15 @@
-#!/bin/zsh
-
 # Navigation
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
-alias ls="lsd --group-dirs first"
+# Check if lsd is installed
+if command -v lsd &> /dev/null
+then
+    alias ls="lsd --group-dirs first"
+else
+    alias ls="ls --color=always --group-directories-first -v"
+fi
 alias l="ls -lFh"     # size, show type, human readable
 alias la="ls -lAFh"   # long list, show almost all, show type, human readable
 alias ll="ls -l"      # long list
@@ -38,7 +42,11 @@ alias rm="rm -i"
 alias cp="cp -i"
 alias mv="mv -i"
 
-alias vim="nvim"
+# Check if nvim is installed
+if command -v nvim &> /dev/null
+then
+    alias vim="nvim"
+fi
 alias svim="sudo vim"
 
 alias kssh="kitty +kitten ssh"

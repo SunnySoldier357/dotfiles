@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 #
 # # ex - archive extractor
 # # usage: ex <file>
@@ -41,7 +39,7 @@ pacman-update ()
 }
 
 #
-# # scode - create and open a new file in Visual Studio code
+# # scode - create and open a new file in Visual Studio Code
 # # usage: scode <file>
 scode ()
 {

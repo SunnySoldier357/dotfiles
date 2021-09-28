@@ -1,0 +1,10 @@
+[[ -f /usr/share/git/git-prompt.sh ]] && . /usr/share/git/git-prompt.sh
+[[ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]] && . /usr/share/git-core/contrib/completion/git-prompt.sh
+
+# Colors
+# \[\e[32m\] : Green (#19cb00)
+# \[\e[35m\] : Magenta (#cb1ed1)
+# \[\e[33m\] : Yellow (#cecb00)
+# \[\e[33m\] : Cyan (#0dcdcd)
+# \[\e[00m\] : Reset color
+PS1='\n\[\e[32m\]\u \[\e[35m\]\h \[\e[33m\]\w\[\e[36m\]`__git_ps1`\[\e[00m\]\n$ '

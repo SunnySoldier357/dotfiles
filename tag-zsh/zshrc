@@ -18,8 +18,16 @@ _comp_options+=(globdots)               # Include hidden files.
 bindkey "\e[3~" delete-char
 
 # Load the shell dotfiles, and then some:
+for file in ~/.sh/{aliases,functions}; do
+	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+		# shellcheck source=/dev/null
+		source "$file"
+	fi
+done
+unset file
+
 # * ~/.zsh/extra can be used for other settings you don’t want to commit.
-for file in ~/.zsh/{prompt,aliases,functions,extra,plugins}; do
+for file in ~/.zsh/{prompt,extra,plugins}; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
 		# shellcheck source=/dev/null
 		source "$file"

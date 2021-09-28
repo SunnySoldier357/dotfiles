@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # Allow git branch to update in prompt
 setopt prompt_subst
 
