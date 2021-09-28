@@ -1,6 +1,10 @@
 # Add .local/bin to PATH
 export PATH="$PATH:$HOME/.local/bin"
 
+# Pkgsrc
+export PATH="$PATH:$HOME/.local/share/pkg/bin"
+export MANPATH="$MANPATH:$HOME/.local/share/pkg/man"
+
 # Add Android SDK cmd-line tools to PATH
 # export PATH="$PATH:/opt/android-sdk/tools/bin"
 

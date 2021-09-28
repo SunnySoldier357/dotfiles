@@ -1,4 +1,7 @@
 {
+    "files.associations": {
+        "**/sh/*": "shellscript"
+    },
     "files.exclude": {
         "**/bin": false
     }
