@@ -57,7 +57,7 @@ alias kssh="kitty +kitten ssh"
 
 alias userctl="systemctl --user"
 
-# Check if nvim is installed
+# Check if trash-put is installed
 if command -v trash-put &> /dev/null
 then
     alias rm="trash-put"

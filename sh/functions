@@ -3,25 +3,45 @@
 # # usage: ex <file>
 ex ()
 {
-  if [ -f $1 ] ; then
-    case $1 in
-      *.tar.bz2)   tar xjf $1;;
-      *.tar.gz)    tar xzf $1;;
-      *.bz2)       bunzip2 $1;;
-      *.rar)       unrar x $1;;
-      *.gz)        gunzip $1;;
-      *.tar)       tar xf $1;;
-      *.tbz2)      tar xjf $1;;
-      *.tgz)       tar xzf $1;;
-      *.zip)       unzip $1;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1;;
-      "")          echo "ex: No file to extract\n\nex - archive extractor\nusage: ex <file>";;
-      *)           echo "'$1' cannot be extracted via ex()";;
-    esac
-  else
-    echo "'$1' is not a valid file"
-  fi
+    if [ -f $1 ] ; then
+        case $1 in
+        *.tar.bz2)   tar xjf $1;;
+        *.tar.gz)    tar xzf $1;;
+        *.bz2)       bunzip2 $1;;
+        *.rar)       unrar x $1;;
+        *.gz)        gunzip $1;;
+        *.tar)       tar xf $1;;
+        *.tbz2)      tar xjf $1;;
+        *.tgz)       tar xzf $1;;
+        *.zip)       unzip $1;;
+        *.Z)         uncompress $1;;
+        *.7z)        7z x $1;;
+        "")          echo "ex: No file to extract\n\nex - archive extractor\nusage: ex <file>";;
+        *)           echo "'$1' cannot be extracted via ex()";;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+#
+# # gcse - gcc with special flags as used in CSE
+# # usage: gcse <file.c> <additional flags for gcc>
+gcse ()
+{
+    if [ -f $1 ] ; then
+        INPUT_FILE=$1
+        OUTPUT_FILE="${1%.*}"
+        shift
+
+        if [ $# -eq 0 ] ; then
+            gcc -g -Wall -std=c18 -o $OUTPUT_FILE $INPUT_FILE
+        else
+            gcc -g -Wall -std=c18 -o $OUTPUT_FILE $INPUT_FILE "$*"
+        fi
+    else
+        echo "'$1' is not a valid file"
+    fi
 }
 
 #
