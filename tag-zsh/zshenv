@@ -10,4 +10,4 @@ for file in ~/.config/sh/{exports,path}; do
 done
 unset file
 
-[[ -f ~/.zshrc ]] && . ~/.zshrc
+[[ -f $ZDOTDIR/.zshrc ]] && . $ZDOTDIR/.zshrc

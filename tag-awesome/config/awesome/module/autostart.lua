@@ -25,7 +25,7 @@ local autostart =
     -- "indicator-kdeconnect", --KDEConnect
     "/usr/lib/geoclue-2.0/demos/agent", -- Geolocation for redshift
 
-    "xbindkeys -f ~/.config/xbindkeysrc", -- Disable middle click pasting
+    "xbindkeys -f $XDG_CONFIG_HOME/xbindkeys/config", -- Disable middle click pasting
 
     "numlockx on", -- Enable numlock
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", -- GUI authentication agent

@@ -6,19 +6,19 @@ autoload -U colors && colors
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.cache/zsh/history
+export HISTFILE=$XDG_STATE_HOME/zsh/history
 
 # Basic auto/tab complete:
 autoload -U compinit
-zstyle ":completion:* menu" select
+zstyle ":completion:* menu" select cache-path $XDG_CACHE_HOME/zsh/zcompcache
 zmodload zsh/complist
-compinit
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 _comp_options+=(globdots)               # Include hidden files.
 
 bindkey "\e[3~" delete-char
 
 # Load the shell dotfiles, and then some:
-for file in ~/.config/sh/{aliases,functions}; do
+for file in $XDG_CONFIG_HOME/sh/{aliases,functions,init}; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
 		# shellcheck source=/dev/null
 		source "$file"
@@ -27,7 +27,7 @@ done
 unset file
 
 # * ~/.zsh/extra can be used for other settings you don’t want to commit.
-for file in ~/.config/zsh/{prompt,extra,plugins}; do
+for file in $XDG_CONFIG_HOME/zsh/{prompt,extra,plugins}; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
 		# shellcheck source=/dev/null
 		source "$file"

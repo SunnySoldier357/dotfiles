@@ -5,7 +5,7 @@
 shopt -s histappend
 
 # Load the shell dotfiles, and then some:
-for file in ~/.config/sh/{aliases,functions}; do
+for file in $XDG_CONFIG_HOME/sh/{aliases,functions,init}; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
 		# shellcheck source=/dev/null
 		source "$file"
@@ -14,7 +14,7 @@ done
 unset file
 
 # * ~/.bash/extra can be used for other settings you don’t want to commit.
-for file in ~/.config/bash/{prompt,extra}; do
+for file in $XDG_CONFIG_HOME/bash/{prompt,extra}; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
 		# shellcheck source=/dev/null
 		source "$file"
