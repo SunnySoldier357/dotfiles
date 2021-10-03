@@ -13,6 +13,8 @@ for file in $XDG_CONFIG_HOME/sh/{aliases,functions,init}; do
 done
 unset file
 
+export HISTFILE=$XDG_STATE_HOME/bash/history
+
 # * ~/.bash/extra can be used for other settings you don’t want to commit.
 for file in $XDG_CONFIG_HOME/bash/{prompt,extra}; do
 	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
