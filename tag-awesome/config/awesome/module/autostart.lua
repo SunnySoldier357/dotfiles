@@ -9,10 +9,6 @@ local apps = require("configuration.apps")
 
 local autostart =
 {
-    -- Add applications that need to be killed between reloads
-    -- to avoid multipled instances, inside the awspawn script
-    configDir .. "configuration/awspawn", -- Spawn "dirty" apps that can linger between sessions
-
     "picom --experimental-backends -b",
 
     -- "libinput-gestures-setup start",
@@ -25,12 +21,12 @@ local autostart =
     -- "indicator-kdeconnect", --KDEConnect
     "/usr/lib/geoclue-2.0/demos/agent", -- Geolocation for redshift
 
-    "xbindkeys -f $XDG_CONFIG_HOME/xbindkeys/config", -- Disable middle click pasting
+    "xbindkeys --file $XDG_CONFIG_HOME/xbindkeys/config", -- Disable middle click pasting
 
     "numlockx on", -- Enable numlock
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", -- GUI authentication agent
 
-    "pcmanfm -d" -- Start PCManFM as a daemon to automatically mount removable media
+    "pcmanfm --daemon-mode" -- Start PCManFM as a daemon to automatically mount removable media
 }
 
 local function runOnce(cmd)
@@ -40,7 +36,7 @@ local function runOnce(cmd)
         findme = cmd:sub(0, firstspace - 1)
     end
     awful.spawn.with_shell(
-        string.format("pgrep -u $USER -x %s > /dev/null || (%s)", findme, cmd))
+        string.format("pgrep --euid $USER --exact %s > /dev/null || (%s)", findme, cmd))
 end
 
 for _, app in ipairs(autostart) do

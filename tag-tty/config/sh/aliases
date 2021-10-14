@@ -8,12 +8,12 @@ if command -v lsd &> /dev/null
 then
     alias ls="lsd --group-dirs first"
 else
-    alias ls="ls --color=always --group-directories-first -v"
+    alias ls="ls --color=always --group-directories-first -v" # Versionsort
 fi
-alias l="ls -lFh"     # size, show type, human readable
-alias la="ls -lAFh"   # long list, show almost all, show type, human readable
+alias l="ls -l --human-readable --classify"     # show type
+alias la="ls -l --almost-all --human-readable --classify"   # show type
 alias ll="ls -l"      # long list
-alias l.="ls -ld .*"
+alias l.="ls -l --directory-only .*"
 
 alias grep="grep --color"
 
@@ -27,7 +27,7 @@ then
     alias -g L="| less"
     alias -g M="| most"
     alias -g LL="2>&1 | less"
-    alias -g CA="2>&1 | cat -A"
+    alias -g CA="2>&1 | cat --show-all"
     alias -g NE="2> /dev/null"
     alias -g NUL="> /dev/null 2>&1"
     alias -g P="2>&1| pygmentize -l pytb"
@@ -40,11 +40,11 @@ alias h="history"
 alias hgrep="fc -El 0 | grep"
 alias help="man"
 alias p="ps -f"
-alias sortnr="sort -n -r"
+alias sortnr="sort --numeric-sort --reverse"
 
-alias rm="rm -i"
-alias cp="cp -i"
-alias mv="mv -i"
+alias rm="rm --interactive=once"
+alias cp="cp --interactive"
+alias mv="mv --interactive"
 
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 
