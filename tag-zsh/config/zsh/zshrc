@@ -8,6 +8,9 @@ HISTSIZE=10000
 SAVEHIST=10000
 export HISTFILE=$XDG_STATE_HOME/zsh/history
 
+# Commands to omit from shell history file
+export HISTORY_IGNORE="(l[al.]#( *)#|cd|pwd|exit|sudo reboot|history|cd -|cd ..|..)"
+
 # Basic auto/tab complete:
 autoload -U compinit
 zstyle ":completion:* menu" select cache-path $XDG_CACHE_HOME/zsh/zcompcache
