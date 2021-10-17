@@ -2,59 +2,87 @@ Config
 {
     overrideRedirect = False,
 
-    font = "xft:iosevka-9",
+    font = "xft:Ubuntu:weight=bold:pixelsize=14:antialias=true:hinting=true",
+    additionalFonts =
+    [
+        "xft:Mononoki:pixelsize=11:antialias=true:hinting=true",
+        "xft:Font Awesome 5 Free Solid:pixelsize=14",
+        "xft:Font Awesome 5 Brands:pixelsize=16"
+    ],
 
-    bgColor = "#5f5f5f",
-    fgColor = "#f8f8f2",
+    bgColor = "#282c34",
+    fgColor = "#ff6c6b",
+    iconRoot = ".config/xmonad/xpm/",
 
-    position = TopW L 90,
+    position = TopSize L 100 24,
+
+    hideOnStart = False,
+    lowerOnStart = True,
+    persistent = True,
 
     commands =
     [
-        Run Weather "KSEA"
-            [
-                "--template", "<weather> <tempC>°C",
-                "-L", "0",
-                "-H", "25",
-                "--low", "lightblue",
-                "--normal", "#f8f8f2",
-                "--high", "red"
-            ]
+        -- Echos a "penguin" icon in front of the kernel output.
+        Run Com "echo"
+            ["<fn=3>\xf17c</fn>"]
+            "penguin"
+            3600,
+        Run Com ".local/bin/kernel"
+            []
+            "kernel"
             36000,
-            
+
         Run Cpu
             [
-                "-L", "3",
+                "--template", "<fn=2>\xf108</fn>  cpu: (<total>%)",
                 "-H", "50",
-                "--high", "red",
-                "--normal", "green"
+                "--high", "red"
             ]
-            10,
-                
-        Run Alsa "default" "Master"
-            [
-                "--template", "<volumestatus>",
-                "--suffix", "True",
-                "--",
-                "--on", ""
-            ],
+            20,
         
         Run Memory
-            ["--template", "Mem: <usedratio>%"]
-            10,
-        
-        Run Swap
+            ["--template", "<fn=2>\xf233</fn>  mem: <used>M (<usedratio>%)"]
+            20,
+
+        Run DiskU
+            [("/", "<fn=2>\xf0c7</fn>  hdd: <free> free")]
             []
-            10,
-        
+            60,
+
+        -- Echos an "up arrow" icon in front of the uptime output.
+        Run Com "echo"
+            ["<fn=2>\xf0aa</fn>"]
+            "uparrow"
+            3600,
+        Run Com ".local/bin/upt"
+            []
+            "uptime"
+            360,
+
+        -- Echos a "bell" icon in front of the pacman updates.
+        Run Com "echo"
+            ["<fn=2>\xf0f3</fn>"]
+            "bell"
+            3600,
+        Run Com ".local/bin/pacupdate"
+            []
+            "pacupdate"
+            36000,
+
         Run Date
-            "%a, %d %b %Y <fc=#8be9fd>%H:%M</fc>"
+            "<fn=2>\xf017</fn> %d %b %Y - (%H:%M) "
             "date"
-            10,
+            50,
+
+        -- Script that dynamically adjusts xmobar padding depending on number of trayer icons.
+        Run Com ".config/xmobar/trayer-padding-icon.sh"
+            []
+            "trayerpad"
+            20,
         
         Run XMonadLog
     ],
     sepChar  = "%",
     alignSep = "}{",
-    template = "%XMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% * %swap% | %KSEA% | %date% "
+    template = " <icon=haskell_20.xpm/>   <fc=#666666>|</fc> %XMonadLog% }{ <box type=Bottom width=2 mb=2 color=#51afef><fc=#51afef>%penguin%  <action=`kitty -e htop`>%kernel%</action> </fc></box>    <box type=Bottom width=2 mb=2 color=#ecbe7b><fc=#ecbe7b><action=`kitty -e htop`>%cpu%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#ff6c6b><fc=#ff6c6b><action=`kitty -e htop`>%memory%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#a9a1e1><fc=#a9a1e1><action=`kitty -e ncdu`>%disku%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#98be65><fc=#98be65>%uparrow%  <action=`kitty -e htop`>%uptime%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#c678dd><fc=#c678dd>%bell%  <action=`kitty --hold -e sudo pacman -Syyu`>%pacupdate%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#46d9ff><fc=#46d9ff>%date%</fc></box> %trayerpad%"
 }

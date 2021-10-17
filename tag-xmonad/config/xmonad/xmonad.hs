@@ -50,7 +50,7 @@ myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol
         delta    = 3/100 -- Percent of screen to increment by when resizing panes
 
 myStartup = do
-    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --width 10 --transparent true --tint 0x5f5f5f --height 18 &"
+    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --transparent true --widthtype request --padding 6 --monitor 1 --alpha 0 --tint 0x282c34 --height 22 &"
     spawnOnce "xsetroot -cursor_name left_ptr"
     spawnOnce "feh --bg-fill --no-fehbg ~/Pictures/Wallpapers/'3019 - City of Bright Lights.jpg'"
     spawnOnce "xscreensaver -no-splash &"
