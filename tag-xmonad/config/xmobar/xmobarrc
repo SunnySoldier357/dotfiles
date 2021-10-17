@@ -26,7 +26,7 @@ Config { overrideRedirect = False
                         ]
                     , Run Memory ["--template", "Mem: <usedratio>%"] 10
                     , Run Swap [] 10
-                    , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
+                    , Run Date "%a, %d %b %Y <fc=#8be9fd>%H:%M</fc>" "date" 10
                     , Run XMonadLog
                     ]
        , sepChar  = "%"
