@@ -9,22 +9,20 @@ local apps = require("configuration.apps")
 
 local autostart =
 {
+    "numlockx on", -- Enable numlock
+    "xbindkeys --file $XDG_CONFIG_HOME/xbindkeys/config &", -- Disable middle click pasting
+    "/usr/lib/geoclue-2.0/demos/agent", -- Geolocation for redshift
+    "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", -- GUI authentication agent
+
+    "autorandr --change && nitrogen --restore",
     "picom --experimental-backends -b",
 
     -- "libinput-gestures-setup start",
-    "autorandr --change",
-    "nitrogen --restore",
 
+    "blueman-applet", -- BLuetooth
     "cbatticon --update-interval 20 --command-critical-level 'systemctl hibernate' --low-level 15",
     "nm-applet", -- Wifi
-    "blueman-applet", -- BLuetooth
     -- "indicator-kdeconnect", --KDEConnect
-    "/usr/lib/geoclue-2.0/demos/agent", -- Geolocation for redshift
-
-    "xbindkeys --file $XDG_CONFIG_HOME/xbindkeys/config", -- Disable middle click pasting
-
-    "numlockx on", -- Enable numlock
-    "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", -- GUI authentication agent
 
     "pcmanfm --daemon-mode" -- Start PCManFM as a daemon to automatically mount removable media
 }

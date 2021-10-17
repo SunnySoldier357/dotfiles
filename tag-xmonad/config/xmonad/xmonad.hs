@@ -50,12 +50,20 @@ myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol
         delta    = 3/100 -- Percent of screen to increment by when resizing panes
 
 myStartup = do
-    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --transparent true --widthtype request --padding 6 --monitor 1 --alpha 0 --tint 0x282c34 --height 22 &"
+    spawnOnce "numlockx on" -- Enable numlock
+    spawnOnce "xbindkeys --file $XDG_CONFIG_HOME/xbindkeys/config &" -- Disable middle click pasting
     spawnOnce "xsetroot -cursor_name left_ptr"
-    spawnOnce "feh --bg-fill --no-fehbg ~/Pictures/Wallpapers/'3019 - City of Bright Lights.jpg'"
-    spawnOnce "xscreensaver -no-splash &"
-    spawnOnce "xfce4-power-manager &"
-    spawnOnce "nm-applet --sm-disable &"
+    spawnOnce "/usr/lib/geoclue-2.0/demos/agent" -- Geolocation for redshift
+    spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- GUI authentication agent
+
+    spawnOnce "autorandr --change && nitrogen --restore"
+    spawnOnce "picom --experimental-backends -b"
+
+    spawnOnce "blueman-applet &"
+    spawnOnce "nm-applet &"
+    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --transparent true --widthtype request --padding 6 --monitor 1 --alpha 0 --tint 0x282c34 --height 22 &"
+
+    spawnOnce "pcmanfm --daemon-mode" -- Start PCManFM as a daemon to automatically mount removable media
 
 myManageHook :: ManageHook
 myManageHook = composeAll
