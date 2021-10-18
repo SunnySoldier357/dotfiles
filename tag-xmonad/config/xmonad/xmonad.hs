@@ -10,16 +10,13 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.StatusBar
-import XMonad.Hooks.StatusBar.PP
 
-import XMonad.Layout.Magnifier
-import XMonad.Layout.Renamed
-import XMonad.Layout.ThreeColumns
+import XMonad.Layout.Spacing
 
 import XMonad.Util.EZConfig
 import XMonad.Util.Loggers
 import XMonad.Util.SpawnOnce
-import XMonad.Util.Ungrab
+-- import XMonad.Util.Ungrab
 
 -- !~~~~~||--------||------||~~~~~~
 -- !~~~~~|| XMONAD || MAIN ||~~~~~~
@@ -112,11 +109,8 @@ myKeys =
         -- ("M-S-=", unGrab *> spawn "scrot -s"),
     ]
 
-myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol
+myLayout = smartSpacing 3 $ tiled ||| Mirror tiled ||| Full
     where
-        threeCol = renamed [Replace "ThreeCol"]
-            $ magnifiercz' 1.3
-            $ ThreeColMid nmaster delta ratio
         tiled    = Tall nmaster delta ratio
         nmaster  = 1     -- Default number of windows in the master pane
         ratio    = 1/2   -- Default proportion of screen occupied by master pane
