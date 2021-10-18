@@ -64,6 +64,27 @@ appTerminal = "kitty"
 configBrightnessStep :: Int
 configBrightnessStep = 10
 
+-- !~~~~~||--------||-----------||~~~~~~
+-- !~~~~~|| XMONAD || AUTOSTART ||~~~~~~
+-- !~~~~~||--------||-----------||~~~~~~
+
+myStartup :: X ()
+myStartup = do
+    spawnOnce "numlockx on" -- Enable numlock
+    spawnOnce "xbindkeys --file $XDG_CONFIG_HOME/xbindkeys/config &" -- Disable middle click pasting
+    spawnOnce "xsetroot -cursor_name left_ptr"
+    spawnOnce "/usr/lib/geoclue-2.0/demos/agent" -- Geolocation for redshift
+    spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- GUI authentication agent
+    spawnOnce "autorandr --change && nitrogen --restore"
+    spawnOnce "picom --experimental-backends -b"
+
+    spawnOnce "blueman-applet &"
+    spawnOnce "nm-applet &"
+    spawnOnce "~/.local/bin/systray.sh &"
+    spawnOnce "volumeicon &"
+
+    spawnOnce "pcmanfm --daemon-mode" -- Start PCManFM as a daemon to automatically mount removable media
+
 -- !~~~~~||--------||-------------||~~~~~~
 -- !~~~~~|| XMONAD || KEYBINDINGS ||~~~~~~
 -- !~~~~~||--------||-------------||~~~~~~
@@ -117,6 +138,9 @@ myKeys =
         -- ("M-S-=", unGrab *> spawn "scrot -s"),
     ]
 
+-- !~~~~~||--------||--------||~~~~~~
+-- !~~~~~|| XMONAD || LAYOUT ||~~~~~~
+-- !~~~~~||--------||--------||~~~~~~
 myLayout = smartSpacing 3 $ tiled ||| Mirror tiled ||| Full
     where
         tiled    = Tall nmaster delta ratio
@@ -126,23 +150,6 @@ myLayout = smartSpacing 3 $ tiled ||| Mirror tiled ||| Full
 
 barSpawner :: ScreenId -> IO StatusBarConfig
 barSpawner id = pure $ statusBarProp ("xmobar -x " ++ show (toInteger id)) $ pure myXmobarPP -- nothing on the rest of the screens
-
-myStartup = do
-    spawnOnce "numlockx on" -- Enable numlock
-    spawnOnce "xbindkeys --file $XDG_CONFIG_HOME/xbindkeys/config &" -- Disable middle click pasting
-    spawnOnce "xsetroot -cursor_name left_ptr"
-    spawnOnce "/usr/lib/geoclue-2.0/demos/agent" -- Geolocation for redshift
-    spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- GUI authentication agent
-
-    spawnOnce "autorandr --change && nitrogen --restore"
-    spawnOnce "picom --experimental-backends -b"
-
-    spawnOnce "blueman-applet &"
-    spawnOnce "nm-applet &"
-    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --transparent true --widthtype request --padding 6 --monitor 1 --alpha 0 --tint 0x282c34 --height 22 &"
-    spawnOnce "volumeicon &"
-
-    spawnOnce "pcmanfm --daemon-mode" -- Start PCManFM as a daemon to automatically mount removable media
 
 myManageHook :: ManageHook
 myManageHook = composeAll

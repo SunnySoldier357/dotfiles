@@ -12,10 +12,10 @@
 
 # Function to create a transparent Wx1 px XPM icon
 create_xpm_icon () {
-    timestamp=$(date)
-    pixels=$(for i in `seq $1`; do echo -n "."; done)
+timestamp=$(date)
+pixels=$(for i in `seq $1`; do echo -n "."; done)
 
-    cat << EOF > "$2"
+cat << EOF > "$2"
 /* XPM *
 static char * trayer_pad_xpm[] = {
 /* This XPM icon is used for padding in xmobar to */
