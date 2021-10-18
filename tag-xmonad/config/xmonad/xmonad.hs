@@ -26,7 +26,7 @@ main :: IO ()
 main = xmonad
     . ewmhFullscreen
     . ewmh
-    . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) defToggleStrutsKey
+    . dynamicEasySBs barSpawner
     $ myConfig
 
 myConfig = def
@@ -38,6 +38,7 @@ myConfig = def
         terminal = appTerminal
     }
     `additionalKeysP` myKeys
+    `removeKeysP` disabledKeys
 
 -- !~~~~~||--------||-----------||~~~~~~
 -- !~~~~~|| XMONAD || VARIABLES ||~~~~~~
@@ -66,6 +67,13 @@ configBrightnessStep = 10
 -- !~~~~~||--------||-------------||~~~~~~
 -- !~~~~~|| XMONAD || KEYBINDINGS ||~~~~~~
 -- !~~~~~||--------||-------------||~~~~~~
+
+disabledKeys :: [String]
+disabledKeys =
+    [
+        "M-S-c", -- Close window
+        "M-S-<Return>" -- Spawn Terminal
+    ]
 
 myKeys :: [(String, X ())]
 myKeys =
@@ -115,6 +123,9 @@ myLayout = smartSpacing 3 $ tiled ||| Mirror tiled ||| Full
         nmaster  = 1     -- Default number of windows in the master pane
         ratio    = 1/2   -- Default proportion of screen occupied by master pane
         delta    = 3/100 -- Percent of screen to increment by when resizing panes
+
+barSpawner :: ScreenId -> IO StatusBarConfig
+barSpawner id = pure $ statusBarProp ("xmobar -x " ++ show (toInteger id)) $ pure myXmobarPP -- nothing on the rest of the screens
 
 myStartup = do
     spawnOnce "numlockx on" -- Enable numlock
