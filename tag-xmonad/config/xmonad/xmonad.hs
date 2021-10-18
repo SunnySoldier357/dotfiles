@@ -1,5 +1,9 @@
 -- Default configuration from https://xmonad.org/TUTORIAL.html
 
+-- !~~~~~||--------||---------||~~~~~~
+-- !~~~~~|| XMONAD || IMPORTS ||~~~~~~
+-- !~~~~~||--------||---------||~~~~~~
+
 import XMonad
 
 import XMonad.Hooks.DynamicLog
@@ -17,6 +21,10 @@ import XMonad.Util.Loggers
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Ungrab
 
+-- !~~~~~||--------||------||~~~~~~
+-- !~~~~~|| XMONAD || MAIN ||~~~~~~
+-- !~~~~~||--------||------||~~~~~~
+
 main :: IO ()
 main = xmonad
     . ewmhFullscreen
@@ -30,13 +38,78 @@ myConfig = def
         layoutHook = myLayout, -- Use custom layouts
         manageHook = myManageHook, -- Match on certain windows
         startupHook = myStartup,
-        terminal = "kitty"
+        terminal = appTerminal
     }
-    `additionalKeysP`
+    `additionalKeysP` myKeys
+
+-- !~~~~~||--------||-----------||~~~~~~
+-- !~~~~~|| XMONAD || VARIABLES ||~~~~~~
+-- !~~~~~||--------||-----------||~~~~~~
+
+appBrowser, appBrowserPrivate :: String
+appBrowser = "brave"
+appBrowserPrivate = "brave --incognito"
+
+appText, appIde :: String
+appText = "xed"
+appIde = "code"
+
+appFile :: String
+appFile = "pcmanfm -n"
+
+appLock :: String
+appLock = "betterlockscreen -l dimblur --display 1"
+
+appTerminal :: String
+appTerminal = "kitty"
+
+configBrightnessStep :: Int
+configBrightnessStep = 10
+
+-- !~~~~~||--------||-------------||~~~~~~
+-- !~~~~~|| XMONAD || KEYBINDINGS ||~~~~~~
+-- !~~~~~||--------||-------------||~~~~~~
+
+myKeys :: [(String, X ())]
+myKeys =
     [
-        ("M-S-z", spawn "xscreensaver-command -lock"),
-        ("M-S-=", unGrab *> spawn "scrot -s"),
-        ("M-]"  , spawn "brave")
+        -- * XMonad Key Bindings
+        -- TODO: Customise dmenu
+        ("M-<Esc>", spawn appLock), -- lock screen
+        ("M-C-r", spawn "xmonad --recompile; xmonad --restart"), -- restart XMonad
+
+        -- * Client Key Bindings
+        ("M-q", kill), -- Close focused window
+
+
+        -- * Hotkeys Key Bindings
+
+        -- Brightness
+        ("<XF86MonBrightnessUp>", spawn $ "brightnessctl s +" ++ show configBrightnessStep ++ "%"),
+        ("<XF86MonBrightnessDown>", spawn $ "brightnessctl s " ++ show configBrightnessStep ++ "%-"),
+
+        -- Media Controls
+        ("<XF86AudioPlay>", spawn "playerctl play-pause || mpc toggle"),
+        ("M-<XF86AudioMute>", spawn "playerctl play-pause || mpc toggle"),
+        
+        ("<XF86AudioNext>", spawn "playerctl next || mpc next"),
+        ("M-<XF86AudioRaiseVolume>", spawn "playerctl next || mpc next"),
+
+        ("<XF86AudioPrev>", spawn "playerctl previous || mpc prev"),
+        ("M-<XF86AudioLowerVolume>", spawn "playerctl previous || mpc prev"),
+
+
+        -- * Launcher Key Bindings
+        ("M-b", spawn appBrowser),
+        ("M-S-b", spawn appBrowserPrivate),
+
+        ("M-c", spawn appIde),
+
+        ("M-e", spawn appFile),
+
+        ("M-<Return>", spawn appTerminal)
+
+        -- ("M-S-=", unGrab *> spawn "scrot -s"),
     ]
 
 myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol
@@ -62,6 +135,7 @@ myStartup = do
     spawnOnce "blueman-applet &"
     spawnOnce "nm-applet &"
     spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --transparent true --widthtype request --padding 6 --monitor 1 --alpha 0 --tint 0x282c34 --height 22 &"
+    spawnOnce "volumeicon &"
 
     spawnOnce "pcmanfm --daemon-mode" -- Start PCManFM as a daemon to automatically mount removable media
 
