@@ -94,6 +94,8 @@ windowCount = gets $ Just
 
 myStartup :: X ()
 myStartup = do
+    -- spawnOnce "lxsession -s xmonad -e xmonad &"
+
     spawnOnce "numlockx on" -- Enable numlock
     spawnOnce "xbindkeys --file $XDG_CONFIG_HOME/xbindkeys/config &" -- Disable middle click pasting
     spawnOnce "xsetroot -cursor_name left_ptr"
@@ -105,8 +107,8 @@ myStartup = do
 
     spawnOnce "blueman-applet &"
     spawnOnce "nm-applet --sm-disable &"
-    spawnOnce "volumeicon &"
-    spawnOnce "~/.local/bin/systray.sh"
+    spawnOnce "sleep 5 && volumeicon &"
+    spawn "~/.local/bin/systray.sh"
 
     spawnOnce "pcmanfm --daemon-mode" -- Start PCManFM as a daemon to automatically mount removable media
 
