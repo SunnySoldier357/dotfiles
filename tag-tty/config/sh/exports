@@ -9,7 +9,7 @@ then
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
 
-# export EDITOR=nvim
+export EDITOR=nvim
 
 #* GTK / QT
 export QT_QPA_PLATFORMTHEME=gtk2

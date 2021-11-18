@@ -35,6 +35,7 @@ main :: IO ()
 main = xmonad
     . ewmhFullscreen
     . ewmh
+    . docks
     . dynamicEasySBs barSpawner
     $ myConfig
 
@@ -43,7 +44,7 @@ myConfig = def
         modMask = mod4Mask,   -- Rebind Mod to the super key
         layoutHook = myLayoutHook, -- Use custom layouts
         manageHook = myManageHook <+> manageDocks, -- Match on certain windows
-        handleEventHook = docksEventHook,
+        -- handleEventHook = docksEventHook,
         startupHook = myStartup,
         workspaces = myWorkspaces,
         terminal = appTerminal
@@ -98,6 +99,7 @@ myStartup = do
 
     spawnOnce "numlockx on" -- Enable numlock
     spawnOnce "xbindkeys --file $XDG_CONFIG_HOME/xbindkeys/config &" -- Disable middle click pasting
+    spawnOnce "xfce4-power-manager &"
     spawnOnce "xsetroot -cursor_name left_ptr"
     spawnOnce "/usr/lib/geoclue-2.0/demos/agent" -- Geolocation for redshift
     spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- GUI authentication agent
@@ -128,8 +130,9 @@ mySpacing' i = spacingRaw True (Border i i i i) True (Border i i i i) True
 
 tall = renamed [Replace "tall"]
     $ windowNavigation
-    $ withBorder configBorderWidth
+    -- $ smartBorders
     $ lessBorders Screen
+    $ withBorder configBorderWidth
     $ smartSpacing 4
     $ Tall 1 (3/100) (1/2)
 
@@ -146,7 +149,7 @@ myLayoutHook = tall ||| Full
 -- !~~~~~|| XMONAD || WORKSPACES ||~~~~~~
 -- !~~~~~||--------||------------||~~~~~~
 
-myWorkspaces = [" dev ", " www ", " sys ", " doc ", " vbox ", " chat ", " mus ", " vid ", " gfx "]
+myWorkspaces = [" www ", " dev ", " sys ", " doc ", " vbox ", " chat ", " mus ", " vid ", " gfx "]
 
 -- !~~~~~||--------||-------------||~~~~~~
 -- !~~~~~|| XMONAD || KEYBINDINGS ||~~~~~~
