@@ -205,7 +205,8 @@ myKeys =
     ]
 
 barSpawner :: ScreenId -> IO StatusBarConfig
-barSpawner id = pure $ statusBarProp ("xmobar -x " ++ show (toInteger id)) $ pure myXmobarPP -- nothing on the rest of the screens
+barSpawner 0 = pure $ statusBarProp "xmobar -x 0" $ pure myXmobarPP -- nothing on the rest of the screens
+barSpawner id = pure $ statusBarProp ("xmobar ~/.config/xmobar/xmobar-secondary.config -x " ++ show (toInteger id)) $ pure myXmobarPP -- nothing on the rest of the screens
 
 myManageHook :: ManageHook
 myManageHook = composeAll
