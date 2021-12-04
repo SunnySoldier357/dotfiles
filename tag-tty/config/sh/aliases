@@ -3,6 +3,12 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 
+# Check if bat is installed
+if command -v bat &> /dev/null
+then
+    alias cat="bat"
+fi
+
 # Check if lsd is installed
 if command -v lsd &> /dev/null
 then
