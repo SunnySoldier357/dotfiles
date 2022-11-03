@@ -12,7 +12,7 @@ fi
 # Check if lsd is installed
 if command -v lsd &> /dev/null
 then
-    alias ls="lsd --group-dirs first"
+    alias ls="lsd --group-dirs first --versionsort"
 else
     alias ls="ls --color=always --group-directories-first -v" # Versionsort
 fi
