@@ -99,13 +99,12 @@ myStartup = do
 
     spawnOnce "numlockx on" -- Enable numlock
     spawnOnce "xbindkeys --file $XDG_CONFIG_HOME/xbindkeys/config &" -- Disable middle click pasting
-    spawnOnce "xfce4-power-manager &"
     spawnOnce "xsetroot -cursor_name left_ptr"
     spawnOnce "/usr/lib/geoclue-2.0/demos/agent" -- Geolocation for redshift
     spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- GUI authentication agent
 
-    spawnOnce "autorandr --change && nitrogen --restore"
-    spawnOnce "picom --experimental-backends -b"
+    spawnOnce "nitrogen --restore"
+    spawnOnce "picom -b"
 
     spawnOnce "blueman-applet &"
     spawnOnce "nm-applet --sm-disable &"

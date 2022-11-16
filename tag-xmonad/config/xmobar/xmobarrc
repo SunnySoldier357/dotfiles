@@ -34,14 +34,14 @@ Config
 
         Run Cpu
             [
-                "--template", "<fn=2>\xf108</fn>  cpu: (<total>%)",
+                "--template", "<fn=2>\xf2db</fn>  cpu: (<total>%)",
                 "-H", "50",
                 "--high", "red"
             ]
             20,
         
         Run Memory
-            ["--template", "<fn=2>\xf233</fn>  mem: <used>M (<usedratio>%)"]
+            ["--template", "<fn=2>\xf538</fn>  mem: <used>M (<usedratio>%)"]
             20,
 
         Run DiskU

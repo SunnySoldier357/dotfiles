@@ -17,10 +17,10 @@ git_branch()
 # %~ - Current working directory, shortned with ~ if possible
 if [ -n "$DESKTOP_SESSION" ];then
 PS1="
-%F{red}%n %F{magenta}%M %F{yellow}%~ %F{cyan}\$(git_branch)
+%F{red}%n %F{blue}%M %F{yellow}%~ %F{cyan}\$(git_branch)
 %f$ "
 else
 PS1="
-%F{green}%n %F{magenta}%M %F{yellow}%~ %F{cyan}\$(git_branch)
+%F{green}%n %F{blue}%M %F{yellow}%~ %F{cyan}\$(git_branch)
 %f$ "
 fi

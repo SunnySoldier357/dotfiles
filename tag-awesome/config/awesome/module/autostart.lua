@@ -15,7 +15,7 @@ local autostart =
     "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1", -- GUI authentication agent
 
     "autorandr --change && nitrogen --restore",
-    "picom --experimental-backends -b",
+    "picom -b",
 
     -- "libinput-gestures-setup start",
 

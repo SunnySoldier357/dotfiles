@@ -1,2 +1,4 @@
 set font "Fira Code 9"
 set default-bg "#0000003F"
+include catppuccin-mocha
+recolor true
