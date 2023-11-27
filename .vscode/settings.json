@@ -5,5 +5,7 @@
     },
     "files.exclude": {
         "**/bin": false
-    }
+    },
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true
 }

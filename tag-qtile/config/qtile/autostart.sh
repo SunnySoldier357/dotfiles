@@ -1,15 +1,20 @@
-numlockx on # Enable numlock
-# xbindkeys --file $XDG_CONFIG_HOME/xbindkeys/config & # Disable middle click pasting
-# xfce4-power-manager &
-# xsetroot -cursor_name left_ptr
-# /usr/lib/geoclue-2.0/demos/agent # Geolocation for redshift
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 # GUI authentication agent
+#!/usr/bin/env bash
 
-autorandr --change && nitrogen --restore
-picom --experimental-backends -b
+# Set up monitors
+~/.screenlayout/apartment.sh
+
+# Enable numlock
+numlockx on
+
+# GUI authentication agent
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+nitrogen --restore
+picom -b
 
 blueman-applet &
 nm-applet --sm-disable &
 volumeicon &
 
-pcmanfm --daemon-mode
+# Start PCManFM as a daemon to automatically mount removable media
+pcmanfm --daemon-mode &
