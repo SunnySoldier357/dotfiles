@@ -1,8 +1,13 @@
 import os
 import subprocess
 
-from libqtile import bar, hook, layout, qtile, widget
+from libqtile import bar, hook, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.layout.max import Max
+from libqtile.layout.columns import Columns
+from libqtile.layout.stack import Stack
+from libqtile.layout.zoomy import Zoomy
+from libqtile.layout.floating import Floating
 from libqtile.lazy import lazy
 
 from qtile_extras.widget.decorations import BorderDecoration
@@ -165,15 +170,15 @@ for i in groups:
     )
 
 colors = [
-    ["#282c34ee", "#282c34cc"],  # bg
-    ["#bbc2cf", "#bbc2cf"],  # fg
+    ["#1e1e2eee", "#1e1e2ecc"],  # bg
+    ["#cdd6f4", "#cdd6f4"],  # fg
     ["#1c1f24", "#1c1f24"],  # color01
-    ["#ff6c6b", "#ff6c6b"],  # color02
-    ["#98be65", "#98be65"],  # color03
-    ["#da8548", "#da8548"],  # color04
-    ["#51afef", "#51afef"],  # color05
-    ["#c678dd", "#c678dd"],  # color06
-    ["#46d9ff", "#46d9ff"]  # color15
+    ["#f38ba8", "#f38ba8"],  # color02
+    ["#a6e3a1", "#a6e3a1"],  # color03
+    ["#fab387", "#fab387"],  # color04
+    ["#89b4fa", "#89b4fa"],  # color05
+    ["#cba6f7", "#cba6f7"],  # color06
+    ["#89dceb", "#89dceb"]  # color15
 ]
 
 layout_theme = {
@@ -185,14 +190,14 @@ layout_theme = {
 
 
 layouts = [
-    layout.MonadTall(**layout_theme),
-    layout.Max(
-        border_width=0,
-        margin=0,
-    ),
-    layout.Stack(**layout_theme, num_stacks=2),
-    layout.Columns(**layout_theme, margin_on_single=0, insert_position=1),
-    layout.Zoomy(**layout_theme),
+    Columns(**layout_theme,
+            margin_on_single=0,
+            insert_position=1),
+    Max(border_width=0,
+        margin=0),
+    Stack(**layout_theme,
+          num_stacks=2),
+    Zoomy(**layout_theme),
 ]
 
 widget_defaults = dict(
@@ -207,7 +212,7 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.Image(
-            filename="~/.config/qtile/icons/python.png",
+            filename="~/.config/qtile/icons/python-white.png",
             scale="False",
             mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(TERMINAL)},
         ),
@@ -225,23 +230,29 @@ def init_widgets_list():
             padding_y=2,
             padding_x=3,
             borderwidth=3,
-            active=colors[8],
+            active=colors[5],
             inactive=colors[1],
             rounded=False,
             highlight_color=colors[2],
             highlight_method="line",
-            this_current_screen_border=colors[7],
-            this_screen_border=colors[4],
-            other_current_screen_border=colors[7],
-            other_screen_border=colors[4],
+            this_current_screen_border=colors[5],
+            this_screen_border=colors[3],
+            other_current_screen_border=colors[5],
+            other_screen_border=colors[3],
         ),
-        widget.TextBox(
-            text='|',
-            font="Ubuntu Mono",
+        widget.Sep(
             foreground=colors[1],
             padding=2,
-            fontsize=14
+            size_percent=50
         ),
+        widget.Spacer(length=8),
+        # widget.TextBox(
+        #     text='|',
+        #     font="Ubuntu Mono",
+        #     foreground=colors[1],
+        #     padding=2,
+        #     fontsize=14
+        # ),
         widget.CurrentLayoutIcon(
             # custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
             foreground=colors[1],
@@ -252,16 +263,15 @@ def init_widgets_list():
             foreground=colors[1],
             padding=5
         ),
-        widget.TextBox(
-            text='|',
-            font="Ubuntu Mono",
+        widget.Sep(
             foreground=colors[1],
             padding=2,
-            fontsize=14
+            size_percent=50
         ),
+        widget.Spacer(length=8),
         widget.WindowName(
-            foreground=colors[6],
-            max_chars=40
+            foreground=colors[5],
+            max_chars=100
         ),
         widget.GenPollText(
             update_interval=300,
@@ -355,7 +365,6 @@ def init_widgets_list():
         widget.Spacer(length=8),
         widget.Systray(padding=3),
         widget.Spacer(length=8),
-
     ]
     return widgets_list
 
@@ -373,7 +382,7 @@ def init_widgets_screen1():
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[22:24]
+    del widgets_screen2[24:26]
     return widgets_screen2
 
 
@@ -442,10 +451,10 @@ follow_mouse_focus = True
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False
-floating_layout = layout.Floating(
+floating_layout = Floating(
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
-        *layout.Floating.default_float_rules,
+        *Floating.default_float_rules,
         Match(wm_class="confirmreset"),  # gitk
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
