@@ -1,6 +1,7 @@
 {
     "files.associations": {
-        "**/sh/*": "shellscript"
+        "**/sh/*": "shellscript",
+        "config.py": "python"
     },
     "files.exclude": {
         "**/bin": false
