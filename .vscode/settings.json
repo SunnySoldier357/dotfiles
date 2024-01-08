@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "**/sh/*": "shellscript",
+        "**/zsh/*": "shellscript",
         "config.py": "python"
     },
     "files.exclude": {

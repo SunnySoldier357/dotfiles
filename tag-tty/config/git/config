@@ -29,3 +29,7 @@
 
 [credential]
 	helper = /usr/lib/git-core/git-credential-libsecret
+[init]
+	defaultBranch = main
+[safe]
+	directory = /opt/flutter

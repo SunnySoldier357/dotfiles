@@ -74,7 +74,7 @@ export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 # export VDPAU_DRIVER=nvidia
 
 #* Android SDK
-# export ANDROID_HOME=/opt/android-sdk
+# export ANDROID_HOME=/$HOME/Android/Sdk
 # export ANDROID_SDK_HOME="$XDG_CONFIG_HOME"/android
 # export ANDROID_AVD_HOME="$XDG_DATA_HOME"/android/
 # export ANDROID_EMULATOR_HOME="$XDG_DATA_HOME"/android/
