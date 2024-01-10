@@ -7,12 +7,13 @@ export PATH="$PATH:$HOME/.local/bin"
 # Add .NET Core SDK tools
 export PATH="$PATH:$HOME/.dotnet/tools"
 
-# Add flutter bin
+# Flutter
 export PATH="$PATH:/opt/flutter/bin"
-
-# Android tools
 export PATH="$PATH:$ANDROID_HOME/cmdline-tools/latest/bin"
 export PATH="$PATH:$ANDROID_HOME/platform-tools"
 
 # Dart
 export PATH="$PATH:$HOME/.pub-cache/bin"
+
+# Pyenv
+[[ -d "$PYENV_ROOT"/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"

@@ -7,3 +7,6 @@ else
     eval $(ssh-agent -s)
     # ssh-add ~/.ssh/github-id_rsa
 fi
+
+# Pyenv
+eval "$(pyenv init -)"

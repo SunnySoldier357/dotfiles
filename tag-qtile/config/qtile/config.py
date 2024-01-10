@@ -362,9 +362,7 @@ def init_widgets_list():
                 )
             ],
         ),
-        widget.Spacer(length=8),
-        widget.Systray(padding=3),
-        widget.Spacer(length=8),
+        widget.Spacer(length=8)
     ]
     return widgets_list
 
@@ -375,6 +373,10 @@ def init_widgets_list():
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
+    widgets_screen1.extend([
+        widget.Systray(padding=3),
+        widget.Spacer(length=8)])
+
     return widgets_screen1
 
 # All other monitors' bars will display everything but widgets 22 (systray) and 23 (spacer).
@@ -382,7 +384,6 @@ def init_widgets_screen1():
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
-    del widgets_screen2[24:26]
     return widgets_screen2
 
 
