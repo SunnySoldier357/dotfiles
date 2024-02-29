@@ -1,7 +1,7 @@
 # For gnome-keyring ssh access
 if [ -n "$DESKTOP_SESSION" ];then
     eval $(gnome-keyring-daemon --start)
-    export SSH_AUTH_SOCK
+    export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
     export GNOME_KEYRING_CONTROL
 else
     eval $(ssh-agent -s)
