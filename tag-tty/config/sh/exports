@@ -52,6 +52,9 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 #* pass
 export PASSWORD_STORE_DIR=$XDG_DATA_HOME/pass
 
+#* Pyenv
+export PYENV_ROOT=$XDG_DATA_HOME/pyenv
+
 #* rcm
 export RCRC=$XDG_CONFIG_HOME/rcm/config
 
