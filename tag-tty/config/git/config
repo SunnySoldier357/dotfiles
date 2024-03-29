@@ -9,7 +9,7 @@
 	required = true
 
 [core]
-	editor = code -w -n
+	editor = code -w -r
 	excludesfile = "~/.config/git/gitignore-global"
 
 [color]
