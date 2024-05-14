@@ -61,7 +61,7 @@ then
 fi
 alias svim="sudo vim"
 
-alias kssh="kitty +kitten ssh"
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
 alias userctl="systemctl --user"
 
