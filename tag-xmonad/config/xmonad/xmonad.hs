@@ -97,9 +97,11 @@ myStartup :: X ()
 myStartup = do
     -- spawnOnce "lxsession -s xmonad -e xmonad &"
 
+    spawnOnce "~/.screenlayout/apartment.sh" -- Set up monitors
+
     spawnOnce "numlockx on" -- Enable numlock
     spawnOnce "xbindkeys --file $XDG_CONFIG_HOME/xbindkeys/config &" -- Disable middle click pasting
-    spawnOnce "xsetroot -cursor_name left_ptr"
+    -- spawnOnce "xsetroot -cursor_name left_ptr"
     spawnOnce "/usr/lib/geoclue-2.0/demos/agent" -- Geolocation for redshift
     spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1" -- GUI authentication agent
 
@@ -203,7 +205,7 @@ myKeys =
         -- ("M-S-=", unGrab *> spawn "scrot -s"),
     ]
 
-barSpawner :: ScreenId -> IO StatusBarConfig
+barSpawner :: ScreenId -> X StatusBarConfig
 barSpawner 0 = pure $ statusBarProp "xmobar -x 0" $ pure myXmobarPP -- nothing on the rest of the screens
 barSpawner id = pure $ statusBarProp ("xmobar ~/.config/xmobar/xmobar-secondary.config -x " ++ show (toInteger id)) $ pure myXmobarPP -- nothing on the rest of the screens
 
