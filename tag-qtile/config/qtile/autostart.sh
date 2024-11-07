@@ -15,6 +15,7 @@ picom -b
 blueman-applet &
 nm-applet --sm-disable &
 volumeicon &
+cbatticon &
 
 # Start PCManFM as a daemon to automatically mount removable media
 pcmanfm --daemon-mode &

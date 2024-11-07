@@ -28,6 +28,18 @@ TERMINAL = "kitty"
 
 LOCK = "betterlockscreen -l dimblur --display 1"
 
+ROFI_LAUNCHER = "rofi \
+    -show drun \
+    -modi run,drun,ssh \
+    -scroll-method 0 \
+    -drun-match-fields all \
+    -drun-display-format \"{name}\" \
+    -no-drun-show-actions \
+    -terminal kitty \
+    -theme .config/rofi/config/launcher.rasi"
+
+BRIGHTNESS_STEP = 10
+
 
 @hook.subscribe.startup_once
 def autostart():
@@ -36,16 +48,29 @@ def autostart():
 
 
 keys = [
-    # Qtile Key Bindings
+    #* Qtile Key Bindings
     Key(
-        [MOD], "h",
-        lazy.layout.left(),
-        desc="Move focus to left"),
-    Key([MOD], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([MOD], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([MOD], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([MOD], "space", lazy.layout.next(),
-        desc="Move window focus to other window"),
+        [MOD, CTRL], "r",
+        lazy.reload_config(),
+        desc="Reload the config"
+    ),
+    Key(
+        [MOD, SHIFT], "q",
+        lazy.shutdown(),
+        desc="Shutdown Qtile"
+    ),
+
+    #* Client Key Bindings
+    Key(
+        [MOD], "j",
+        lazy.layout.previous(),
+        desc="Move focus to previous window"
+    ),
+    Key(
+        [MOD], "k",
+        lazy.layout.next(),
+        desc="Move focus to next window"
+    ),
 
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
@@ -89,11 +114,10 @@ keys = [
     ),
     Key([MOD], "t", lazy.window.toggle_floating(),
         desc="Toggle floating on the focused window"),
-    Key([MOD, CTRL], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([MOD, SHIFT], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+
     Key([MOD], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 
-    # Launchers
+    #* Launchers
     Key(
         [MOD], "b",
         lazy.spawn(BROWSER),
@@ -123,6 +147,55 @@ keys = [
         desc="Launch terminal"
     ),
 
+    Key(
+        [MOD], "p",
+        lazy.spawn(ROFI_LAUNCHER),
+        desc="Launch prompt"
+    ),
+
+    #* Hotkeys
+
+    # Brightness
+    Key(
+        [], "XF86MonBrightnessUp",
+        lazy.spawn(f"brightnessctl s +{BRIGHTNESS_STEP}%")
+    ),
+    Key(
+        [MOD], "XF86MonBrightnessUp",
+        lazy.spawn(f"brightnessctl s {BRIGHTNESS_STEP}%-")
+    ),
+    Key(
+        [], "XF86MonBrightnessDown",
+        lazy.spawn(f"brightnessctl s {BRIGHTNESS_STEP}%-")
+    ),
+
+    # Media Controls
+    Key(
+        [], "XF86AudioPlay",
+        lazy.spawn("playerctl play-pause || mpc toggle")
+    ),
+    Key(
+        [MOD], "XF86AudioMute",
+        lazy.spawn("playerctl play-pause || mpc toggle")
+    ),
+
+    Key(
+        [], "XF86AudioNext",
+        lazy.spawn("playerctl next || mpc next")
+    ),
+    Key(
+        [MOD], "XF86AudioRaiseVolume",
+        lazy.spawn("playerctl next || mpc next")
+    ),
+
+    Key(
+        [], "XF86AudioPrev",
+        lazy.spawn("playerctl previous || mpc prev")
+    ),
+    Key(
+        [MOD], "XF86AudioLowerVolume",
+        lazy.spawn("playerctl previous || mpc prev")
+    )
 ]
 
 groups = []
@@ -135,32 +208,32 @@ group_labels = ["www", "dev", "sys", "doc",
 group_layouts = ["columns", "columns", "columns", "columns",
                  "columns", "columns", "columns", "columns", "columns"]
 
-for i in range(len(group_names)):
+for name, label, layout in zip(group_names, group_labels, group_layouts):
     groups.append(
         Group(
-            name=group_names[i],
-            layout=group_layouts[i].lower(),
-            label=group_labels[i],
-        ))
+            name=name,
+            layout=layout.lower(),
+            label=label,
+        )
+    )
 
-
-for i in groups:
+for g in groups:
     keys.extend(
         [
             # mod1 + group number = switch to group
             Key(
                 [MOD],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc=f"Switch to group {i.name}",
+                g.name,
+                lazy.group[g.name].toscreen(),
+                desc=f"Switch to group {g.name}",
             ),
             # mod1 + shift + group number = switch to & move focused window to group
             Key(
                 [MOD, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=False),
+                g.name,
+                lazy.window.togroup(g.name, switch_group=False),
                 desc="Switch to & move focused window to group {}".format(
-                    i.name),
+                    g.name),
             ),
             # Or, use below if you prefer not to switch to that group.
             # # mod1 + shift + group number = move focused window to group
@@ -184,7 +257,7 @@ colors = [
 layout_theme = {
     "border_width": 2,
     "margin": 4,
-    "border_focus": colors[8],
+    "border_focus": colors[5],
     "border_normal": colors[0]
 }
 
@@ -202,7 +275,7 @@ layouts = [
 
 widget_defaults = dict(
     font="Ubuntu Bold",
-    fontsize=12,
+    fontsize=14,
     padding=0,
     background=colors[0],
 )
@@ -216,13 +289,8 @@ def init_widgets_list():
             scale="False",
             mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(TERMINAL)},
         ),
-        widget.Prompt(
-            font="Ubuntu Mono",
-            fontsize=14,
-            foreground=colors[1]
-        ),
         widget.GroupBox(
-            fontsize=11,
+            fontsize=13,
             margin_y=3,
             disable_drag=True,
             hide_unused=False,
@@ -287,49 +355,6 @@ def init_widgets_list():
             ],
         ),
         widget.Spacer(length=8),
-        widget.CPU(
-            format='▓  Cpu: {load_percent}%',
-            foreground=colors[4],
-            decorations=[
-                BorderDecoration(
-                    colour=colors[4],
-                    border_width=[0, 0, 2, 0],
-                )
-            ],
-        ),
-        widget.Spacer(length=8),
-        widget.Memory(
-            foreground=colors[8],
-            mouse_callbacks={
-                'Button1': lambda: qtile.cmd_spawn(TERMINAL + ' -e htop')},
-            format='{MemUsed: .0f}{mm}',
-            fmt='🖥  Mem: {} used',
-            decorations=[
-                BorderDecoration(
-                    colour=colors[8],
-                    border_width=[0, 0, 2, 0],
-                )
-            ],
-        ),
-        widget.Spacer(length=8),
-        widget.DF(
-            update_interval=60,
-            foreground=colors[5],
-            mouse_callbacks={
-                'Button1': lambda: qtile.cmd_spawn(TERMINAL + ' -e df')},
-            partition='/',
-            # format = '[{p}] {uf}{m} ({r:.0f}%)',
-            format='{uf}{m} free',
-            fmt='🖴  Disk: {}',
-            visible_on_warn=False,
-            decorations=[
-                BorderDecoration(
-                    colour=colors[5],
-                    border_width=[0, 0, 2, 0],
-                )
-            ],
-        ),
-        widget.Spacer(length=8),
         widget.Volume(
             foreground=colors[7],
             fmt='🕫  Vol: {}',
@@ -341,12 +366,16 @@ def init_widgets_list():
             ],
         ),
         widget.Spacer(length=8),
-        widget.KeyboardLayout(
+        widget.Battery(
             foreground=colors[4],
-            fmt='⌨  Kbd: {}',
+            # fmt='🕫{}',
+            format='{char}  Bat: {percent:1.0%}',
+            charge_char='',
+            discharge_char='',
+            empty_char='',
             decorations=[
                 BorderDecoration(
-                    colour=colors[4],
+                    colour=colors[7],
                     border_width=[0, 0, 2, 0],
                 )
             ],
