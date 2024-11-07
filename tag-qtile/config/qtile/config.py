@@ -26,8 +26,6 @@ CODE = "code"
 FILE = "pcmanfm -n"
 TERMINAL = "kitty"
 
-LOCK = "betterlockscreen -l dimblur --display 1"
-
 ROFI_LAUNCHER = "rofi \
     -show drun \
     -modi run,drun,ssh \
@@ -37,6 +35,15 @@ ROFI_LAUNCHER = "rofi \
     -no-drun-show-actions \
     -terminal kitty \
     -theme .config/rofi/config/launcher.rasi"
+
+ROFI_COMMAND = ("rofi "
+	"-show run "
+	"-scroll-method 0 "
+	"-terminal kitty "
+	"-theme .config/rofi/config/runner.rasi")
+ROFI_POWER = "sh $XDG_CONFIG_HOME/rofi/bin/powermenu"
+
+LOCK = "betterlockscreen -l dimblur --display 1"
 
 BRIGHTNESS_STEP = 10
 
@@ -285,8 +292,9 @@ extension_defaults = widget_defaults.copy()
 def init_widgets_list():
     widgets_list = [
         widget.Image(
-            filename="~/.config/qtile/icons/python-white.png",
+            filename="~/.config/qtile/icons/qtile.png",
             scale="False",
+            margin=3,
             mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(TERMINAL)},
         ),
         widget.GroupBox(
@@ -341,6 +349,17 @@ def init_widgets_list():
             foreground=colors[5],
             max_chars=100
         ),
+    ]
+    return widgets_list
+
+# Monitor 1 will display ALL widgets in widgets_list. It is important that this
+# is the only monitor that displays all widgets because the systray widget will
+# crash if you try to run multiple instances of it.
+
+
+def init_widgets_screen1():
+    widgets_screen1 = init_widgets_list()
+    widgets_screen1.extend([
         widget.GenPollText(
             update_interval=300,
             func=lambda: subprocess.check_output(
@@ -391,18 +410,7 @@ def init_widgets_list():
                 )
             ],
         ),
-        widget.Spacer(length=8)
-    ]
-    return widgets_list
-
-# Monitor 1 will display ALL widgets in widgets_list. It is important that this
-# is the only monitor that displays all widgets because the systray widget will
-# crash if you try to run multiple instances of it.
-
-
-def init_widgets_screen1():
-    widgets_screen1 = init_widgets_list()
-    widgets_screen1.extend([
+        widget.Spacer(length=8),
         widget.Systray(padding=3),
         widget.Spacer(length=8)])
 
@@ -413,6 +421,18 @@ def init_widgets_screen1():
 
 def init_widgets_screen2():
     widgets_screen2 = init_widgets_list()
+    widgets_screen2.extend([
+        widget.Clock(
+            foreground=colors[8],
+            format="⏱  %a, %d %b - %H:%M",
+            decorations=[
+                BorderDecoration(
+                    colour=colors[8],
+                    border_width=[0, 0, 2, 0],
+                )
+            ],
+        ),
+        widget.Spacer(length=8)])
     return widgets_screen2
 
 
