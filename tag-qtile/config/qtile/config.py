@@ -1,6 +1,8 @@
 import os
 import subprocess
 
+import psutil
+
 from libqtile import bar, hook, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.layout.max import Max
@@ -385,20 +387,28 @@ def init_widgets_screen1():
             ],
         ),
         widget.Spacer(length=8),
-        widget.Battery(
-            foreground=colors[4],
-            # fmt='🕫{}',
-            format='{char}  Bat: {percent:1.0%}',
-            charge_char='',
-            discharge_char='',
-            empty_char='',
-            decorations=[
-                BorderDecoration(
-                    colour=colors[7],
-                    border_width=[0, 0, 2, 0],
-                )
-            ],
-        ),
+    ])
+
+    # Only show battery widget if there is a battery
+    if hasattr(psutil, "sensors_battery") and psutil.sensors_battery() is not None:
+        widgets_screen1.extend([
+            widget.Battery(
+                foreground=colors[4],
+                # fmt='🕫{}',
+                format='{char}  Bat: {percent:1.0%}',
+                charge_char='',
+                discharge_char='',
+                empty_char='',
+                decorations=[
+                    BorderDecoration(
+                        colour=colors[7],
+                        border_width=[0, 0, 2, 0],
+                    )
+                ],
+            ),
+        ])
+
+    widgets_screen1.extend([
         widget.Spacer(length=8),
         widget.Clock(
             foreground=colors[8],
