@@ -349,8 +349,9 @@ def init_widgets_list():
         widget.Spacer(length=8),
         widget.WindowName(
             foreground=colors[5],
-            max_chars=100
+            # max_chars=100
         ),
+        widget.Spacer(length=0),
     ]
     return widgets_list
 
