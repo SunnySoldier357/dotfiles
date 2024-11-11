@@ -73,6 +73,17 @@ appLock = "betterlockscreen -l dimblur --display 1"
 appTerminal :: String
 appTerminal = "kitty"
 
+appLauncher :: String
+appLauncher = "rofi \
+    \-show drun \
+    \-modi run,drun,ssh \
+    \-scroll-method 0 \
+    \-drun-match-fields all \
+    \-drun-display-format \"{name}\" \
+    \-no-drun-show-actions \
+    \-terminal kitty \
+    \-theme .config/rofi/config/launcher.rasi"
+
 configBrightnessStep :: Int
 configBrightnessStep = 10
 
@@ -200,7 +211,9 @@ myKeys =
 
         ("M-e", spawn appFile),
 
-        ("M-<Return>", spawn appTerminal)
+        ("M-<Return>", spawn appTerminal),
+
+         ("M-p", spawn appLauncher)
 
         -- ("M-S-=", unGrab *> spawn "scrot -s"),
     ]
