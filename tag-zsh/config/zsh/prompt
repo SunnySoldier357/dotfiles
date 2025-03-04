@@ -15,12 +15,22 @@ git_branch()
 # %M - The full machine hostname
 # %n - $USERNAME
 # %~ - Current working directory, shortned with ~ if possible
-if [ -n "$DESKTOP_SESSION" ];then
-PS1="
-%F{red}%n %F{blue}%M %F{yellow}%~ %F{cyan}\$(git_branch)
-%f$ "
+
+if [[ -n "$DESKTOP_SESSION" ]]; then
+    # Linux graphical environment (Desktop session), use red for the username
+    color="%F{red}"
+elif [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
+    # SSH session, use green for the username
+    color="%F{green}"
 else
-PS1="
-%F{green}%n %F{blue}%M %F{yellow}%~ %F{cyan}\$(git_branch)
-%f$ "
+    # Local terminal session (not SSH), use red for the username
+    color="%F{red}"
 fi
+
+# Remove ".local" from hostname for macOS, use short hostname
+hostname=$(hostname -s)
+
+# Apply the prompt with the chosen color
+PS1="
+${color}%n %F{blue}${hostname} %F{yellow}%~ %F{cyan}\$(git_branch)
+%f$ "

@@ -48,9 +48,9 @@ alias help="man"
 alias p="ps -f"
 alias sortnr="sort --numeric-sort --reverse"
 
-alias rm="rm --interactive=once"
-alias cp="cp --interactive"
-alias mv="mv --interactive"
+alias rm="rm -i"
+alias cp="cp -i"
+alias mv="mv -i"
 
 alias wget="wget --hsts-file='$XDG_CACHE_HOME/wget-hsts'"
 
