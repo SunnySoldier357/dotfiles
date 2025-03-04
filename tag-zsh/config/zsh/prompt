@@ -30,7 +30,19 @@ fi
 # Remove ".local" from hostname for macOS, use short hostname
 hostname=$(hostname -s)
 
+function virtualenv_info(){
+    # Get Virtual Env
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        # Strip out the path and just leave the env name
+        venv="${VIRTUAL_ENV##*/}"
+    else
+        # In case you don't have one activated
+        venv=''
+    fi
+    [[ -n "$venv" ]] && echo "[$venv]"
+}
+
 # Apply the prompt with the chosen color
 PS1="
-${color}%n %F{blue}${hostname} %F{yellow}%~ %F{cyan}\$(git_branch)
-%f$ "
+${color}%n %F{blue}${hostname} %F{yellow}%~ %F{cyan}\$(git_branch) %F{magenta}\$(virtualenv_info)%f
+$ "

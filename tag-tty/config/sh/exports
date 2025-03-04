@@ -75,6 +75,11 @@ export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 #* Pyenv
 export PYENV_ROOT="$XDG_DATA_HOME/pyenv"
 
+#* Python
+
+# disable the default virtualenv prompt change
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 #* rcm
 export RCRC="$XDG_CONFIG_HOME"/rcm/config
 
