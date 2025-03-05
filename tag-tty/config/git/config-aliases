@@ -7,6 +7,7 @@
     ca = commit -a
     cam = commit -am
 
+    pu = push -u origin HEAD
     pua = push -u origin --all
 
     rh = reset --hard
@@ -22,7 +23,7 @@
     D = "!f() { git branch -D $1 2> /dev/null && git push -d origin $1 || (git tag -d $1 && git push -d origin $1); }; f"
 
     # Switch to a branch, creating it if necessary
-    go = "!f() { git switch \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+    go = "!f() { git switch \"$1\" 2> /dev/null || git checkout -b \"$1\"; }; f"
 
     # Show verbose output about tags, branches or remotes
 	tags = tag -l
