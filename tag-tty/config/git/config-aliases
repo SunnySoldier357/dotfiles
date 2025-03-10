@@ -19,8 +19,11 @@
     authorlist = shortlog -s -n --all --no-merges
 
     # Deletes a particular branch or tag from local and remote repository (D = force delete)
-    d = "!f() { git branch -d $1 2> /dev/null && git push -d origin $1 || (git tag -d $1 && git push -d origin $1); }; f"
-    D = "!f() { git branch -D $1 2> /dev/null && git push -d origin $1 || (git tag -d $1 && git push -d origin $1); }; f"
+    d = branch -d
+    D = branch -D
+
+    dd = "!f() { git branch -d $1 2> /dev/null && git push -d origin $1 || (git tag -d $1 && git push -d origin $1); }; f"
+    DD = "!f() { git branch -D $1 2> /dev/null && git push -d origin $1 || (git tag -d $1 && git push -d origin $1); }; f"
 
     # Switch to a branch, creating it if necessary
     go = "!f() { git switch \"$1\" 2> /dev/null || git checkout -b \"$1\"; }; f"
