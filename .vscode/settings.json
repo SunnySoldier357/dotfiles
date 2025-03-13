@@ -11,5 +11,5 @@
     "python.analysis.autoImportCompletions": true,
     "cSpell.words": [
         "qtile"
-    ]
+    ],
 }
