@@ -6,7 +6,10 @@ autoload -U colors && colors
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
-export HISTFILE=$XDG_STATE_HOME/zsh/history
+# Only set custom history file on Linux
+if [[ "$(uname -s)" == "Linux" ]]; then
+  export HISTFILE="$XDG_STATE_HOME/zsh/history"
+fi
 
 # Commands to omit from shell history file
 export HISTORY_IGNORE="(l[al.]#( *)#|cd|pwd|exit|sudo reboot|history|cd -|cd ..|..)"
