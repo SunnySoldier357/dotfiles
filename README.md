@@ -15,6 +15,14 @@ EXCLUDES="*.md"
 TAGS="awesome zsh"
 ```
 
+## Initialization
+
+Run the following command
+
+```sh
+rcup -v -x "*.md" -t tty -t zsh
+```
+
 ## Dependecies
 
 ### zsh
