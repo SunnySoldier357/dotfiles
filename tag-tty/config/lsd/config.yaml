@@ -1,0 +1,2 @@
+# Replace the Unicode symlink arrow with ASCII so Fira Code’s ligature shows
+symlink-arrow: "=>"
