@@ -29,3 +29,9 @@ rcup -v -x "*.md" -t tty -t zsh
 
 - [prezto](https://github.com/sorin-ionescu/prezto) with
   [zsh-prompt-garrett](https://github.com/chauncey-garrett/zsh-prompt-garrett)
+
+## Additional Steps
+
+### macOS
+
+- [`sudo` with Touch ID](https://dev.to/siddhantkcode/enable-touch-id-authentication-for-sudo-on-macos-sonoma-14x-4d28)
