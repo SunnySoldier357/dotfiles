@@ -41,6 +41,9 @@ export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
 #* CUDA
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 
+#* Docker
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+
 #* GTK2
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 
