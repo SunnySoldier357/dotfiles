@@ -3,9 +3,9 @@ setopt prompt_subst
 
 git_branch()
 {
-    branch="($(git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'}))"
-    if [ $branch != "()" ]; then
-        echo $branch
+    branch="$(git branch --show-current 2>/dev/null)"
+    if [[ -n "$branch" ]]; then
+        echo "($branch)"
     fi
 }
 
