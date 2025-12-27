@@ -35,3 +35,7 @@ rcup -v -x "*.md" -t tty -t zsh
 ### macOS
 
 - [`sudo` with Touch ID](https://dev.to/siddhantkcode/enable-touch-id-authentication-for-sudo-on-macos-sonoma-14x-4d28)
+- Set hostnames
+  - `sudo scutil --set HostName <new host name>`
+  - `sudo scutil --set LocalHostName <new host name>`
+  - `sudo scutil --set ComputerName <new name>`
