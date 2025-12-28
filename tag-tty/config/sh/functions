@@ -26,26 +26,6 @@ ex ()
 }
 
 #
-# # gcse - gcc with special flags as used in CSE
-# # usage: gcse <file.c> <additional flags for gcc>
-gcse ()
-{
-    if [ -f $1 ] ; then
-        INPUT_FILE=$1
-        OUTPUT_FILE="${1%.*}.o"
-        shift
-
-        if [ $# -eq 0 ] ; then
-            gcc -g -Wall -std=c18 -o $OUTPUT_FILE $INPUT_FILE
-        else
-            gcc -g -Wall -std=c18 -o $OUTPUT_FILE $INPUT_FILE "$*"
-        fi
-    else
-        echo "'$1' is not a valid file"
-    fi
-}
-
-#
 # # pacman-update - Updates pacman mirrorlist
 # # usage: pacman-update <country>
 pacman-update ()
